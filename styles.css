@@ -368,13 +368,13 @@ html[data-theme="dark"] .play-indicator,
 }
 
 .work-title {
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  margin: 0 0 0.2rem 0;
+  margin: 0 0 0.25rem 0;
   color: var(--fg-color);
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
 .work-details {
@@ -390,6 +390,10 @@ html[data-theme="dark"] .play-indicator,
   margin: 0;
   line-height: 1.4;
   font-weight: 400;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* INFO / BIO VIEW */
