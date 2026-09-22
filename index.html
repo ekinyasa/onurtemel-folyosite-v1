@@ -3,76 +3,87 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Onur Temel</title>
+  <title>ONUR TEMEL — Videograf & Hareketli Görüntü Arşivi</title>
+  <meta name="description" content="Videograf Onur Temel'in portfolyosu. Gözlemci belgesel, performans kaydı, sanatçı filmi dokümantasyonu ve sergi arşivleri.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="ONUR TEMEL — Videographer">
+  <meta property="og:description" content="Portfolio of videographer Onur Temel. Observational documentary, performance capture, artist film documentation, and exhibition archives.">
+  <meta property="og:type" content="website">
 
+  <link rel="stylesheet" href="styles.css">
+  
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    body {
-      background: #000;
-      color: #f2efe8;
-      font-family: Helvetica, Arial, sans-serif;
-    }
-
-    main {
-      width: 100%;
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .coming-soon {
-      width: 33.333vw;
-      text-align: center;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2rem, 4vw, 4.5rem);
-      font-weight: 700;
-      letter-spacing: 0.04em;
+    /* Visually hidden helper for screen reader headings */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
       white-space: nowrap;
-    }
-
-    p {
-      margin: 0.7rem 0 0;
-      font-size: clamp(0.85rem, 1.2vw, 1.15rem);
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      white-space: nowrap;
-    }
-
-    @media (max-width: 700px) {
-      .coming-soon {
-        width: 66.666vw;
-      }
-
-      h1 {
-        font-size: clamp(1.8rem, 9vw, 3rem);
-      }
-
-      p {
-        font-size: clamp(0.75rem, 3.7vw, 1rem);
-      }
+      border: 0;
     }
   </style>
 </head>
-
 <body>
-  <main>
-    <div class="coming-soon">
-      <h1>ONUR TEMEL</h1>
-      <p>yakında | coming soon</p>
+
+  <header class="site-header">
+    <div class="site-container" style="width:100%; display:flex; align-items:center; justify-content:space-between;">
+      <a href="#work" class="header-brand" id="brand-link" aria-label="Onur Temel Homepage">ONUR TEMEL</a>
+      
+      <div class="header-controls">
+        <!-- Theme Switcher: Visual non-text split circle icon -->
+        <button id="theme-toggle" class="icon-btn theme-toggle-btn" aria-label="Koyu/Açık temayı değiştir" title="Tema Değiştir">
+          <span class="theme-split-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16">
+              <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 3 A9 9 0 0 0 12 21 Z" fill="currentColor"/>
+            </svg>
+          </span>
+        </button>
+
+        <!-- Language Switcher: Shows target language (EN when TR active, TR when EN active) -->
+        <button id="lang-toggle" class="icon-btn lang-toggle-btn" aria-label="Switch language to English" title="Dil Değiştir">
+          EN
+        </button>
+        
+        <!-- View Switcher: Abstract text/paragraph symbol morphing to grid -->
+        <button id="view-switch-btn" class="icon-btn view-switch-btn" aria-label="Metin Görünümünü Göster" aria-expanded="false" title="Görünüm Değiştir">
+          <span class="view-switch-symbol" aria-hidden="true">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+          </span>
+        </button>
+      </div>
     </div>
-  </main>
+  </header>
+
+  <div class="site-container">
+    <main>
+      <!-- Primary View: Work Grid -->
+      <section id="work-view" class="view" aria-label="Seçilmiş Çalışmalar">
+        <h1 class="sr-only" id="work-heading">Seçilmiş Çalışmalar</h1>
+        <div id="works-grid" class="works-grid" role="region" aria-live="polite"></div>
+      </section>
+
+      <!-- Information / Bio / CV View -->
+      <section id="info-view" class="view" aria-label="Bilgi & Arşiv" hidden>
+        <h1 class="sr-only" id="info-heading">Bilgi & Arşiv</h1>
+        <div id="info-container" class="info-container"></div>
+      </section>
+
+      <!-- Graceful Fallback Error UI -->
+      <div id="error-state" class="error-state" hidden>
+        <p id="error-message">İçerik kataloğu yüklenemedi. Lütfen bağlantınızı kontrol edin.</p>
+        <button id="retry-btn" class="retry-btn">Yeniden Dene</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 /**
  * ONUR TEMEL — VIDEOGRAPHER PORTFOLIO
- * Vanilla JS Application Controller
+ * Vanilla JS Application Controller (Bilingual & CMS Controlled)
  */
 
 (function () {
@@ -16,23 +16,132 @@
   const retryBtn = document.getElementById('retry-btn');
   const viewSwitchBtn = document.getElementById('view-switch-btn');
   const themeToggleBtn = document.getElementById('theme-toggle');
+  const langToggleBtn = document.getElementById('lang-toggle');
   const brandLink = document.getElementById('brand-link');
 
   // Application State
   let siteData = null;
   let currentView = 'work';
+  let currentLang = 'TR';
+  let enabledLangs = ['TR', 'EN'];
+  let cmsThemeMode = 'otomatik';
 
   // --- 1. INITIALIZATION ---
   function init() {
-    initTheme();
     setupEventListeners();
     loadContent();
   }
 
-  // --- 2. THEME SYSTEM ---
-  function initTheme() {
+  // --- 2. TRANSLATION RESOLVER (DEFENSIVE FALLBACK CHAIN) ---
+  function t(fieldObj, targetLang) {
+    if (fieldObj === null || fieldObj === undefined) return '';
+    if (typeof fieldObj !== 'object') return String(fieldObj);
+
+    const lang = targetLang || currentLang;
+
+    // 1. Requested language
+    if (fieldObj[lang] !== undefined && fieldObj[lang] !== null) {
+      return String(fieldObj[lang]);
+    }
+
+    // 2. Other enabled language fallback
+    const fallbackLang = lang === 'TR' ? 'EN' : 'TR';
+    if (fieldObj[fallbackLang] !== undefined && fieldObj[fallbackLang] !== null) {
+      return String(fieldObj[fallbackLang]);
+    }
+
+    // 3. Any available localized property in object
+    const keys = Object.keys(fieldObj);
+    for (let i = 0; i < keys.length; i++) {
+      const k = keys[i];
+      if (!k.startsWith('_') && fieldObj[k] !== undefined && fieldObj[k] !== null) {
+        return String(fieldObj[k]);
+      }
+    }
+
+    // 4. Empty string fallback
+    return '';
+  }
+
+  // --- 3. LANGUAGE DETERMINATION & PRECEDENCE ---
+  function determineLanguage(settings) {
+    let rawLangs = (settings && Array.isArray(settings.gosterilecekDiller))
+      ? settings.gosterilecekDiller
+      : ['TR', 'EN'];
+
+    // Normalize enabled languages
+    enabledLangs = rawLangs.map(l => String(l).toUpperCase().trim()).filter(l => l === 'TR' || l === 'EN');
+    if (enabledLangs.length === 0) {
+      enabledLangs = ['TR', 'EN'];
+    }
+
+    // Rule: Single language enabled -> Source of truth
+    if (enabledLangs.length === 1) {
+      currentLang = enabledLangs[0];
+      return;
+    }
+
+    // Check visitor's previously stored preference
+    const storedLang = localStorage.getItem('onurtemel_lang');
+    if (storedLang && enabledLangs.includes(storedLang.toUpperCase())) {
+      currentLang = storedLang.toUpperCase();
+      return;
+    }
+
+    // Check CMS forced default
+    const forcedDefault = settings && settings.varsayilanDil ? String(settings.varsayilanDil).toUpperCase().trim() : '';
+    if (forcedDefault && enabledLangs.includes(forcedDefault)) {
+      currentLang = forcedDefault;
+      return;
+    }
+
+    // Browser language auto detection
+    const browserLangs = navigator.languages || [navigator.language || ''];
+    let detectedTR = false;
+    for (let i = 0; i < browserLangs.length; i++) {
+      if (String(browserLangs[i]).toLowerCase().startsWith('tr')) {
+        detectedTR = true;
+        break;
+      }
+    }
+
+    if (detectedTR && enabledLangs.includes('TR')) {
+      currentLang = 'TR';
+    } else if (enabledLangs.includes('EN')) {
+      currentLang = 'EN';
+    } else {
+      currentLang = enabledLangs[0];
+    }
+  }
+
+  function setLanguage(newLang) {
+    if (!enabledLangs.includes(newLang)) return;
+    currentLang = newLang;
+    localStorage.setItem('onurtemel_lang', currentLang);
+    renderAll();
+  }
+
+  // --- 4. THEME CONTROL & PRECEDENCE ---
+  function initTheme(settings) {
+    cmsThemeMode = settings && settings.varsayilanTema ? String(settings.varsayilanTema).toLowerCase().trim() : 'otomatik';
+
+    if (cmsThemeMode === 'karanlik') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      if (themeToggleBtn) themeToggleBtn.hidden = true;
+      return;
+    }
+
+    if (cmsThemeMode === 'aydinlik') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      if (themeToggleBtn) themeToggleBtn.hidden = true;
+      return;
+    }
+
+    // "otomatik" mode: Show visual icon, check visitor stored choice or OS default
+    if (themeToggleBtn) themeToggleBtn.hidden = false;
     const savedTheme = localStorage.getItem('onurtemel_theme');
-    if (savedTheme) {
+
+    if (savedTheme === 'dark' || savedTheme === 'light') {
       applyTheme(savedTheme);
     } else {
       applyTheme('system');
@@ -40,23 +149,33 @@
   }
 
   function applyTheme(theme) {
+    if (cmsThemeMode === 'karanlik' || cmsThemeMode === 'aydinlik') return;
+
     if (theme === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
-      themeToggleBtn.textContent = 'LIGHT';
-      themeToggleBtn.setAttribute('aria-label', 'Switch to light theme');
+      updateThemeButtonLabel('dark');
     } else if (theme === 'light') {
       document.documentElement.setAttribute('data-theme', 'light');
-      themeToggleBtn.textContent = 'DARK';
-      themeToggleBtn.setAttribute('aria-label', 'Switch to dark theme');
+      updateThemeButtonLabel('light');
     } else {
       document.documentElement.removeAttribute('data-theme');
       const systemIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      themeToggleBtn.textContent = systemIsDark ? 'LIGHT' : 'DARK';
-      themeToggleBtn.setAttribute('aria-label', 'Toggle light/dark theme');
+      updateThemeButtonLabel(systemIsDark ? 'dark' : 'light');
+    }
+  }
+
+  function updateThemeButtonLabel(currentActiveTheme) {
+    if (!themeToggleBtn) return;
+    if (currentActiveTheme === 'dark') {
+      themeToggleBtn.setAttribute('aria-label', currentLang === 'TR' ? 'Açık temaya geç' : 'Switch to light theme');
+    } else {
+      themeToggleBtn.setAttribute('aria-label', currentLang === 'TR' ? 'Koyu temaya geç' : 'Switch to dark theme');
     }
   }
 
   function toggleTheme() {
+    if (cmsThemeMode === 'karanlik' || cmsThemeMode === 'aydinlik') return;
+
     const currentAttr = document.documentElement.getAttribute('data-theme');
     let nextTheme = 'dark';
 
@@ -65,7 +184,6 @@
     } else if (currentAttr === 'light') {
       nextTheme = 'dark';
     } else {
-      // System mode default
       const systemIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       nextTheme = systemIsDark ? 'light' : 'dark';
     }
@@ -74,7 +192,7 @@
     applyTheme(nextTheme);
   }
 
-  // --- 3. CONTENT LOADING & FETCHING ---
+  // --- 5. CONTENT LOADING & FETCHING ---
   async function loadContent() {
     hideError();
     try {
@@ -83,11 +201,18 @@
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       siteData = await response.json();
-      validateAndRender();
+      
+      const settings = siteData.siteAyarlari || {};
+      determineLanguage(settings);
+      initTheme(settings);
+      
+      renderAll();
       handleHashNavigation();
     } catch (err) {
       console.error('Failed to load portfolio content:', err);
-      showError('Unable to load content catalog. Please verify your connection.');
+      showError(currentLang === 'TR'
+        ? 'İçerik kataloğu yüklenemedi. Lütfen bağlantınızı kontrol edin.'
+        : 'Unable to load content catalog. Please verify your connection.');
     }
   }
 
@@ -102,29 +227,60 @@
     if (errorState) errorState.hidden = true;
   }
 
-  // --- 4. DATA VALIDATION & RENDERING ---
-  function validateAndRender() {
+  // --- 6. RENDERING ALL COMPONENTS ---
+  function renderAll() {
     if (!siteData) return;
 
-    // Site Meta updates
+    // 1. Update HTML tag lang attribute
+    document.documentElement.lang = currentLang.toLowerCase();
+
+    // 2. Site Metadata
     if (siteData.site) {
-      if (siteData.site.pageTitle) document.title = siteData.site.pageTitle;
+      const title = t(siteData.site.pageTitle, currentLang);
+      if (title) document.title = title;
+
+      const desc = t(siteData.site.description, currentLang);
       const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc && siteData.site.description) {
-        metaDesc.setAttribute('content', siteData.site.description);
+      if (metaDesc && desc) metaDesc.setAttribute('content', desc);
+    }
+
+    // 3. Language Switch Button State
+    if (langToggleBtn) {
+      if (enabledLangs.length <= 1) {
+        langToggleBtn.hidden = true;
+      } else {
+        langToggleBtn.hidden = false;
+        // Button displays the target language visitor can switch to
+        const targetLang = currentLang === 'TR' ? 'EN' : 'TR';
+        langToggleBtn.textContent = targetLang;
+        langToggleBtn.setAttribute(
+          'aria-label',
+          currentLang === 'TR' ? 'Switch language to English' : 'Türkçe diline geç'
+        );
+        langToggleBtn.setAttribute(
+          'title',
+          currentLang === 'TR' ? 'Switch to English' : 'Türkçe Diline Geç'
+        );
       }
     }
 
+    // 4. Render Views
     renderWorksGrid(siteData.works || []);
     renderInfoView(siteData.bio || {}, siteData.links || [], siteData.site || {});
+    updateViewSwitchBtnState();
   }
 
   // Render Works (Primary View)
   function renderWorksGrid(works) {
     worksGrid.innerHTML = '';
 
+    const workHeading = document.getElementById('work-heading');
+    if (workHeading) {
+      workHeading.textContent = currentLang === 'TR' ? 'Seçilmiş Çalışmalar' : 'Selected Works';
+    }
+
     if (!Array.isArray(works) || works.length === 0) {
-      worksGrid.innerHTML = '<p class="work-description">No works available.</p>';
+      worksGrid.innerHTML = `<p class="work-description">${currentLang === 'TR' ? 'Çalışma bulunamadı.' : 'No works available.'}</p>`;
       return;
     }
 
@@ -132,14 +288,14 @@
 
     works.forEach(work => {
       const workId = work.id || `work-${Math.random().toString(36).substr(2, 9)}`;
-      const title = work.title || 'Untitled Work';
+      const title = t(work.title, currentLang) || (currentLang === 'TR' ? 'İsimsiz Çalışma' : 'Untitled Work');
       const year = work.year || '';
-      const role = work.role || '';
-      const description = work.description || '';
+      const role = t(work.role, currentLang) || '';
+      const description = t(work.description, currentLang) || '';
       const youtubeId = work.youtube || '';
 
       // Derive thumbnail
-      let thumbUrl = work.thumbnail && work.thumbnail.trim() ? work.thumbnail : '';
+      let thumbUrl = work.thumbnail && String(work.thumbnail).trim() ? work.thumbnail : '';
       if (!thumbUrl && youtubeId) {
         thumbUrl = `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`;
       }
@@ -152,13 +308,13 @@
         <div class="work-media-container" id="media-${workId}">
           ${
             youtubeId
-              ? `<button class="work-media-btn" data-youtube="${escapeAttr(youtubeId)}" data-title="${escapeAttr(title)}" aria-label="Play video: ${escapeAttr(title)}">
-                  <img src="${escapeAttr(thumbUrl)}" alt="Thumbnail for ${escapeAttr(title)}" loading="lazy" width="640" height="360" onerror="this.onerror=null; this.src='https://i.ytimg.com/vi/${escapeAttr(youtubeId)}/hqdefault.jpg';">
+              ? `<button class="work-media-btn" data-youtube="${escapeAttr(youtubeId)}" data-title="${escapeAttr(title)}" aria-label="${currentLang === 'TR' ? 'Videoyu oynat' : 'Play video'}: ${escapeAttr(title)}">
+                  <img src="${escapeAttr(thumbUrl)}" alt="${currentLang === 'TR' ? 'Kapak görseli' : 'Thumbnail'}: ${escapeAttr(title)}" loading="lazy" width="640" height="360" onerror="this.onerror=null; this.src='https://i.ytimg.com/vi/${escapeAttr(youtubeId)}/hqdefault.jpg';">
                   <span class="play-indicator" aria-hidden="true">
                     <svg viewBox="0 0 24 24"><polygon points="6,4 18,12 6,20"></polygon></svg>
                   </span>
                 </button>`
-              : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--fg-muted);">No video source</div>`
+              : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--fg-muted);">${currentLang === 'TR' ? 'Video bulunamadı' : 'No video source'}</div>`
           }
         </div>
         <div class="work-meta">
@@ -205,8 +361,13 @@
   function renderInfoView(bio, links, site) {
     infoContainer.innerHTML = '';
 
-    const shortBio = bio.short || '';
-    const longBio = bio.long || '';
+    const infoHeading = document.getElementById('info-heading');
+    if (infoHeading) {
+      infoHeading.textContent = currentLang === 'TR' ? 'Bilgi & Arşiv' : 'Information & Archive';
+    }
+
+    const shortBio = t(bio.short, currentLang);
+    const longBio = t(bio.long, currentLang);
     const sections = bio.sections || [];
     const email = site.email || '';
     const location = site.location || '';
@@ -214,13 +375,13 @@
     let sidebarHTML = `
       <div class="info-sidebar">
         <div>
-          <h2 class="info-section-title">About</h2>
+          <h2 class="info-section-title">${currentLang === 'TR' ? 'Hakkında' : 'About'}</h2>
           ${shortBio ? `<p class="info-short-bio">${escapeHTML(shortBio)}</p>` : ''}
           ${longBio ? `<p class="info-long-bio">${escapeHTML(longBio)}</p>` : ''}
         </div>
 
         <div>
-          <h2 class="info-section-title">Contact & Location</h2>
+          <h2 class="info-section-title">${currentLang === 'TR' ? 'İletişim & Konum' : 'Contact & Location'}</h2>
           ${email ? `<p style="margin:0 0 0.25rem 0;"><a href="mailto:${escapeAttr(email)}" class="editorial-link">${escapeHTML(email)}</a></p>` : ''}
           ${location ? `<p style="margin:0; font-size:0.85rem; color:var(--fg-muted);">${escapeHTML(location)}</p>` : ''}
         </div>
@@ -228,13 +389,13 @@
         ${
           Array.isArray(links) && links.length > 0
             ? `<div>
-                <h2 class="info-section-title">External Links</h2>
+                <h2 class="info-section-title">${currentLang === 'TR' ? 'Dış Bağlantılar' : 'External Links'}</h2>
                 <div class="links-list">
                   ${links
                     .map(
                       link =>
                         `<a href="${escapeAttr(link.url)}" target="_blank" rel="noopener noreferrer" class="editorial-link">
-                          ${escapeHTML(link.label)} ↗
+                          ${escapeHTML(t(link.label, currentLang) || link.label || '')} ↗
                         </a>`
                     )
                     .join('')}
@@ -249,13 +410,13 @@
 
     if (Array.isArray(sections) && sections.length > 0) {
       sections.forEach(sec => {
-        const secTitle = sec.title || 'Section';
+        const secTitle = t(sec.title, currentLang) || '';
         const items = sec.items || [];
         mainHTML += `
           <div>
             <h2 class="info-section-title">${escapeHTML(secTitle)}</h2>
             <ul class="info-list">
-              ${items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}
+              ${items.map(item => `<li>${escapeHTML(t(item, currentLang))}</li>`).join('')}
             </ul>
           </div>
         `;
@@ -264,23 +425,39 @@
 
     mainHTML += `
       <div class="demo-notice">
-        <strong>ARCHIVE NOTE:</strong> All copy and video works contained in this preview catalog represent structured demonstration placeholders for Onur Temel's videography portfolio.
+        <strong>${currentLang === 'TR' ? 'ARŞİV NOTU:' : 'ARCHIVE NOTE:'}</strong> ${
+          currentLang === 'TR'
+            ? "Bu önizleme kataloğunda yer alan tüm metinler ve video çalışmaları, Onur Temel'in videografi portfolyosu için yapılandırılmış gösterim örnekleridir."
+            : "All copy and video works contained in this preview catalog represent structured demonstration placeholders for Onur Temel's videography portfolio."
+        }
       </div>
     </div>`;
 
     infoContainer.innerHTML = sidebarHTML + mainHTML;
   }
 
-  // --- 5. NAVIGATION & VIEW SWITCHING ---
+  // --- 7. NAVIGATION & VIEW SWITCHING ---
   function setupEventListeners() {
     // Theme toggle button
-    themeToggleBtn.addEventListener('click', toggleTheme);
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', toggleTheme);
+    }
+
+    // Language toggle button
+    if (langToggleBtn) {
+      langToggleBtn.addEventListener('click', () => {
+        const nextLang = currentLang === 'TR' ? 'EN' : 'TR';
+        setLanguage(nextLang);
+      });
+    }
 
     // View switch button
-    viewSwitchBtn.addEventListener('click', () => {
-      const targetView = currentView === 'work' ? 'info' : 'work';
-      switchView(targetView, true);
-    });
+    if (viewSwitchBtn) {
+      viewSwitchBtn.addEventListener('click', () => {
+        const targetView = currentView === 'work' ? 'info' : 'work';
+        switchView(targetView, true);
+      });
+    }
 
     // Brand link (ONUR TEMEL) -> returns to #work
     if (brandLink) {
@@ -331,21 +508,42 @@
     if (viewName === 'info') {
       workView.hidden = true;
       infoView.hidden = false;
-      viewSwitchBtn.setAttribute('aria-expanded', 'true');
-      viewSwitchBtn.setAttribute('aria-label', 'Return to Work Grid view');
-      viewSwitchBtn.setAttribute('title', 'Show Work View');
+      updateViewSwitchBtnState();
 
       const infoHeading = document.getElementById('info-heading');
       if (infoHeading) infoHeading.focus();
     } else {
       infoView.hidden = true;
       workView.hidden = false;
-      viewSwitchBtn.setAttribute('aria-expanded', 'false');
-      viewSwitchBtn.setAttribute('aria-label', 'Show Information / Bio view');
-      viewSwitchBtn.setAttribute('title', 'Show Information View');
+      updateViewSwitchBtnState();
 
       const workHeading = document.getElementById('work-heading');
       if (workHeading) workHeading.focus();
+    }
+  }
+
+  function updateViewSwitchBtnState() {
+    if (!viewSwitchBtn) return;
+    if (currentView === 'info') {
+      viewSwitchBtn.setAttribute('aria-expanded', 'true');
+      viewSwitchBtn.setAttribute(
+        'aria-label',
+        currentLang === 'TR' ? 'Çalışmalar görünümüne dön' : 'Return to Work Grid view'
+      );
+      viewSwitchBtn.setAttribute(
+        'title',
+        currentLang === 'TR' ? 'Çalışmalar Görünümü' : 'Show Work View'
+      );
+    } else {
+      viewSwitchBtn.setAttribute('aria-expanded', 'false');
+      viewSwitchBtn.setAttribute(
+        'aria-label',
+        currentLang === 'TR' ? 'Metin / Bilgi görünümünü göster' : 'Show Information / Bio view'
+      );
+      viewSwitchBtn.setAttribute(
+        'title',
+        currentLang === 'TR' ? 'Metin Görünümü' : 'Show Information View'
+      );
     }
   }
 

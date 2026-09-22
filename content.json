@@ -1,41 +1,106 @@
 {
+  "siteAyarlari": {
+    "_aciklama": "Bu bölüm sitenin genel ayarlarını kontrol eder. Tüm rehber metinleri bilgilendirme amaçlıdır.",
+    "_yardim_diller": "gosterilecekDiller: Sitede hangi dillerin aktif olacağını seçin. Seçenekler: [\"TR\", \"EN\"] (çift dilli), [\"TR\"] (sadece Türkçe), [\"EN\"] (sadece İngilizce).",
+    "gosterilecekDiller": ["TR", "EN"],
+    "_yardim_varsayilanDil": "varsayilanDil: İlk açılış dilini belirler. \"\" (otomatik tarayıcı dili), \"TR\" veya \"EN\".",
+    "varsayilanDil": "",
+    "_yardim_varsayilanTema": "varsayilanTema: Sitenin renk temasını belirler. \"otomatik\" (kullanıcı seçimi + ikon göster), \"karanlik\" (koyu tema zorunlu, ikon gizli), \"aydinlik\" (açık tema zorunlu, ikon gizli).",
+    "varsayilanTema": "otomatik"
+  },
   "site": {
     "name": "ONUR TEMEL",
-    "pageTitle": "ONUR TEMEL — Videographer & Moving Image Archive",
-    "description": "Portfolio of videographer Onur Temel. Observational documentary, performance capture, artist film documentation, and exhibition archives.",
+    "pageTitle": {
+      "TR": "ONUR TEMEL — Videograf & Hareketli Görüntü Arşivi",
+      "EN": "ONUR TEMEL — Videographer & Moving Image Archive"
+    },
+    "description": {
+      "TR": "Videograf Onur Temel'in portfolyosu. Gözlemci belgesel, performans kaydı, sanatçı filmi dokümantasyonu ve sergi arşivleri.",
+      "EN": "Portfolio of videographer Onur Temel. Observational documentary, performance capture, artist film documentation, and exhibition archives."
+    },
     "email": "contact@onurtemel.com.tr",
-    "location": "Istanbul / Berlin",
-    "theme": "system"
+    "location": "Istanbul / Berlin"
   },
   "bio": {
-    "short": "Videographer and camera operator specializing in contemporary art documentation, long-form performance recording, and observational documentary.",
-    "long": "Onur Temel works across contemporary art institutions, exhibition catalogues, and independent film productions. His practice focuses on quiet spatial observation, natural acoustic dynamics, and precise visual documentation of multi-disciplinary performances.",
+    "short": {
+      "TR": "Çağdaş sanat dokümantasyonu, uzun metrajlı performans kaydı ve gözlemci belgesel alanında uzmanlaşmış videograf ve kamera operatörü.",
+      "EN": "Videographer and camera operator specializing in contemporary art documentation, long-form performance recording, and observational documentary."
+    },
+    "long": {
+      "TR": "Onur Temel, çağdaş sanat kurumları, sergi katalogları ve bağımsız film yapımları genelinde çalışmaktadır. Pratiği; sessiz mekânsal gözlem, doğal akustik dinamikler ve disiplinlerarası performansların hassas görsel dokümantasyonuna odaklanır.",
+      "EN": "Onur Temel works across contemporary art institutions, exhibition catalogues, and independent film productions. His practice focuses on quiet spatial observation, natural acoustic dynamics, and precise visual documentation of multi-disciplinary performances."
+    },
     "sections": [
       {
-        "title": "Selected Experience",
+        "title": {
+          "TR": "Seçilmiş Deneyim",
+          "EN": "Selected Experience"
+        },
         "items": [
-          "2023–Present — Lead Camera Operator, Moving Image Archive Project",
-          "2020–2023 — Videographer & Editor, Contemporary Art Documentation Unit",
-          "2018–2020 — Assistant Cinematographer, Observational Cinema Workshop"
+          {
+            "TR": "2023–Günümüz — Baş Kamera Operatörü, Hareketli Görüntü Arşivi Projesi",
+            "EN": "2023–Present — Lead Camera Operator, Moving Image Archive Project"
+          },
+          {
+            "TR": "2020–2023 — Videograf & Editör, Çağdaş Sanat Dokümantasyon Birimi",
+            "EN": "2020–2023 — Videographer & Editor, Contemporary Art Documentation Unit"
+          },
+          {
+            "TR": "2018–2020 — Görüntü Yönetmeni Yardımcısı, Gözlemci Sinema Atölyesi",
+            "EN": "2018–2020 — Assistant Cinematographer, Observational Cinema Workshop"
+          }
         ]
       },
       {
-        "title": "Selected Screenings & Exhibitions",
+        "title": {
+          "TR": "Seçilmiş Gösterimler & Sergiler",
+          "EN": "Selected Screenings & Exhibitions"
+        },
         "items": [
-          "2024 — Spatial Acoustics & Movement (Screening), Biennial Media Hall",
-          "2023 — Urban Topographies: Moving Image Survey, Kunsthalle Project Room",
-          "2022 — Archival Motions, Museum of Contemporary Art Screening Program",
-          "2021 — Chamber Performances in Low Light, Cinema Forum"
+          {
+            "TR": "2024 — Mekânsal Akustik & Hareket (Gösterim), Bienal Medya Salonu",
+            "EN": "2024 — Spatial Acoustics & Movement (Screening), Biennial Media Hall"
+          },
+          {
+            "TR": "2023 — Kent Topografyaları: Hareketli Görüntü Taraması, Kunsthalle Proje Odası",
+            "EN": "2023 — Urban Topographies: Moving Image Survey, Kunsthalle Project Room"
+          },
+          {
+            "TR": "2022 — Arşivsel Hareketler, Çağdaş Sanat Müzesi Gösterim Programı",
+            "EN": "2022 — Archival Motions, Museum of Contemporary Art Screening Program"
+          },
+          {
+            "TR": "2021 — Düşük Işıkta Oda Performansları, Sinema Forumu",
+            "EN": "2021 — Chamber Performances in Low Light, Cinema Forum"
+          }
         ]
       },
       {
-        "title": "Selected Clients & Collaborators",
+        "title": {
+          "TR": "Seçilmiş Danışanlar & İşbirlikleri",
+          "EN": "Selected Clients & Collaborators"
+        },
         "items": [
-          "Contemporary Art Foundation",
-          "International Film & Media Forum",
-          "SALT Research & Moving Image Archive",
-          "Independent Choreographers Collective",
-          "Urban Architecture Research Lab"
+          {
+            "TR": "Çağdaş Sanat Vakfı",
+            "EN": "Contemporary Art Foundation"
+          },
+          {
+            "TR": "Uluslararası Film & Medya Forumu",
+            "EN": "International Film & Media Forum"
+          },
+          {
+            "TR": "SALT Araştırma & Hareketli Görüntü Arşivi",
+            "EN": "SALT Research & Moving Image Archive"
+          },
+          {
+            "TR": "Bağımsız Koreograflar Kolektifi",
+            "EN": "Independent Choreographers Collective"
+          },
+          {
+            "TR": "Kent Mimarisi Araştırma Laboratuvarı",
+            "EN": "Urban Architecture Research Lab"
+          }
         ]
       }
     ]
@@ -50,139 +115,283 @@
       "url": "https://instagram.com"
     },
     {
-      "label": "Email",
+      "label": "E-posta",
       "url": "mailto:contact@onurtemel.com.tr"
     }
   ],
   "works": [
     {
       "id": "work-01",
-      "title": "Resonant Structures",
+      "title": {
+        "TR": "Rezonans Yapılar",
+        "EN": "Resonant Structures"
+      },
       "year": "2024",
-      "role": "Direction / Cinematography",
-      "category": "Documentary",
-      "description": "Observational study of concrete acoustics and spatial decay in disused industrial facilities.",
+      "role": {
+        "TR": "Yönetmenlik / Görüntü Yönetimi",
+        "EN": "Direction / Cinematography"
+      },
+      "category": {
+        "TR": "Belgesel",
+        "EN": "Documentary"
+      },
+      "description": {
+        "TR": "Eski endüstriyel tesislerde beton akustiği ve mekânsal aşınmanın gözlemsel incelemesi.",
+        "EN": "Observational study of concrete acoustics and spatial decay in disused industrial facilities."
+      },
       "youtube": "L_LUpnjgPso",
       "thumbnail": "",
       "featured": true
     },
     {
       "id": "work-02",
-      "title": "Chamber Movement No. 4",
+      "title": {
+        "TR": "Oda Hareketi No. 4",
+        "EN": "Chamber Movement No. 4"
+      },
       "year": "2024",
-      "role": "Camera / Performance Recording",
-      "category": "Dance & Performance",
-      "description": "Single-take documentation of a minimal contemporary dance duet performed under directional daylight.",
+      "role": {
+        "TR": "Kamera / Performans Kaydı",
+        "EN": "Camera / Performance Recording"
+      },
+      "category": {
+        "TR": "Dans & Performans",
+        "EN": "Dance & Performance"
+      },
+      "description": {
+        "TR": "Yönlendirici gün ışığı altında gerçekleştirilen minimal çağdaş dans düetinin tek çekim dokümantasyonu.",
+        "EN": "Single-take documentation of a minimal contemporary dance duet performed under directional daylight."
+      },
       "youtube": "aqz-KE-bpKQ",
       "thumbnail": "",
       "featured": false
     },
     {
       "id": "work-03",
-      "title": "Archive of Shadows",
+      "title": {
+        "TR": "Gölgeler Arşivi",
+        "EN": "Archive of Shadows"
+      },
       "year": "2023",
-      "role": "Cinematography / Editing",
-      "category": "Artist Film",
-      "description": "16mm and digital hybrid exploration of light patterns inside exhibition spaces during off-hours.",
+      "role": {
+        "TR": "Görüntü Yönetimi / Kurgu",
+        "EN": "Cinematography / Editing"
+      },
+      "category": {
+        "TR": "Sanatçı Filmi",
+        "EN": "Artist Film"
+      },
+      "description": {
+        "TR": "Ziyaret saatleri dışında sergi mekânlarındaki ışık desenlerinin 16mm ve dijital hibrit keşfi.",
+        "EN": "16mm and digital hybrid exploration of light patterns inside exhibition spaces during off-hours."
+      },
       "youtube": "M7lc1UVf-VE",
       "thumbnail": "",
       "featured": true
     },
     {
       "id": "work-04",
-      "title": "Industrial Soundscapes",
+      "title": {
+        "TR": "Endüstriyel Ses Manzaraları",
+        "EN": "Industrial Soundscapes"
+      },
       "year": "2023",
-      "role": "Director of Photography",
-      "category": "Cultural Institution",
-      "description": "Multi-channel installation recording documenting sound artists working in heavy machinery environments.",
+      "role": {
+        "TR": "Görüntü Yönetmeni",
+        "EN": "Director of Photography"
+      },
+      "category": {
+        "TR": "Kültür Kurumu",
+        "EN": "Cultural Institution"
+      },
+      "description": {
+        "TR": "Ağır makine ortamlarında çalışan ses sanatçılarını belgeleyen çok kanallı enstalasyon kaydı.",
+        "EN": "Multi-channel installation recording documenting sound artists working in heavy machinery environments."
+      },
       "youtube": "2g811Ko7K8U",
       "thumbnail": "",
       "featured": false
     },
     {
       "id": "work-05",
-      "title": "Monolith in Monologue",
+      "title": {
+        "TR": "Monolitle Tek Başına",
+        "EN": "Monolith in Monologue"
+      },
       "year": "2023",
-      "role": "Camera / Lighting",
-      "category": "Short Portrait",
-      "description": "Intimate profile of a sculptor preparing large-scale granite elements for museum display.",
+      "role": {
+        "TR": "Kamera / Işık",
+        "EN": "Camera / Lighting"
+      },
+      "category": {
+        "TR": "Kısa Portre",
+        "EN": "Short Portrait"
+      },
+      "description": {
+        "TR": "Müze sergisi için büyük ölçekli granit unsurlar hazırlayan bir heykeltıraşın samimi portresi.",
+        "EN": "Intimate profile of a sculptor preparing large-scale granite elements for museum display."
+      },
       "youtube": "EngW7tLk6R8",
       "thumbnail": "",
       "featured": false
     },
     {
       "id": "work-06",
-      "title": "Bosphorus Topography",
+      "title": {
+        "TR": "Boğaziçi Topografyası",
+        "EN": "Bosphorus Topography"
+      },
       "year": "2022",
-      "role": "Direction / Camera",
-      "category": "Architecture",
-      "description": "Static frame study examining waterfront infrastructure, maritime flow, and urban density.",
+      "role": {
+        "TR": "Yönetmenlik / Kamera",
+        "EN": "Direction / Camera"
+      },
+      "category": {
+        "TR": "Mimari",
+        "EN": "Architecture"
+      },
+      "description": {
+        "TR": "Kıyı altyapısını, deniz trafiğini ve kentsel yoğunluğu inceleyen sabit çerçeveli çalışma.",
+        "EN": "Static frame study examining waterfront infrastructure, maritime flow, and urban density."
+      },
       "youtube": "LXb3EKWsInQ",
       "thumbnail": "",
       "featured": true
     },
     {
       "id": "work-07",
-      "title": "Rehearsal Notes",
+      "title": {
+        "TR": "Prova Notları",
+        "EN": "Rehearsal Notes"
+      },
       "year": "2022",
-      "role": "Camera Operator",
-      "category": "Music Performance",
-      "description": "Uncut multi-mic rehearsal capture of a string quartet preparing a contemporary microtonal composition.",
+      "role": {
+        "TR": "Kamera Operatörü",
+        "EN": "Camera Operator"
+      },
+      "category": {
+        "TR": "Müzik Performansı",
+        "EN": "Music Performance"
+      },
+      "description": {
+        "TR": "Çağdaş bir mikrotonal beste hazırlayan yaylı çalgılar dörtlüsünün kesintisiz çok mikrofonlu prova kaydı.",
+        "EN": "Uncut multi-mic rehearsal capture of a string quartet preparing a contemporary microtonal composition."
+      },
       "youtube": "jNQXAC9IVRw",
       "thumbnail": "",
       "featured": false
     },
     {
       "id": "work-08",
-      "title": "Fabric & Tension",
+      "title": {
+        "TR": "Kumaş & Gerilim",
+        "EN": "Fabric & Tension"
+      },
       "year": "2022",
-      "role": "Cinematography",
-      "category": "Fashion / Editorial",
-      "description": "Tactile close-range motion study of raw textile draping for an avant-garde design studio.",
+      "role": {
+        "TR": "Görüntü Yönetimi",
+        "EN": "Cinematography"
+      },
+      "category": {
+        "TR": "Moda / Editöryal",
+        "EN": "Fashion / Editorial"
+      },
+      "description": {
+        "TR": "Avangart bir tasarım stüdyosu için ham tekstil dökümünün yakın plan dokunsal hareket incelemesi.",
+        "EN": "Tactile close-range motion study of raw textile draping for an avant-garde design studio."
+      },
       "youtube": "YE7VzlLtp-4",
       "thumbnail": "",
       "featured": false
     },
     {
       "id": "work-09",
-      "title": "Transient Light Study",
+      "title": {
+        "TR": "Geçici Işık İncelemesi",
+        "EN": "Transient Light Study"
+      },
       "year": "2021",
-      "role": "Director / Camera",
-      "category": "Experimental Film",
-      "description": "Time-lapse and real-time capture of atmospheric shifts across coastal limestone formations.",
+      "role": {
+        "TR": "Yönetmen / Kamera",
+        "EN": "Director / Camera"
+      },
+      "category": {
+        "TR": "Deneysel Film",
+        "EN": "Experimental Film"
+      },
+      "description": {
+        "TR": "Kıyı kireçtaşı oluşumları üzerindeki atmosferik değişimlerin hızlandırılmış ve gerçek zamanlı kaydı.",
+        "EN": "Time-lapse and real-time capture of atmospheric shifts across coastal limestone formations."
+      },
       "youtube": "mP0RAo9SKZk",
       "thumbnail": "",
       "featured": false
     },
     {
       "id": "work-10",
-      "title": "Gallery Installation Record",
+      "title": {
+        "TR": "Galeri Enstalasyon Kaydı",
+        "EN": "Gallery Installation Record"
+      },
       "year": "2021",
-      "role": "Camera / Post-production",
-      "category": "Cultural Institution",
-      "description": "Spatial walk-through documentation of a retrospective exhibition for catalogue archive.",
+      "role": {
+        "TR": "Kamera / Yapım Sonrası",
+        "EN": "Camera / Post-production"
+      },
+      "category": {
+        "TR": "Kültür Kurumu",
+        "EN": "Cultural Institution"
+      },
+      "description": {
+        "TR": "Katalog arşivi için retrospektif bir serginin mekânsal gezinti dokümantasyonu.",
+        "EN": "Spatial walk-through documentation of a retrospective exhibition for catalogue archive."
+      },
       "youtube": "Bey4XXJAqS8",
       "thumbnail": "",
       "featured": false
     },
     {
       "id": "work-11",
-      "title": "Dusk Chorus",
+      "title": {
+        "TR": "Alacakaranlık Korosu",
+        "EN": "Dusk Chorus"
+      },
       "year": "2021",
-      "role": "Direction / Sound Recording",
-      "category": "Documentary",
-      "description": "Field recording and fixed-lens cinematography of avian soundscapes in suburban wetlands.",
+      "role": {
+        "TR": "Yönetmenlik / Ses Kaydı",
+        "EN": "Direction / Sound Recording"
+      },
+      "category": {
+        "TR": "Belgesel",
+        "EN": "Documentary"
+      },
+      "description": {
+        "TR": "Şehir dışı sulak alanlarda kuş ses manzaralarının saha kaydı ve sabit lensli görüntü yönetimi.",
+        "EN": "Field recording and fixed-lens cinematography of avian soundscapes in suburban wetlands."
+      },
       "youtube": "kJQP7kiw5Fk",
       "thumbnail": "",
       "featured": false
     },
     {
       "id": "work-12",
-      "title": "Concrete & Horizon",
+      "title": {
+        "TR": "Beton & Ufuk",
+        "EN": "Concrete & Horizon"
+      },
       "year": "2020",
-      "role": "Cinematography",
-      "category": "Architecture",
-      "description": "Visual essay on brutalist housing estates and geometric shadows in Northern European ports.",
+      "role": {
+        "TR": "Görüntü Yönetimi",
+        "EN": "Cinematography"
+      },
+      "category": {
+        "TR": "Mimari",
+        "EN": "Architecture"
+      },
+      "description": {
+        "TR": "Kuzey Avrupa limanlarındaki brutalist toplu konutlar ve geometrik gölgeler üzerine görsel deneme.",
+        "EN": "Visual essay on brutalist housing estates and geometric shadows in Northern European ports."
+      },
       "youtube": "9bZkp7q19f0",
       "thumbnail": "",
       "featured": false
