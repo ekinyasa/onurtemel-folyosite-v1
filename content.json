@@ -1,0 +1,191 @@
+{
+  "site": {
+    "name": "ONUR TEMEL",
+    "pageTitle": "ONUR TEMEL — Videographer & Moving Image Archive",
+    "description": "Portfolio of videographer Onur Temel. Observational documentary, performance capture, artist film documentation, and exhibition archives.",
+    "email": "contact@onurtemel.com.tr",
+    "location": "Istanbul / Berlin",
+    "theme": "system"
+  },
+  "bio": {
+    "short": "Videographer and camera operator specializing in contemporary art documentation, long-form performance recording, and observational documentary.",
+    "long": "Onur Temel works across contemporary art institutions, exhibition catalogues, and independent film productions. His practice focuses on quiet spatial observation, natural acoustic dynamics, and precise visual documentation of multi-disciplinary performances.",
+    "sections": [
+      {
+        "title": "Selected Experience",
+        "items": [
+          "2023–Present — Lead Camera Operator, Moving Image Archive Project",
+          "2020–2023 — Videographer & Editor, Contemporary Art Documentation Unit",
+          "2018–2020 — Assistant Cinematographer, Observational Cinema Workshop"
+        ]
+      },
+      {
+        "title": "Selected Screenings & Exhibitions",
+        "items": [
+          "2024 — Spatial Acoustics & Movement (Screening), Biennial Media Hall",
+          "2023 — Urban Topographies: Moving Image Survey, Kunsthalle Project Room",
+          "2022 — Archival Motions, Museum of Contemporary Art Screening Program",
+          "2021 — Chamber Performances in Low Light, Cinema Forum"
+        ]
+      },
+      {
+        "title": "Selected Clients & Collaborators",
+        "items": [
+          "Contemporary Art Foundation",
+          "International Film & Media Forum",
+          "SALT Research & Moving Image Archive",
+          "Independent Choreographers Collective",
+          "Urban Architecture Research Lab"
+        ]
+      }
+    ]
+  },
+  "links": [
+    {
+      "label": "Vimeo",
+      "url": "https://vimeo.com"
+    },
+    {
+      "label": "Instagram",
+      "url": "https://instagram.com"
+    },
+    {
+      "label": "Email",
+      "url": "mailto:contact@onurtemel.com.tr"
+    }
+  ],
+  "works": [
+    {
+      "id": "work-01",
+      "title": "Resonant Structures",
+      "year": "2024",
+      "role": "Direction / Cinematography",
+      "category": "Documentary",
+      "description": "Observational study of concrete acoustics and spatial decay in disused industrial facilities.",
+      "youtube": "L_LUpnjgPso",
+      "thumbnail": "",
+      "featured": true
+    },
+    {
+      "id": "work-02",
+      "title": "Chamber Movement No. 4",
+      "year": "2024",
+      "role": "Camera / Performance Recording",
+      "category": "Dance & Performance",
+      "description": "Single-take documentation of a minimal contemporary dance duet performed under directional daylight.",
+      "youtube": "aqz-KE-bpKQ",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "id": "work-03",
+      "title": "Archive of Shadows",
+      "year": "2023",
+      "role": "Cinematography / Editing",
+      "category": "Artist Film",
+      "description": "16mm and digital hybrid exploration of light patterns inside exhibition spaces during off-hours.",
+      "youtube": "M7lc1UVf-VE",
+      "thumbnail": "",
+      "featured": true
+    },
+    {
+      "id": "work-04",
+      "title": "Industrial Soundscapes",
+      "year": "2023",
+      "role": "Director of Photography",
+      "category": "Cultural Institution",
+      "description": "Multi-channel installation recording documenting sound artists working in heavy machinery environments.",
+      "youtube": "2g811Ko7K8U",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "id": "work-05",
+      "title": "Monolith in Monologue",
+      "year": "2023",
+      "role": "Camera / Lighting",
+      "category": "Short Portrait",
+      "description": "Intimate profile of a sculptor preparing large-scale granite elements for museum display.",
+      "youtube": "EngW7tLk6R8",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "id": "work-06",
+      "title": "Bosphorus Topography",
+      "year": "2022",
+      "role": "Direction / Camera",
+      "category": "Architecture",
+      "description": "Static frame study examining waterfront infrastructure, maritime flow, and urban density.",
+      "youtube": "LXb3EKWsInQ",
+      "thumbnail": "",
+      "featured": true
+    },
+    {
+      "id": "work-07",
+      "title": "Rehearsal Notes",
+      "year": "2022",
+      "role": "Camera Operator",
+      "category": "Music Performance",
+      "description": "Uncut multi-mic rehearsal capture of a string quartet preparing a contemporary microtonal composition.",
+      "youtube": "jNQXAC9IVRw",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "id": "work-08",
+      "title": "Fabric & Tension",
+      "year": "2022",
+      "role": "Cinematography",
+      "category": "Fashion / Editorial",
+      "description": "Tactile close-range motion study of raw textile draping for an avant-garde design studio.",
+      "youtube": "YE7VzlLtp-4",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "id": "work-09",
+      "title": "Transient Light Study",
+      "year": "2021",
+      "role": "Director / Camera",
+      "category": "Experimental Film",
+      "description": "Time-lapse and real-time capture of atmospheric shifts across coastal limestone formations.",
+      "youtube": "mP0RAo9SKZk",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "id": "work-10",
+      "title": "Gallery Installation Record",
+      "year": "2021",
+      "role": "Camera / Post-production",
+      "category": "Cultural Institution",
+      "description": "Spatial walk-through documentation of a retrospective exhibition for catalogue archive.",
+      "youtube": "Bey4XXJAqS8",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "id": "work-11",
+      "title": "Dusk Chorus",
+      "year": "2021",
+      "role": "Direction / Sound Recording",
+      "category": "Documentary",
+      "description": "Field recording and fixed-lens cinematography of avian soundscapes in suburban wetlands.",
+      "youtube": "kJQP7kiw5Fk",
+      "thumbnail": "",
+      "featured": false
+    },
+    {
+      "id": "work-12",
+      "title": "Concrete & Horizon",
+      "year": "2020",
+      "role": "Cinematography",
+      "category": "Architecture",
+      "description": "Visual essay on brutalist housing estates and geometric shadows in Northern European ports.",
+      "youtube": "9bZkp7q19f0",
+      "thumbnail": "",
+      "featured": false
+    }
+  ]
+}

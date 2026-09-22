@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ONUR TEMEL — Videographer & Moving Image Archive</title>
+  <meta name="description" content="Portfolio of videographer Onur Temel. Observational documentary, performance capture, artist film documentation, and exhibition archives.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="ONUR TEMEL — Videographer">
+  <meta property="og:description" content="Portfolio of videographer Onur Temel. Observational documentary, performance capture, artist film documentation, and exhibition archives.">
+  <meta property="og:type" content="website">
+
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    /* Visually hidden helper for screen reader headings */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-container" style="width:100%; display:flex; align-items:center; justify-content:space-between;">
+      <a href="#work" class="header-brand" id="brand-link" aria-label="Onur Temel Homepage">ONUR TEMEL</a>
+      
+      <div class="header-controls">
+        <button id="theme-toggle" class="icon-btn theme-toggle-btn" aria-label="Toggle dark/light theme" title="Toggle Theme">
+          DARK
+        </button>
+        
+        <button id="view-switch-btn" class="icon-btn view-switch-btn" aria-label="Switch to Text Information View" aria-expanded="false" title="Switch View">
+          <span class="view-switch-symbol" aria-hidden="true">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="site-container">
+    <main>
+      <!-- Primary View: Work Grid -->
+      <section id="work-view" class="view" aria-label="Selected Works">
+        <h1 class="sr-only" id="work-heading">Selected Works</h1>
+        <div id="works-grid" class="works-grid" role="region" aria-live="polite"></div>
+      </section>
+
+      <!-- Information / Bio / CV View -->
+      <section id="info-view" class="view" aria-label="Information & Archive" hidden>
+        <h1 class="sr-only" id="info-heading">Information & Archive</h1>
+        <div id="info-container" class="info-container"></div>
+      </section>
+
+      <!-- Graceful Fallback Error UI -->
+      <div id="error-state" class="error-state" hidden>
+        <p id="error-message">Unable to load content catalog. Please verify your connection.</p>
+        <button id="retry-btn" class="retry-btn">Retry Loading</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
