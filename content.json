@@ -15,8 +15,8 @@
       "EN": "ONUR TEMEL — Videographer & Moving Image Archive"
     },
     "description": {
-      "TR": "Videograf Onur Temel'in portfolyosu. Gözlemci belgesel, performans kaydı, sanatçı filmi dokümantasyonu ve sergi arşivleri.",
-      "EN": "Portfolio of videographer Onur Temel. Observational documentary, performance capture, artist film documentation, and exhibition archives."
+      "TR": "Videograf Onur Temel'in portfolyosu. Gözlemci belgesel, performans kaydı, kent araştırmaları ve saha dokümantasyonları.",
+      "EN": "Portfolio of videographer Onur Temel. Observational documentary, performance capture, urban research, and field documentation."
     },
     "email": "contact@onurtemel.com.tr",
     "location": "Istanbul / Berlin"
@@ -82,24 +82,20 @@
         },
         "items": [
           {
-            "TR": "Çağdaş Sanat Vakfı",
-            "EN": "Contemporary Art Foundation"
+            "TR": "Mekânsal Adalet Derneği (MAD)",
+            "EN": "Center for Spatial Justice (MAD)"
           },
           {
-            "TR": "Uluslararası Film & Medya Forumu",
-            "EN": "International Film & Media Forum"
+            "TR": "BAYETAV",
+            "EN": "BAYETAV"
           },
           {
-            "TR": "SALT Araştırma & Hareketli Görüntü Arşivi",
-            "EN": "SALT Research & Moving Image Archive"
+            "TR": "Bartın Platformu",
+            "EN": "Bartın Platform"
           },
           {
-            "TR": "Bağımsız Koreograflar Kolektifi",
-            "EN": "Independent Choreographers Collective"
-          },
-          {
-            "TR": "Kent Mimarisi Araştırma Laboratuvarı",
-            "EN": "Urban Architecture Research Lab"
+            "TR": "Avdan Platformu",
+            "EN": "Avdan Platform"
           }
         ]
       }
@@ -121,280 +117,225 @@
   ],
   "works": [
     {
-      "id": "work-01",
+      "id": "hevsel-bahceleri",
       "title": {
-        "TR": "Rezonans Yapılar",
-        "EN": "Resonant Structures"
-      },
-      "year": "2024",
-      "role": {
-        "TR": "Yönetmenlik / Görüntü Yönetimi",
-        "EN": "Direction / Cinematography"
-      },
-      "category": {
-        "TR": "Belgesel",
-        "EN": "Documentary"
+        "TR": "Hevsel Bahçeleri",
+        "EN": "Hevsel Gardens"
       },
       "description": {
-        "TR": "Eski endüstriyel tesislerde beton akustiği ve mekânsal aşınmanın gözlemsel incelemesi.",
-        "EN": "Observational study of concrete acoustics and spatial decay in disused industrial facilities."
+        "TR": "UNESCO Dünya Kültür Mirası Listesi'nde yer alan Hevsel Bahçeleri'nin sorunlarını uzmanlar ve çiftçilerden dinliyoruz.",
+        "EN": "Listening to experts and farmers regarding the challenges faced by the Hevsel Gardens, a site inscribed on the UNESCO World Heritage List."
       },
-      "youtube": "L_LUpnjgPso",
-      "thumbnail": "",
-      "featured": true
+      "youtube": "https://www.youtube.com/watch?v=YfxRL26UxUA",
+      "thumbnail": "assets/covers/hevsel-bahceleri.jpeg"
     },
     {
-      "id": "work-02",
+      "id": "yedikule-hevsel",
       "title": {
-        "TR": "Oda Hareketi No. 4",
-        "EN": "Chamber Movement No. 4"
-      },
-      "year": "2024",
-      "role": {
-        "TR": "Kamera / Performans Kaydı",
-        "EN": "Camera / Performance Recording"
-      },
-      "category": {
-        "TR": "Dans & Performans",
-        "EN": "Dance & Performance"
+        "TR": "Yedikule Bostanları ve Hevsel Bahçelerini Birlikte Düşünmek",
+        "EN": "Rethinking Yedikule Market Gardens and Hevsel Gardens Together"
       },
       "description": {
-        "TR": "Yönlendirici gün ışığı altında gerçekleştirilen minimal çağdaş dans düetinin tek çekim dokümantasyonu.",
-        "EN": "Single-take documentation of a minimal contemporary dance duet performed under directional daylight."
+        "TR": "Arkeolog Nevin Soyukaya ile akademisyen Asu Aksoy'un Yedikule'deki yürüyüşü ve sohbeti, iki önemli tarımsal kültür mirası olan İstanbul'da Yedikule Bostanları ile Diyarbakır'da Hevsel Bahçeleri'nin özgün tarihini, güncel koşullarını ve bunlar arasındaki ilişkiyi keşfetmeye davet ediyor.",
+        "EN": "Archaeologist Nevin Soyukaya and academic Asu Aksoy walk and converse in Yedikule, inviting us to explore the unique history, current conditions, and interrelations of two vital agricultural heritage sites: the Yedikule Market Gardens in Istanbul and the Hevsel Gardens in Diyarbakır."
       },
-      "youtube": "aqz-KE-bpKQ",
-      "thumbnail": "",
-      "featured": false
+      "youtube": "https://www.youtube.com/watch?v=Mpe4wSCotCA",
+      "thumbnail": "assets/covers/yedikule-hevsel.jpeg"
     },
     {
-      "id": "work-03",
+      "id": "haydarpasa",
       "title": {
-        "TR": "Gölgeler Arşivi",
-        "EN": "Archive of Shadows"
-      },
-      "year": "2023",
-      "role": {
-        "TR": "Görüntü Yönetimi / Kurgu",
-        "EN": "Cinematography / Editing"
-      },
-      "category": {
-        "TR": "Sanatçı Filmi",
-        "EN": "Artist Film"
+        "TR": "Haydarpaşa: \"Seni Yeneceğim İstanbul\"",
+        "EN": "Haydarpaşa: \"I Will Defeat You, Istanbul\""
       },
       "description": {
-        "TR": "Ziyaret saatleri dışında sergi mekânlarındaki ışık desenlerinin 16mm ve dijital hibrit keşfi.",
-        "EN": "16mm and digital hybrid exploration of light patterns inside exhibition spaces during off-hours."
+        "TR": "Kent suçlarının kültür ve sanat aracılığıyla meşrulaştırılmaya çalışıldığı bu örnekte olduğu gibi, söz konusu proje yalnızca bir yapı değişimini değil; kamusal alanın geleceğini ve kent belleğini de doğrudan etkiliyor.",
+        "EN": "As in this example where urban crimes are attempted to be legitimized through art and culture, the project in question directly impacts not only structural transformation, but also the future of public space and urban memory."
       },
-      "youtube": "M7lc1UVf-VE",
-      "thumbnail": "",
-      "featured": true
+      "youtube": "https://www.youtube.com/watch?v=qTomyRhTNUQ&t=21s",
+      "thumbnail": "assets/covers/haydarpasa.jpeg"
     },
     {
-      "id": "work-04",
+      "id": "we-ran-there-to-defend-our-lives",
       "title": {
-        "TR": "Endüstriyel Ses Manzaraları",
-        "EN": "Industrial Soundscapes"
-      },
-      "year": "2023",
-      "role": {
-        "TR": "Görüntü Yönetmeni",
-        "EN": "Director of Photography"
-      },
-      "category": {
-        "TR": "Kültür Kurumu",
-        "EN": "Cultural Institution"
+        "TR": "\"We ran there to defend our lives\"",
+        "EN": "\"We ran there to defend our lives\""
       },
       "description": {
-        "TR": "Ağır makine ortamlarında çalışan ses sanatçılarını belgeleyen çok kanallı enstalasyon kaydı.",
-        "EN": "Multi-channel installation recording documenting sound artists working in heavy machinery environments."
+        "TR": "2019 yılında Türkiye'deki Kaz Dağları (Mount Ida) bölgesi, altın madeni kurmayı planlayan Kanadalı bir maden şirketi ile topraklarına ve geçim kaynaklarına yönelik müdahaleye direnen yerel halk arasında tırmanan bir çatışmanın merkez üssü haline geldi.",
+        "EN": "In 2019, Mount Ida (Kaz Dağları) in Turkey became the epicenter of an escalating conflict between a Canadian mining company planning a gold mine and local residents resisting interventions against their land and livelihoods."
       },
-      "youtube": "2g811Ko7K8U",
-      "thumbnail": "",
-      "featured": false
+      "youtube": "https://www.youtube.com/watch?v=GrhA39JhMBc&t=320s",
+      "thumbnail": "assets/covers/we-ran-there-to-defend-our-lives.jpeg"
     },
     {
-      "id": "work-05",
+      "id": "sanma-ki-o-yagmur-bulutu",
       "title": {
-        "TR": "Monolitle Tek Başına",
-        "EN": "Monolith in Monologue"
-      },
-      "year": "2023",
-      "role": {
-        "TR": "Kamera / Işık",
-        "EN": "Camera / Lighting"
-      },
-      "category": {
-        "TR": "Kısa Portre",
-        "EN": "Short Portrait"
+        "TR": "\"SANMA Kİ O YAĞMUR BULUTU\" Menderes'te Jeotermal",
+        "EN": "\"DO NOT THINK IT IS A RAIN CLOUD\" Geothermal in Menderes"
       },
       "description": {
-        "TR": "Müze sergisi için büyük ölçekli granit unsurlar hazırlayan bir heykeltıraşın samimi portresi.",
-        "EN": "Intimate profile of a sculptor preparing large-scale granite elements for museum display."
+        "TR": "Aydın başta olmak üzere JES’lerin halk sağlığı ve çevre üzerinde geri dönüşü mümkün olmayan zararlar bıraktığını gördük. Bu video haberimizde bölgeyi derinden etkileyen JES’leri havza sakinlerinden dinliyoruz.",
+        "EN": "We observed that geothermal power plants (JES), particularly in Aydın, inflict irreversible harm on public health and the environment. In this video report, we listen to basin residents affected by geothermal operations."
       },
-      "youtube": "EngW7tLk6R8",
-      "thumbnail": "",
-      "featured": false
+      "youtube": "https://www.youtube.com/watch?v=alrFAKlmap4&t=71s",
+      "thumbnail": "assets/covers/sanma-ki-o-yagmur-bulutu.jpeg"
     },
     {
-      "id": "work-06",
+      "id": "avdan",
       "title": {
-        "TR": "Boğaziçi Topografyası",
-        "EN": "Bosphorus Topography"
-      },
-      "year": "2022",
-      "role": {
-        "TR": "Yönetmenlik / Kamera",
-        "EN": "Direction / Camera"
-      },
-      "category": {
-        "TR": "Mimari",
-        "EN": "Architecture"
+        "TR": "AVDAN: Kömüre Teslim Olmayan Topraklar",
+        "EN": "AVDAN: Lands That Refuse to Surrender to Coal"
       },
       "description": {
-        "TR": "Kıyı altyapısını, deniz trafiğini ve kentsel yoğunluğu inceleyen sabit çerçeveli çalışma.",
-        "EN": "Static frame study examining waterfront infrastructure, maritime flow, and urban density."
+        "TR": "Avdan, kömür madenine karşı yürüttüğü direnişle gündeme gelen, Denizli’nin Tavas ilçesine bağlı bir köy. Bölge sakinlerinin 2018 yılında kurduğu Avdan Platformu, direnişi ve hukuki mücadeleyi kararlı bir şekilde sürdürüyor. Nisan 2023’te Büyük Menderes Havza Çalışması kapsamında görüştüğümüz Avdanlılardan devam eden mücadelelerini ve ekolojik restorasyon taleplerini dinledik.",
+        "EN": "Avdan is a village in the Tavas district of Denizli that came to prominence through its resistance against coal mining. The Avdan Platform, established by local residents in 2018, continues its resistance and legal battle. In April 2023, as part of the Great Menderes Basin Study, we spoke with Avdan residents about their ongoing struggle and demands for ecological restoration."
       },
-      "youtube": "LXb3EKWsInQ",
-      "thumbnail": "",
-      "featured": true
+      "youtube": "https://www.youtube.com/watch?v=IIxveSKOcbc&t=22s",
+      "thumbnail": "assets/covers/avdan.jpeg"
     },
     {
-      "id": "work-07",
+      "id": "kisladag",
       "title": {
-        "TR": "Prova Notları",
-        "EN": "Rehearsal Notes"
-      },
-      "year": "2022",
-      "role": {
-        "TR": "Kamera Operatörü",
-        "EN": "Camera Operator"
-      },
-      "category": {
-        "TR": "Müzik Performansı",
-        "EN": "Music Performance"
+        "TR": "KIŞLADAĞ: Altın Madeni Gölgesinde",
+        "EN": "KIŞLADAĞ: In the Shadow of the Gold Mine"
       },
       "description": {
-        "TR": "Çağdaş bir mikrotonal beste hazırlayan yaylı çalgılar dörtlüsünün kesintisiz çok mikrofonlu prova kaydı.",
-        "EN": "Uncut multi-mic rehearsal capture of a string quartet preparing a contemporary microtonal composition."
+        "TR": "Uşak’ın Eşme ve Ulubey ilçeleri arasında yer alan devasa büyüklükteki madende 2006 yılından bu yana çıkarılan cevher siyanürle ayrıştırılıyor. Eldorado Gold’un uzantısı olan Tüprag’ın işlettiği maden, 2022 yılında çevresindeki köyleri susuz bırakmasıyla gündeme geldi. MAD ve BAYETAV olarak birlikte yürüttüğümüz Büyük Menderes Havza Çalışması’nda gittiğimiz maden, çok geniş bir alanda ekolojik yıkıma neden olurken çevresinde yaşayanların hayatını da derinden etkiliyor. Video haberimizde Kışladağ Altın Madeni’ni bölge sakinlerinden dinliyoruz!",
+        "EN": "Located between Eşme and Ulubey in Uşak, this massive open-pit mine has used cyanide leaching to extract ore since 2006. Operated by Tüprag (a subsidiary of Eldorado Gold), the mine drew public outrage in 2022 for depleting surrounding villages' water supplies. Documented during the Great Menderes Basin Study conducted jointly by MAD and BAYETAV, the mine inflicts widespread ecological destruction and severely impacts local lives."
       },
-      "youtube": "jNQXAC9IVRw",
-      "thumbnail": "",
-      "featured": false
+      "youtube": "https://www.youtube.com/watch?v=6SPHHPYtQV0&t=237s",
+      "thumbnail": "assets/covers/kisladag.jpeg"
     },
     {
-      "id": "work-08",
+      "id": "bakirkoy-kentin-ruh-hali",
       "title": {
-        "TR": "Kumaş & Gerilim",
-        "EN": "Fabric & Tension"
-      },
-      "year": "2022",
-      "role": {
-        "TR": "Görüntü Yönetimi",
-        "EN": "Cinematography"
-      },
-      "category": {
-        "TR": "Moda / Editöryal",
-        "EN": "Fashion / Editorial"
+        "TR": "Bakırköy 'Kentin Ruh Hali'",
+        "EN": "Bakırköy 'The State of Mind of the City'"
       },
       "description": {
-        "TR": "Avangart bir tasarım stüdyosu için ham tekstil dökümünün yakın plan dokunsal hareket incelemesi.",
-        "EN": "Tactile close-range motion study of raw textile draping for an avant-garde design studio."
+        "TR": "Deprem riski sebebiyle tahliye kararı alınan, bünyesinde barındırdığı yapılardan bir kısmının taşınacağı gündeme gelen hastanelerden biri de Bakırköy Ruh ve Sinir Hastalıkları Hastanesi. Sağlıkçılar, kent hakkı savunucuları ve hastane çalışanları hastanenin yerinde dönüşümünü talep ediyor ve bu mekânın yok olma riskini hem kentin kamusal alanının kaybı hem de ruh sağlığı hizmetinin öncüsü bir kurumun hafızasının kaybı olarak değerlendiriyor.",
+        "EN": "Facing an evacuation order due to earthquake risk, the Bakırköy Psychiatric Hospital is among the facilities slated for partial relocation. Healthcare workers, urban rights advocates, and hospital staff demand on-site renewal, viewing the potential loss of this space as both a destruction of public urban memory and the displacement of a pioneering mental healthcare institution."
       },
-      "youtube": "YE7VzlLtp-4",
-      "thumbnail": "",
-      "featured": false
+      "youtube": "https://www.youtube.com/watch?v=VGfBWyZcOqc&t=269s",
+      "thumbnail": "assets/covers/bakirkoy-kentin-ruh-hali.jpeg"
     },
     {
-      "id": "work-09",
+      "id": "topraga-donus-aydos",
       "title": {
-        "TR": "Geçici Işık İncelemesi",
-        "EN": "Transient Light Study"
-      },
-      "year": "2021",
-      "role": {
-        "TR": "Yönetmen / Kamera",
-        "EN": "Director / Camera"
-      },
-      "category": {
-        "TR": "Deneysel Film",
-        "EN": "Experimental Film"
+        "TR": "İstanbul Çeperindeki Toprağa Dönüş İnisiyatifleri: #1 Aydos | Cengizhan Benice",
+        "EN": "Return to the Land Initiatives on Istanbul's Periphery: #1 Aydos | Cengizhan Benice"
       },
       "description": {
-        "TR": "Kıyı kireçtaşı oluşumları üzerindeki atmosferik değişimlerin hızlandırılmış ve gerçek zamanlı kaydı.",
-        "EN": "Time-lapse and real-time capture of atmospheric shifts across coastal limestone formations."
+        "TR": "Kent merkezlerinden “toprağa dönen”, çeşitli profesyonel geçmişlere sahip yedi üretici yedi farklı hikâyeyle “İstanbul Çeperindeki Toprağa Dönüş İnisiyatifleri” video serisinde! Serinin ilk videosunda, hızlı ve tüketim odaklı bir kent hayatını geride bırakıp, çocukluğunun sayfiye yeri Kartal Aydos’ta, kendi tanımlamasıyla “doğal tarım” yapmaya başlayan Cengizhan Benice’nin hikayesi sizlerle!",
+        "EN": "Seven producers with diverse professional backgrounds who 'returned to the land' from urban centers share seven distinct stories in the video series 'Return to the Land Initiatives on Istanbul's Periphery'. In this first installment, Cengizhan Benice leaves behind fast-paced consumerist city life to practice 'natural farming' in Kartal Aydos, his childhood retreat."
       },
-      "youtube": "mP0RAo9SKZk",
-      "thumbnail": "",
-      "featured": false
+      "youtube": "https://www.youtube.com/watch?v=jm7JW5vyFLQ&t=2s",
+      "thumbnail": "assets/covers/topraga-donus-aydos.jpeg"
     },
     {
-      "id": "work-10",
+      "id": "yusufeli",
       "title": {
-        "TR": "Galeri Enstalasyon Kaydı",
-        "EN": "Gallery Installation Record"
-      },
-      "year": "2021",
-      "role": {
-        "TR": "Kamera / Yapım Sonrası",
-        "EN": "Camera / Post-production"
-      },
-      "category": {
-        "TR": "Kültür Kurumu",
-        "EN": "Cultural Institution"
+        "TR": "Yusufeli: Bindik Bi' Alâmete",
+        "EN": "Yusufeli: Bound for the Unknown"
       },
       "description": {
-        "TR": "Katalog arşivi için retrospektif bir serginin mekânsal gezinti dokümantasyonu.",
-        "EN": "Spatial walk-through documentation of a retrospective exhibition for catalogue archive."
+        "TR": "Yusufeli Barajı, Artvin sınırları içerisindeki Çoruh Nehri üzerinde yer alan beş barajdan biridir. Faaliyete geçtiğinde, onsekiz yerleşim yerinin bir kısmını tamamen sular altında bırakırken, geri kalanını kısmen etkileyecektir. Yusufeli ilçe merkezi de, barajın devam eden inşası nedeniyle sular altında kalacak bölgeler arasında yer almaktadır.",
+        "EN": "The Yusufeli Dam is one of five dams built on the Çoruh River in Artvin. Once fully operational, it will completely submerge parts of eighteen settlements and partially flood the remainder. The district center of Yusufeli is among the areas designated for submergence due to ongoing reservoir impoundment."
       },
-      "youtube": "Bey4XXJAqS8",
-      "thumbnail": "",
-      "featured": false
+      "youtube": "https://www.youtube.com/watch?v=Q39Mvafv7I8&t=3s",
+      "thumbnail": "assets/covers/yusufeli.jpeg"
     },
     {
-      "id": "work-11",
+      "id": "erzincan-artvin",
       "title": {
-        "TR": "Alacakaranlık Korosu",
-        "EN": "Dusk Chorus"
-      },
-      "year": "2021",
-      "role": {
-        "TR": "Yönetmenlik / Ses Kaydı",
-        "EN": "Direction / Sound Recording"
-      },
-      "category": {
-        "TR": "Belgesel",
-        "EN": "Documentary"
+        "TR": "Erzincan'dan Artvin'e Yitirilen Bir Coğrafya",
+        "EN": "From Erzincan to Artvin: A Lost Landscape"
       },
       "description": {
-        "TR": "Şehir dışı sulak alanlarda kuş ses manzaralarının saha kaydı ve sabit lensli görüntü yönetimi.",
-        "EN": "Field recording and fixed-lens cinematography of avian soundscapes in suburban wetlands."
+        "TR": "İliç'teki faaliyet yürüten Anagold Madencilik'in ortaklarından Lidya Madencilik, Artvin'in, eski adıyla Hod, bugünkü adıyla Yukarı Maden ve Aşağı Maden köylerinde 2014 yılından beri sondaj çalışmaları yapıyor. Çoruh Vadisi'ni besleyen kollardan biri olan ve yırtıcı kuşların göç yolları üzerinde yer alan Hod Vadisi, verimli tarım arazileriyle Artvin için çok kıymetli. Artvinliler, madencilik faaliyetleri ile birlikte bölgenin İliç'e benzer bir gidişat yaşayacağından endişe duyuyor.",
+        "EN": "Lidya Mining, a partner of Anagold Mining operating in İliç, has conducted exploratory drilling since 2014 in the Artvin villages of Yukarı Maden and Aşağı Maden (formerly Hod). Feeding into the Çoruh Valley and lying along raptor migration routes, the Hod Valley is vital for Artvin's agricultural fertility. Local residents fear mining operations will cause ecological disaster similar to İliç."
       },
-      "youtube": "kJQP7kiw5Fk",
-      "thumbnail": "",
-      "featured": false
+      "youtube": "https://www.youtube.com/watch?v=4Tw2gB-ygME&t=69s",
+      "thumbnail": "assets/covers/erzincan-artvin.jpeg"
     },
     {
-      "id": "work-12",
+      "id": "slapp-01-sedat-cezayirlioglu",
       "title": {
-        "TR": "Beton & Ufuk",
-        "EN": "Concrete & Horizon"
-      },
-      "year": "2020",
-      "role": {
-        "TR": "Görüntü Yönetimi",
-        "EN": "Cinematography"
-      },
-      "category": {
-        "TR": "Mimari",
-        "EN": "Architecture"
+        "TR": "SLAPP #1 | Sedat Cezayirlioğlu",
+        "EN": "SLAPP #1 | Sedat Cezayirlioğlu"
       },
       "description": {
-        "TR": "Kuzey Avrupa limanlarındaki brutalist toplu konutlar ve geometrik gölgeler üzerine görsel deneme.",
-        "EN": "Visual essay on brutalist housing estates and geometric shadows in Northern European ports."
+        "TR": "İliçli Sedat Cezayirlioğlu, yaklaşık yedi yıldır Çöpler Altın Madeni'nin yol açtığı çevresel tahribata karşı aktif bir mücadele yürütüyor. Şirket tarafından açılan davalardan suç duyurularına kadar uzanan ve kendisine yönelik uygulanan yargısal tacizi konuşmak üzere, 22 Temmuz 2022 tarihinde Erzincan'da Sedat Cezayirlioğlu ile bir araya geldik.",
+        "EN": "Sedat Cezayirlioğlu from İliç has actively fought environmental destruction caused by the Çöpler Gold Mine for nearly seven years. We met with Sedat Cezayirlioğlu in Erzincan on July 22, 2022, to discuss judicial harassment ranging from corporate lawsuits to criminal complaints targeting his activism."
       },
-      "youtube": "9bZkp7q19f0",
-      "thumbnail": "",
-      "featured": false
+      "youtube": "https://www.youtube.com/watch?v=4b99hVhK-q0&t=4s",
+      "thumbnail": "assets/covers/slapp-01-sedat-cezayirlioglu.jpeg"
+    },
+    {
+      "id": "slapp-02-recai-cakir",
+      "title": {
+        "TR": "SLAPP #2 | Recai Çakır",
+        "EN": "SLAPP #2 | Recai Çakır"
+      },
+      "description": {
+        "TR": "Recai Çakır, 2010 yılından beri Amasra’da termik santral yapılmasına karşı mücadele veren bir hak savunucusu. Hattat Holding’in kurmaya çalıştığı termik santrale karşı mücadele yürüten Bartın Platformu’nun eş sözcüsü ve 2019’dan bu yana Amasra Belediye Başkanı. Çakır, şirketin hak savunucularını yıldırmak amacıyla stratejik olarak açtığı bir SLAPP davasıyla karşı karşıya.",
+        "EN": "Recai Çakır is a rights defender who has resisted coal-fired power plant construction in Amasra since 2010. Co-spokesperson for the Bartın Platform opposing Hattat Holding's power plant project and Mayor of Amasra since 2019, Çakır faces a Strategic Lawsuit Against Public Participation (SLAPP) filed by the corporation to intimidate defenders."
+      },
+      "youtube": "https://www.youtube.com/watch?v=zdSeijlr82E&t=7s",
+      "thumbnail": "assets/covers/slapp-02-recai-cakir.jpeg"
+    },
+    {
+      "id": "slapp-03-erdogan-atmis",
+      "title": {
+        "TR": "SLAPP #3 | Erdoğan Atmış",
+        "EN": "SLAPP #3 | Erdoğan Atmış"
+      },
+      "description": {
+        "TR": "Erdoğan Atmış, 2010 yılından bu yana Bartın Platformu’yla birlikte Amasra’da termik santrale karşı mücadele veren hak savunucularından biri. Atmış’ın Bartın Üniversitesi’nde öğretim üyesi olarak çalıştığı dönemde termik santral projesinin sahibi Hattat Holding, Atmış hakkında suç duyurusunda bulundu ve üniversitedeki görevinden alınması için YÖK’e başvurdu.",
+        "EN": "Erdoğan Atmış is a rights defender who has campaigned with the Bartın Platform against the Amasra coal-fired power plant since 2010. While Atmış was a faculty member at Bartın University, Hattat Holding filed criminal complaints against him and petitioned the Council of Higher Education (YÖK) for his dismissal."
+      },
+      "youtube": "https://www.youtube.com/watch?v=q7ETz3gvldM&t=16s",
+      "thumbnail": "none"
+    },
+    {
+      "id": "madyuruyus-02-beyoglu",
+      "title": {
+        "TR": "MADyürüyüş 02 - Beyoğlu",
+        "EN": "MADwalk 02 - Beyoğlu"
+      },
+      "description": {
+        "TR": "",
+        "EN": ""
+      },
+      "youtube": "https://www.youtube.com/watch?v=KI17inOyNUs",
+      "thumbnail": "assets/covers/madyuruyus-02-beyoglu.jpeg"
+    },
+    {
+      "id": "madyuruyus-03-beykoz",
+      "title": {
+        "TR": "MADyürüyüş 03 - Beykoz",
+        "EN": "MADwalk 03 - Beykoz"
+      },
+      "description": {
+        "TR": "",
+        "EN": ""
+      },
+      "youtube": "https://www.youtube.com/watch?v=6C0vLtI7nD4",
+      "thumbnail": "assets/covers/madyuruyus-03-beykoz.jpeg"
+    },
+    {
+      "id": "madyuruyus-05-habibler",
+      "title": {
+        "TR": "MADyürüyüş 05 - Habibler",
+        "EN": "MADwalk 05 - Habibler"
+      },
+      "description": {
+        "TR": "",
+        "EN": ""
+      },
+      "youtube": "https://www.youtube.com/watch?v=lZcPSBDOUhU",
+      "thumbnail": "assets/covers/madyuruyus-05-habibler.jpeg"
     }
   ]
 }

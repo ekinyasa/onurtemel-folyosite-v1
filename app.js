@@ -32,6 +32,31 @@
     loadContent();
   }
 
+  // --- YOUTUBE URL & START TIME PARSER ---
+  function parseYouTubeUrl(input) {
+    if (!input) return { id: '', start: 0 };
+
+    const str = String(input).trim();
+    let id = str;
+    let start = 0;
+
+    // Extract start time parameter (e.g. &t=21s, ?t=320s, &start=21)
+    const tMatch = str.match(/[?&](?:t|start)=(\d+)s?/);
+    if (tMatch) {
+      start = parseInt(tMatch[1], 10);
+    }
+
+    // Extract video ID from YouTube URL formats
+    if (str.includes('youtube.com/') || str.includes('youtu.be/')) {
+      const idMatch = str.match(/(?:v=|\/embed\/|\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+      if (idMatch) {
+        id = idMatch[1];
+      }
+    }
+
+    return { id, start };
+  }
+
   // --- 2. TRANSLATION RESOLVER (DEFENSIVE FALLBACK CHAIN) ---
   function t(fieldObj, targetLang) {
     if (fieldObj === null || fieldObj === undefined) return '';
@@ -201,11 +226,11 @@
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       siteData = await response.json();
-      
+
       const settings = siteData.siteAyarlari || {};
       determineLanguage(settings);
       initTheme(settings);
-      
+
       renderAll();
       handleHashNavigation();
     } catch (err) {
@@ -250,7 +275,6 @@
         langToggleBtn.hidden = true;
       } else {
         langToggleBtn.hidden = false;
-        // Button displays the target language visitor can switch to
         const targetLang = currentLang === 'TR' ? 'EN' : 'TR';
         langToggleBtn.textContent = targetLang;
         langToggleBtn.setAttribute(
@@ -292,34 +316,66 @@
       const year = work.year || '';
       const role = t(work.role, currentLang) || '';
       const description = t(work.description, currentLang) || '';
-      const youtubeId = work.youtube || '';
+      const youtubeRaw = work.youtube || '';
 
-      // Derive thumbnail
-      let thumbUrl = work.thumbnail && String(work.thumbnail).trim() ? work.thumbnail : '';
-      if (!thumbUrl && youtubeId) {
-        thumbUrl = `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`;
-      }
+      const { id: parsedId } = parseYouTubeUrl(youtubeRaw);
+
+      const thumbUrl = work.thumbnail && String(work.thumbnail).trim() ? String(work.thumbnail).trim() : '';
+      const isBlackCover = (thumbUrl === 'none' || thumbUrl === 'black' || work.noCover === true);
 
       const article = document.createElement('article');
       article.className = 'work-item';
       article.id = workId;
 
+      let mediaHTML = '';
+
+      if (isBlackCover) {
+        // 100% Black cover state (SLAPP #3) - No img tag, no YouTube thumbnail request!
+        mediaHTML = `
+          <div class="work-media-container black-cover-container" id="media-${workId}">
+            <button class="work-media-btn black-cover-btn" data-youtube="${escapeAttr(youtubeRaw)}" data-title="${escapeAttr(title)}" aria-label="${currentLang === 'TR' ? 'Videoyu oynat' : 'Play video'}: ${escapeAttr(title)}">
+              <span class="play-indicator" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><polygon points="6,4 18,12 6,20"></polygon></svg>
+              </span>
+            </button>
+          </div>
+        `;
+      } else if (thumbUrl) {
+        // Local cover image - No YouTube thumbnail request!
+        mediaHTML = `
+          <div class="work-media-container" id="media-${workId}">
+            <button class="work-media-btn" data-youtube="${escapeAttr(youtubeRaw)}" data-title="${escapeAttr(title)}" aria-label="${currentLang === 'TR' ? 'Videoyu oynat' : 'Play video'}: ${escapeAttr(title)}">
+              <img src="${escapeAttr(thumbUrl)}" alt="${currentLang === 'TR' ? 'Kapak görseli' : 'Thumbnail'}: ${escapeAttr(title)}" loading="lazy" decoding="async" width="640" height="360">
+              <span class="play-indicator" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><polygon points="6,4 18,12 6,20"></polygon></svg>
+              </span>
+            </button>
+          </div>
+        `;
+      } else if (parsedId) {
+        // Fallback YouTube thumbnail (only for future works without explicit cover decision)
+        const fallbackThumb = `https://i.ytimg.com/vi/${parsedId}/hqdefault.jpg`;
+        mediaHTML = `
+          <div class="work-media-container" id="media-${workId}">
+            <button class="work-media-btn" data-youtube="${escapeAttr(youtubeRaw)}" data-title="${escapeAttr(title)}" aria-label="${currentLang === 'TR' ? 'Videoyu oynat' : 'Play video'}: ${escapeAttr(title)}">
+              <img src="${escapeAttr(fallbackThumb)}" alt="${currentLang === 'TR' ? 'Kapak görseli' : 'Thumbnail'}: ${escapeAttr(title)}" loading="lazy" decoding="async" width="640" height="360">
+              <span class="play-indicator" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><polygon points="6,4 18,12 6,20"></polygon></svg>
+              </span>
+            </button>
+          </div>
+        `;
+      } else {
+        mediaHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--fg-muted);">${currentLang === 'TR' ? 'Video bulunamadı' : 'No video source'}</div>`;
+      }
+
+      const detailsText = [year, role].filter(Boolean).join(' — ');
+
       article.innerHTML = `
-        <div class="work-media-container" id="media-${workId}">
-          ${
-            youtubeId
-              ? `<button class="work-media-btn" data-youtube="${escapeAttr(youtubeId)}" data-title="${escapeAttr(title)}" aria-label="${currentLang === 'TR' ? 'Videoyu oynat' : 'Play video'}: ${escapeAttr(title)}">
-                  <img src="${escapeAttr(thumbUrl)}" alt="${currentLang === 'TR' ? 'Kapak görseli' : 'Thumbnail'}: ${escapeAttr(title)}" loading="lazy" width="640" height="360" onerror="this.onerror=null; this.src='https://i.ytimg.com/vi/${escapeAttr(youtubeId)}/hqdefault.jpg';">
-                  <span class="play-indicator" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><polygon points="6,4 18,12 6,20"></polygon></svg>
-                  </span>
-                </button>`
-              : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--fg-muted);">${currentLang === 'TR' ? 'Video bulunamadı' : 'No video source'}</div>`
-          }
-        </div>
+        ${mediaHTML}
         <div class="work-meta">
           <h2 class="work-title">${escapeHTML(title)}</h2>
-          <p class="work-details">${escapeHTML(year)}${year && role ? ' — ' : ''}${escapeHTML(role)}</p>
+          ${detailsText ? `<p class="work-details">${escapeHTML(detailsText)}</p>` : ''}
           ${description ? `<p class="work-description">${escapeHTML(description)}</p>` : ''}
         </div>
       `;
@@ -338,15 +394,23 @@
   // Handle Video Cover Click -> Replace with YouTube iframe
   function handleVideoPlay(e) {
     const btn = e.currentTarget;
-    const youtubeId = btn.dataset.youtube;
+    const rawYoutube = btn.dataset.youtube;
     const title = btn.dataset.title || 'Video player';
     const container = btn.parentElement;
 
-    if (!youtubeId || !container) return;
+    if (!rawYoutube || !container) return;
+
+    const { id: youtubeId, start: startTime } = parseYouTubeUrl(rawYoutube);
+    if (!youtubeId) return;
+
+    let embedSrc = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(youtubeId)}?autoplay=1&playsinline=1&rel=0`;
+    if (startTime > 0) {
+      embedSrc += `&start=${startTime}`;
+    }
 
     const iframe = document.createElement('iframe');
     iframe.className = 'work-iframe';
-    iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(youtubeId)}?autoplay=1&playsinline=1&rel=0`;
+    iframe.src = embedSrc;
     iframe.title = title;
     iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
     iframe.setAttribute('allowfullscreen', 'true');

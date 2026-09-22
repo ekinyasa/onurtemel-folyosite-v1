@@ -285,6 +285,15 @@ main {
   overflow: hidden;
 }
 
+/* Black Cover State for Work 14 (SLAPP #3) */
+.black-cover-container {
+  background-color: #000000 !important;
+}
+
+.black-cover-btn {
+  background-color: #000000 !important;
+}
+
 .work-media-btn {
   width: 100%;
   height: 100%;
