@@ -127,7 +127,7 @@
         "EN": "Listening to experts and farmers regarding the challenges faced by the Hevsel Gardens, a site inscribed on the UNESCO World Heritage List."
       },
       "youtube": "https://www.youtube.com/watch?v=YfxRL26UxUA",
-      "thumbnail": "assets/covers/hevsel-bahceleri.jpeg"
+      "thumbnail": "assets/covers/hevsel-bahceleri.png"
     },
     {
       "id": "yedikule-hevsel",
@@ -140,7 +140,7 @@
         "EN": "Archaeologist Nevin Soyukaya and academic Asu Aksoy walk and converse in Yedikule, inviting us to explore the unique history, current conditions, and interrelations of two vital agricultural heritage sites: the Yedikule Market Gardens in Istanbul and the Hevsel Gardens in Diyarbakır."
       },
       "youtube": "https://www.youtube.com/watch?v=Mpe4wSCotCA",
-      "thumbnail": "assets/covers/yedikule-hevsel.jpeg"
+      "thumbnail": "assets/covers/yedikule-hevsel.png"
     },
     {
       "id": "haydarpasa",
@@ -153,7 +153,7 @@
         "EN": "As in this example where urban crimes are attempted to be legitimized through art and culture, the project in question directly impacts not only structural transformation, but also the future of public space and urban memory."
       },
       "youtube": "https://www.youtube.com/watch?v=qTomyRhTNUQ&t=21s",
-      "thumbnail": "assets/covers/haydarpasa.jpeg"
+      "thumbnail": "assets/covers/haydarpasa.png"
     },
     {
       "id": "we-ran-there-to-defend-our-lives",
@@ -166,7 +166,7 @@
         "EN": "In 2019, Mount Ida (Kaz Dağları) in Turkey became the epicenter of an escalating conflict between a Canadian mining company planning a gold mine and local residents resisting interventions against their land and livelihoods."
       },
       "youtube": "https://www.youtube.com/watch?v=GrhA39JhMBc&t=320s",
-      "thumbnail": "assets/covers/we-ran-there-to-defend-our-lives.jpeg"
+      "thumbnail": "assets/covers/we-ran-there-to-defend-our-lives.png"
     },
     {
       "id": "sanma-ki-o-yagmur-bulutu",
@@ -179,7 +179,7 @@
         "EN": "We observed that geothermal power plants (JES), particularly in Aydın, inflict irreversible harm on public health and the environment. In this video report, we listen to basin residents affected by geothermal operations."
       },
       "youtube": "https://www.youtube.com/watch?v=alrFAKlmap4&t=71s",
-      "thumbnail": "assets/covers/sanma-ki-o-yagmur-bulutu.jpeg"
+      "thumbnail": "assets/covers/sanma-ki-o-yagmur-bulutu.png"
     },
     {
       "id": "avdan",
@@ -192,7 +192,7 @@
         "EN": "Avdan is a village in the Tavas district of Denizli that came to prominence through its resistance against coal mining. The Avdan Platform, established by local residents in 2018, continues its resistance and legal battle. In April 2023, as part of the Great Menderes Basin Study, we spoke with Avdan residents about their ongoing struggle and demands for ecological restoration."
       },
       "youtube": "https://www.youtube.com/watch?v=IIxveSKOcbc&t=22s",
-      "thumbnail": "assets/covers/avdan.jpeg"
+      "thumbnail": "assets/covers/avdan.png"
     },
     {
       "id": "kisladag",
@@ -205,7 +205,7 @@
         "EN": "Located between Eşme and Ulubey in Uşak, this massive open-pit mine has used cyanide leaching to extract ore since 2006. Operated by Tüprag (a subsidiary of Eldorado Gold), the mine drew public outrage in 2022 for depleting surrounding villages' water supplies. Documented during the Great Menderes Basin Study conducted jointly by MAD and BAYETAV, the mine inflicts widespread ecological destruction and severely impacts local lives."
       },
       "youtube": "https://www.youtube.com/watch?v=6SPHHPYtQV0&t=237s",
-      "thumbnail": "assets/covers/kisladag.jpeg"
+      "thumbnail": "assets/covers/kisladag.png"
     },
     {
       "id": "bakirkoy-kentin-ruh-hali",
@@ -218,7 +218,7 @@
         "EN": "Facing an evacuation order due to earthquake risk, the Bakırköy Psychiatric Hospital is among the facilities slated for partial relocation. Healthcare workers, urban rights advocates, and hospital staff demand on-site renewal, viewing the potential loss of this space as both a destruction of public urban memory and the displacement of a pioneering mental healthcare institution."
       },
       "youtube": "https://www.youtube.com/watch?v=VGfBWyZcOqc&t=269s",
-      "thumbnail": "assets/covers/bakirkoy-kentin-ruh-hali.jpeg"
+      "thumbnail": "assets/covers/bakirkoy-kentin-ruh-hali.png"
     },
     {
       "id": "topraga-donus-aydos",
@@ -231,7 +231,7 @@
         "EN": "Seven producers with diverse professional backgrounds who 'returned to the land' from urban centers share seven distinct stories in the video series 'Return to the Land Initiatives on Istanbul's Periphery'. In this first installment, Cengizhan Benice leaves behind fast-paced consumerist city life to practice 'natural farming' in Kartal Aydos, his childhood retreat."
       },
       "youtube": "https://www.youtube.com/watch?v=jm7JW5vyFLQ&t=2s",
-      "thumbnail": "assets/covers/topraga-donus-aydos.jpeg"
+      "thumbnail": "assets/covers/topraga-donus-aydos.png"
     },
     {
       "id": "yusufeli",
@@ -244,7 +244,7 @@
         "EN": "The Yusufeli Dam is one of five dams built on the Çoruh River in Artvin. Once fully operational, it will completely submerge parts of eighteen settlements and partially flood the remainder. The district center of Yusufeli is among the areas designated for submergence due to ongoing reservoir impoundment."
       },
       "youtube": "https://www.youtube.com/watch?v=Q39Mvafv7I8&t=3s",
-      "thumbnail": "assets/covers/yusufeli.jpeg"
+      "thumbnail": "assets/covers/yusufeli.png"
     },
     {
       "id": "erzincan-artvin",
@@ -257,7 +257,7 @@
         "EN": "Lidya Mining, a partner of Anagold Mining operating in İliç, has conducted exploratory drilling since 2014 in the Artvin villages of Yukarı Maden and Aşağı Maden (formerly Hod). Feeding into the Çoruh Valley and lying along raptor migration routes, the Hod Valley is vital for Artvin's agricultural fertility. Local residents fear mining operations will cause ecological disaster similar to İliç."
       },
       "youtube": "https://www.youtube.com/watch?v=4Tw2gB-ygME&t=69s",
-      "thumbnail": "assets/covers/erzincan-artvin.jpeg"
+      "thumbnail": "assets/covers/erzincan-artvin.png"
     },
     {
       "id": "slapp-01-sedat-cezayirlioglu",
@@ -270,7 +270,7 @@
         "EN": "Sedat Cezayirlioğlu from İliç has actively fought environmental destruction caused by the Çöpler Gold Mine for nearly seven years. We met with Sedat Cezayirlioğlu in Erzincan on July 22, 2022, to discuss judicial harassment ranging from corporate lawsuits to criminal complaints targeting his activism."
       },
       "youtube": "https://www.youtube.com/watch?v=4b99hVhK-q0&t=4s",
-      "thumbnail": "assets/covers/slapp-01-sedat-cezayirlioglu.jpeg"
+      "thumbnail": "assets/covers/slapp-01-sedat-cezayirlioglu.png"
     },
     {
       "id": "slapp-02-recai-cakir",
@@ -283,7 +283,7 @@
         "EN": "Recai Çakır is a rights defender who has resisted coal-fired power plant construction in Amasra since 2010. Co-spokesperson for the Bartın Platform opposing Hattat Holding's power plant project and Mayor of Amasra since 2019, Çakır faces a Strategic Lawsuit Against Public Participation (SLAPP) filed by the corporation to intimidate defenders."
       },
       "youtube": "https://www.youtube.com/watch?v=zdSeijlr82E&t=7s",
-      "thumbnail": "assets/covers/slapp-02-recai-cakir.jpeg"
+      "thumbnail": "assets/covers/slapp-02-recai-cakir.png"
     },
     {
       "id": "slapp-03-erdogan-atmis",
@@ -309,7 +309,7 @@
         "EN": ""
       },
       "youtube": "https://www.youtube.com/watch?v=KI17inOyNUs",
-      "thumbnail": "assets/covers/madyuruyus-02-beyoglu.jpeg"
+      "thumbnail": "assets/covers/madyuruyus-02-beyoglu.png"
     },
     {
       "id": "madyuruyus-03-beykoz",
@@ -322,7 +322,7 @@
         "EN": ""
       },
       "youtube": "https://www.youtube.com/watch?v=6C0vLtI7nD4",
-      "thumbnail": "assets/covers/madyuruyus-03-beykoz.jpeg"
+      "thumbnail": "assets/covers/madyuruyus-03-beykoz.png"
     },
     {
       "id": "madyuruyus-05-habibler",
@@ -335,7 +335,7 @@
         "EN": ""
       },
       "youtube": "https://www.youtube.com/watch?v=lZcPSBDOUhU",
-      "thumbnail": "assets/covers/madyuruyus-05-habibler.jpeg"
+      "thumbnail": "assets/covers/madyuruyus-05-habibler.png"
     }
   ]
 }
