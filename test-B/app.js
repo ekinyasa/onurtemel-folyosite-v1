@@ -46,6 +46,7 @@
   let originatingButton = null;
 
   function init() {
+    initCoverResizeObserver();
     setupEventListeners();
     loadContent();
   }
@@ -499,6 +500,68 @@
     worksGrid.querySelectorAll('.work-media-btn').forEach(btn => {
       btn.addEventListener('click', handleMediaClick);
     });
+
+    observeCoverContainers();
+    requestAnimationFrame(fitAllCoverTypography);
+  }
+
+  // --- COVER TYPOGRAPHY AUTO-FIT ENGINE (TEST B) ---
+  let coverResizeObserver = null;
+
+  function initCoverResizeObserver() {
+    if (coverResizeObserver) coverResizeObserver.disconnect();
+    if (typeof ResizeObserver !== 'undefined') {
+      coverResizeObserver = new ResizeObserver(entries => {
+        for (const entry of entries) {
+          fitCoverTypography(entry.target);
+        }
+      });
+    }
+  }
+
+  function observeCoverContainers() {
+    const containers = document.querySelectorAll('.work-media-container');
+    containers.forEach(container => {
+      if (coverResizeObserver) coverResizeObserver.observe(container);
+    });
+  }
+
+  function fitAllCoverTypography() {
+    const containers = document.querySelectorAll('.work-media-container');
+    containers.forEach(container => fitCoverTypography(container));
+  }
+
+  function fitCoverTypography(container) {
+    if (!container) return;
+    const textEl = container.querySelector('.cover-text');
+    const layerEl = container.querySelector('.cover-typography-layer');
+    if (!textEl || !layerEl) return;
+
+    const layerRect = layerEl.getBoundingClientRect();
+    const maxW = layerRect.width;
+    const maxH = layerRect.height;
+    if (maxW <= 0 || maxH <= 0) return;
+
+    let minFont = 12;
+    let maxFont = Math.min(Math.max(24, maxW * 0.22), 84);
+    let bestFont = minFont;
+
+    for (let i = 0; i < 8; i++) {
+      const mid = (minFont + maxFont) / 2;
+      textEl.style.fontSize = `${mid}px`;
+      
+      const scrollW = textEl.scrollWidth;
+      const scrollH = textEl.scrollHeight;
+
+      if (scrollW <= maxW + 1 && scrollH <= maxH + 1) {
+        bestFont = mid;
+        minFont = mid + 0.5;
+      } else {
+        maxFont = mid - 0.5;
+      }
+    }
+
+    textEl.style.fontSize = `${Math.floor(bestFont)}px`;
   }
 
   // --- MEDIA INTERACTION & OVERLAY CONTROLLER ---
@@ -744,20 +807,26 @@
     if (filterToggleBtn && filterMenu) {
       filterToggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const isExp = filterToggleBtn.getAttribute('aria-expanded') === 'true';
-        filterToggleBtn.setAttribute('aria-expanded', !isExp);
-        filterMenu.hidden = isExp;
-        if (sortMenu) sortMenu.hidden = true;
+        const willOpen = filterMenu.hidden;
+        filterMenu.hidden = !willOpen;
+        filterToggleBtn.setAttribute('aria-expanded', String(willOpen));
+        if (willOpen && sortMenu) {
+          sortMenu.hidden = true;
+          if (sortToggleBtn) sortToggleBtn.setAttribute('aria-expanded', 'false');
+        }
       });
     }
 
     if (sortToggleBtn && sortMenu) {
       sortToggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const isExp = sortToggleBtn.getAttribute('aria-expanded') === 'true';
-        sortToggleBtn.setAttribute('aria-expanded', !isExp);
-        sortMenu.hidden = isExp;
-        if (filterMenu) filterMenu.hidden = true;
+        const willOpen = sortMenu.hidden;
+        sortMenu.hidden = !willOpen;
+        sortToggleBtn.setAttribute('aria-expanded', String(willOpen));
+        if (willOpen && filterMenu) {
+          filterMenu.hidden = true;
+          if (filterToggleBtn) filterToggleBtn.setAttribute('aria-expanded', 'false');
+        }
       });
     }
 
@@ -770,7 +839,7 @@
           sortMenu.querySelectorAll('.sort-option-btn').forEach(b => b.classList.remove('active'));
           e.target.classList.add('active');
           sortMenu.hidden = true;
-          sortToggleBtn.setAttribute('aria-expanded', 'false');
+          if (sortToggleBtn) sortToggleBtn.setAttribute('aria-expanded', 'false');
           updateSortBtnLabel();
           renderWorksGrid(getProcessedWorks());
         });
@@ -788,18 +857,33 @@
       });
     }
 
-    // Close Dropdowns on Click Outside
-    document.addEventListener('click', (e) => {
-      if (filterMenu && !filterMenu.contains(e.target) && e.target !== filterToggleBtn) {
-        filterMenu.hidden = true;
-        if (filterToggleBtn) filterToggleBtn.setAttribute('aria-expanded', 'false');
-      }
-      if (sortMenu && !sortMenu.contains(e.target) && e.target !== sortToggleBtn) {
-        sortMenu.hidden = true;
-        if (sortToggleBtn) sortToggleBtn.setAttribute('aria-expanded', 'false');
+    // Close Dropdowns on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        if (filterMenu && !filterMenu.hidden) {
+          filterMenu.hidden = true;
+          if (filterToggleBtn) filterToggleBtn.setAttribute('aria-expanded', 'false');
+        }
+        if (sortMenu && !sortMenu.hidden) {
+          sortMenu.hidden = true;
+          if (sortToggleBtn) sortToggleBtn.setAttribute('aria-expanded', 'false');
+        }
       }
     });
 
+    // Close Dropdowns on Click Outside
+    document.addEventListener('click', (e) => {
+      if (filterMenu && !filterMenu.hidden && !filterMenu.contains(e.target) && filterToggleBtn && !filterToggleBtn.contains(e.target)) {
+        filterMenu.hidden = true;
+        filterToggleBtn.setAttribute('aria-expanded', 'false');
+      }
+      if (sortMenu && !sortMenu.hidden && !sortMenu.contains(e.target) && sortToggleBtn && !sortToggleBtn.contains(e.target)) {
+        sortMenu.hidden = true;
+        sortToggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    window.addEventListener('resize', fitAllCoverTypography);
     window.addEventListener('hashchange', handleHashNavigation);
     if (retryBtn) retryBtn.addEventListener('click', loadContent);
   }

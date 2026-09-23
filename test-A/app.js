@@ -751,20 +751,26 @@
     if (filterToggleBtn && filterMenu) {
       filterToggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const isExp = filterToggleBtn.getAttribute('aria-expanded') === 'true';
-        filterToggleBtn.setAttribute('aria-expanded', !isExp);
-        filterMenu.hidden = isExp;
-        if (sortMenu) sortMenu.hidden = true;
+        const willOpen = filterMenu.hidden;
+        filterMenu.hidden = !willOpen;
+        filterToggleBtn.setAttribute('aria-expanded', String(willOpen));
+        if (willOpen && sortMenu) {
+          sortMenu.hidden = true;
+          if (sortToggleBtn) sortToggleBtn.setAttribute('aria-expanded', 'false');
+        }
       });
     }
 
     if (sortToggleBtn && sortMenu) {
       sortToggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const isExp = sortToggleBtn.getAttribute('aria-expanded') === 'true';
-        sortToggleBtn.setAttribute('aria-expanded', !isExp);
-        sortMenu.hidden = isExp;
-        if (filterMenu) filterMenu.hidden = true;
+        const willOpen = sortMenu.hidden;
+        sortMenu.hidden = !willOpen;
+        sortToggleBtn.setAttribute('aria-expanded', String(willOpen));
+        if (willOpen && filterMenu) {
+          filterMenu.hidden = true;
+          if (filterToggleBtn) filterToggleBtn.setAttribute('aria-expanded', 'false');
+        }
       });
     }
 
@@ -777,7 +783,7 @@
           sortMenu.querySelectorAll('.sort-option-btn').forEach(b => b.classList.remove('active'));
           e.target.classList.add('active');
           sortMenu.hidden = true;
-          sortToggleBtn.setAttribute('aria-expanded', 'false');
+          if (sortToggleBtn) sortToggleBtn.setAttribute('aria-expanded', 'false');
           updateSortBtnLabel();
           renderWorksGrid(getProcessedWorks());
         });
@@ -795,15 +801,29 @@
       });
     }
 
+    // Close Dropdowns on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        if (filterMenu && !filterMenu.hidden) {
+          filterMenu.hidden = true;
+          if (filterToggleBtn) filterToggleBtn.setAttribute('aria-expanded', 'false');
+        }
+        if (sortMenu && !sortMenu.hidden) {
+          sortMenu.hidden = true;
+          if (sortToggleBtn) sortToggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      }
+    });
+
     // Close Dropdowns on Click Outside
     document.addEventListener('click', (e) => {
-      if (filterMenu && !filterMenu.contains(e.target) && e.target !== filterToggleBtn) {
+      if (filterMenu && !filterMenu.hidden && !filterMenu.contains(e.target) && filterToggleBtn && !filterToggleBtn.contains(e.target)) {
         filterMenu.hidden = true;
-        if (filterToggleBtn) filterToggleBtn.setAttribute('aria-expanded', 'false');
+        filterToggleBtn.setAttribute('aria-expanded', 'false');
       }
-      if (sortMenu && !sortMenu.contains(e.target) && e.target !== sortToggleBtn) {
+      if (sortMenu && !sortMenu.hidden && !sortMenu.contains(e.target) && sortToggleBtn && !sortToggleBtn.contains(e.target)) {
         sortMenu.hidden = true;
-        if (sortToggleBtn) sortToggleBtn.setAttribute('aria-expanded', 'false');
+        sortToggleBtn.setAttribute('aria-expanded', 'false');
       }
     });
 
