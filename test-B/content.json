@@ -1,0 +1,301 @@
+{
+  "siteAyarlari": {
+    "_aciklama": "Bu bölüm test uygulamasının genel ayarlarını ve taksonomisini kontrol eder.",
+    "gosterilecekDiller": ["TR", "EN"],
+    "varsayilanDil": "",
+    "varsayilanTema": "otomatik"
+  },
+  "taksonomi": {
+    "medyaTipleri": [
+      { "id": "video-landscape", "label": { "TR": "Film / Video", "EN": "Film / Video" } },
+      { "id": "video-portrait", "label": { "TR": "Kısa Video", "EN": "Short" } },
+      { "id": "photo", "label": { "TR": "Fotoğraf", "EN": "Photo" } }
+    ],
+    "kategoriler": [
+      { "id": "documentary", "label": { "TR": "Belgesel", "EN": "Documentary" } },
+      { "id": "news", "label": { "TR": "Haber", "EN": "News" } },
+      { "id": "drone", "label": { "TR": "Hava Çekimi", "EN": "Drone" } },
+      { "id": "environment", "label": { "TR": "Çevre & Ekoloji", "EN": "Environment" } },
+      { "id": "architecture", "label": { "TR": "Mimari", "EN": "Architecture" } }
+    ]
+  },
+  "site": {
+    "name": "ONUR TEMEL",
+    "pageTitle": {
+      "TR": "ONUR TEMEL — Videograf & Arşiv (Test B)",
+      "EN": "ONUR TEMEL — Videographer & Archive (Test B)"
+    },
+    "description": {
+      "TR": "Videograf Onur Temel'in portfolyosu. Gözlemci belgesel, performans kaydı, kent araştırmaları ve saha dokümantasyonları.",
+      "EN": "Portfolio of videographer Onur Temel. Observational documentary, performance capture, urban research, and field documentation."
+    },
+    "email": "contact@onurtemel.com.tr",
+    "location": "Istanbul / Berlin"
+  },
+  "bio": {
+    "short": {
+      "TR": "Çağdaş sanat dokümantasyonu, uzun metrajlı performans kaydı ve gözlemci belgesel alanında uzmanlaşmış videograf ve kamera operatörü.",
+      "EN": "Videographer and camera operator specializing in contemporary art documentation, long-form performance recording, and observational documentary."
+    },
+    "long": {
+      "TR": "Onur Temel, çağdaş sanat kurumları, sergi katalogları ve bağımsız film yapımları genelinde çalışmaktadır. Pratiği; sessiz mekânsal gözlem, doğal akustik dinamikler ve disiplinlerarası performansların hassas görsel dokümantasyonuna odaklanır.",
+      "EN": "Onur Temel works across contemporary art institutions, exhibition catalogues, and independent film productions. His practice focuses on quiet spatial observation, natural acoustic dynamics, and precise visual documentation of multi-disciplinary performances."
+    },
+    "sections": [
+      {
+        "title": { "TR": "Seçilmiş Deneyim", "EN": "Selected Experience" },
+        "items": [
+          { "TR": "2023–Günümüz — Baş Kamera Operatörü, Hareketli Görüntü Arşivi Projesi", "EN": "2023–Present — Lead Camera Operator, Moving Image Archive Project" },
+          { "TR": "2020–2023 — Videograf & Editör, Çağdaş Sanat Dokümantasyon Birimi", "EN": "2020–2023 — Videographer & Editor, Contemporary Art Documentation Unit" }
+        ]
+      }
+    ]
+  },
+  "links": [
+    { "label": "Vimeo", "url": "https://vimeo.com" },
+    { "label": "Instagram", "url": "https://instagram.com" },
+    { "label": "E-posta", "url": "mailto:contact@onurtemel.com.tr" }
+  ],
+  "works": [
+    {
+      "id": "hevsel-bahceleri",
+      "mediaType": "video",
+      "aspect": "landscape",
+      "categories": ["documentary", "environment"],
+      "date": "2024-05-10",
+      "title": { "TR": "Hevsel Bahçeleri", "EN": "Hevsel Gardens" },
+      "description": {
+        "TR": "UNESCO Dünya Kültür Mirası Listesi'nde yer alan Hevsel Bahçeleri'nin sorunlarını uzmanlar ve çiftçilerden dinliyoruz.",
+        "EN": "Listening to experts and farmers regarding the challenges faced by the Hevsel Gardens, a site inscribed on the UNESCO World Heritage List."
+      },
+      "youtube": "https://www.youtube.com/watch?v=YfxRL26UxUA",
+      "cover": {
+        "image": "assets/covers/hevsel-bahceleri.png",
+        "text": "HEVSEL",
+        "textColor": "#ffffff",
+        "horizontal": "center",
+        "vertical": "center"
+      }
+    },
+    {
+      "id": "yedikule-hevsel",
+      "mediaType": "video",
+      "aspect": "landscape",
+      "categories": ["documentary", "environment"],
+      "date": "2024-02-18",
+      "title": { "TR": "Yedikule Bostanları ve Hevsel Bahçelerini Birlikte Düşünmek", "EN": "Rethinking Yedikule Market Gardens and Hevsel Gardens Together" },
+      "description": {
+        "TR": "Arkeolog Nevin Soyukaya ile akademisyen Asu Aksoy'un Yedikule'deki yürüyüşü ve sohbeti...",
+        "EN": "Archaeologist Nevin Soyukaya and academic Asu Aksoy walk and converse in Yedikule..."
+      },
+      "youtube": "https://www.youtube.com/watch?v=Mpe4wSCotCA",
+      "cover": {
+        "image": "assets/covers/yedikule-hevsel.png",
+        "text": "YEDİKULE & HEVSEL",
+        "textColor": "#f0f0f0",
+        "horizontal": "left",
+        "vertical": "top"
+      }
+    },
+    {
+      "id": "haydarpasa",
+      "mediaType": "video",
+      "aspect": "landscape",
+      "categories": ["news", "architecture"],
+      "date": "2023-11-04",
+      "title": { "TR": "Haydarpaşa: \"Seni Yeneceğim İstanbul\"", "EN": "Haydarpaşa: \"I Will Defeat You, Istanbul\"" },
+      "description": {
+        "TR": "Kent suçlarının kültür ve sanat aracılığıyla meşrulaştırılmaya çalışıldığı bu örnekte olduğu gibi...",
+        "EN": "As in this example where urban crimes are attempted to be legitimized through art and culture..."
+      },
+      "youtube": "https://www.youtube.com/watch?v=qTomyRhTNUQ&t=21s",
+      "cover": {
+        "image": "assets/covers/haydarpasa.png",
+        "text": "HAYDARPAŞA GARI",
+        "textColor": "#ffffff",
+        "horizontal": "right",
+        "vertical": "bottom"
+      }
+    },
+    {
+      "id": "we-ran-there-to-defend-our-lives",
+      "mediaType": "video",
+      "aspect": "landscape",
+      "categories": ["environment", "news"],
+      "date": "2023-08-12",
+      "title": { "TR": "\"We ran there to defend our lives\"", "EN": "\"We ran there to defend our lives\"" },
+      "description": {
+        "TR": "2019 yılında Türkiye'deki Kaz Dağları (Mount Ida) bölgesi, altın madeni kurmayı planlayan Kanadalı bir maden şirketi ile direnen yerel halk arasında çatışmanın merkez üssü oldu.",
+        "EN": "In 2019, Mount Ida (Kaz Dağları) in Turkey became the epicenter of an escalating conflict between a mining company and local residents."
+      },
+      "youtube": "https://www.youtube.com/watch?v=GrhA39JhMBc&t=320s",
+      "cover": {
+        "image": "assets/covers/we-ran-there-to-defend-our-lives.png",
+        "text": "KAZ DAĞLARI",
+        "textColor": "#e8e8e8",
+        "horizontal": "center",
+        "vertical": "top"
+      }
+    },
+    {
+      "id": "sanma-ki-o-yagmur-bulutu",
+      "mediaType": "video",
+      "aspect": "landscape",
+      "categories": ["environment", "news"],
+      "date": "2023-04-20",
+      "title": { "TR": "\"SANMA Kİ O YAĞMUR BULUTU\" Menderes'te Jeotermal", "EN": "\"DO NOT THINK IT IS A RAIN CLOUD\" Geothermal in Menderes" },
+      "description": {
+        "TR": "Aydın başta olmak üzere JES’lerin halk sağlığı ve çevre üzerinde geri dönüşü mümkün olmayan zararlar bıraktığını gördük.",
+        "EN": "We observed that geothermal power plants (JES), particularly in Aydın, inflict irreversible harm on public health and the environment."
+      },
+      "youtube": "https://www.youtube.com/watch?v=alrFAKlmap4&t=71s",
+      "cover": {
+        "image": "assets/covers/sanma-ki-o-yagmur-bulutu.png",
+        "text": "MENDERES",
+        "textColor": "#ffffff",
+        "horizontal": "left",
+        "vertical": "bottom"
+      }
+    },
+    {
+      "id": "avdan",
+      "mediaType": "video",
+      "aspect": "landscape",
+      "categories": ["environment", "documentary"],
+      "date": "2023-04-01",
+      "title": { "TR": "AVDAN: Kömüre Teslim Olmayan Topraklar", "EN": "AVDAN: Lands That Refuse to Surrender to Coal" },
+      "description": {
+        "TR": "Avdan, kömür madenine karşı yürüttüğü direnişle gündeme gelen, Denizli’nin Tavas ilçesine bağlı bir köy.",
+        "EN": "Avdan is a village in Denizli that came to prominence through its resistance against coal mining."
+      },
+      "youtube": "https://www.youtube.com/watch?v=IIxveSKOcbc&t=22s",
+      "cover": {
+        "image": "assets/covers/avdan.png",
+        "text": "AVDAN DİRENİŞİ",
+        "textColor": "#ffffff",
+        "horizontal": "center",
+        "vertical": "center"
+      }
+    },
+    {
+      "id": "kisladag",
+      "mediaType": "video",
+      "aspect": "landscape",
+      "categories": ["environment"],
+      "date": "2022-10-15",
+      "title": { "TR": "KIŞLADAĞ: Altın Madeni Gölgesinde", "EN": "KIŞLADAĞ: In the Shadow of the Gold Mine" },
+      "description": {
+        "TR": "Uşak’ın Eşme ve Ulubey ilçeleri arasında yer alan devasa büyüklükteki madende cevher siyanürle ayrıştırılıyor.",
+        "EN": "Located between Eşme and Ulubey in Uşak, this massive open-pit mine has used cyanide leaching since 2006."
+      },
+      "youtube": "https://www.youtube.com/watch?v=6SPHHPYtQV0&t=237s",
+      "cover": {
+        "image": "assets/covers/kisladag.png",
+        "text": "KIŞLADAĞ",
+        "textColor": "#f5f5f5",
+        "horizontal": "right",
+        "vertical": "top"
+      }
+    },
+    {
+      "id": "bakirkoy-kentin-ruh-hali",
+      "mediaType": "video",
+      "aspect": "landscape",
+      "categories": ["architecture", "news"],
+      "date": "2022-06-30",
+      "title": { "TR": "Bakırköy 'Kentin Ruh Hali'", "EN": "Bakırköy 'The State of Mind of the City'" },
+      "description": {
+        "TR": "Deprem riski sebebiyle tahliye kararı alınan Bakırköy Ruh ve Sinir Hastalıkları Hastanesi mekânsal hafızası.",
+        "EN": "Facing an evacuation order due to earthquake risk, Bakırköy Psychiatric Hospital's spatial memory."
+      },
+      "youtube": "https://www.youtube.com/watch?v=VGfBWyZcOqc&t=269s",
+      "cover": {
+        "image": "assets/covers/bakirkoy-kentin-ruh-hali.png",
+        "text": "BAKIRKÖY HAFIZASI",
+        "textColor": "#ffffff",
+        "horizontal": "left",
+        "vertical": "center"
+      }
+    },
+    {
+      "id": "topraga-donus-aydos",
+      "mediaType": "video",
+      "aspect": "landscape",
+      "categories": ["documentary", "environment"],
+      "date": "2022-03-12",
+      "title": { "TR": "İstanbul Çeperindeki Toprağa Dönüş İnisiyatifleri: #1 Aydos", "EN": "Return to the Land Initiatives: #1 Aydos" },
+      "description": {
+        "TR": "Kartal Aydos’ta doğal tarım yapmaya başlayan Cengizhan Benice’nin hikayesi.",
+        "EN": "The story of Cengizhan Benice practicing natural farming in Kartal Aydos."
+      },
+      "youtube": "https://www.youtube.com/watch?v=jm7JW5vyFLQ&t=2s",
+      "cover": {
+        "image": "assets/covers/topraga-donus-aydos.png",
+        "text": "AYDOS TOPRAĞA DÖNÜŞ",
+        "textColor": "#ffffff",
+        "horizontal": "center",
+        "vertical": "bottom"
+      }
+    },
+    {
+      "id": "madyuruyus-02-beyoglu",
+      "mediaType": "video",
+      "aspect": "portrait",
+      "categories": ["architecture", "drone"],
+      "date": "2021-09-10",
+      "title": { "TR": "MADyürüyüş 02 - Beyoğlu (Dikey Çekim)", "EN": "MADwalk 02 - Beyoğlu (Vertical)" },
+      "description": {
+        "TR": "Beyoğlu aksında dikey 9:16 formatta yürüyüş ve kent içi gözlem kaydı.",
+        "EN": "Urban walking and spatial observation recording in 9:16 vertical format across Beyoğlu."
+      },
+      "youtube": "https://www.youtube.com/watch?v=KI17inOyNUs",
+      "cover": {
+        "image": "assets/covers/madyuruyus-02-beyoglu.png",
+        "text": "BEYOĞLU YÜRÜYÜŞÜ",
+        "textColor": "#ffffff",
+        "horizontal": "center",
+        "vertical": "center"
+      }
+    },
+    {
+      "id": "madyuruyus-05-habibler-photo",
+      "mediaType": "photo",
+      "aspect": "landscape",
+      "categories": ["architecture", "environment"],
+      "date": "2020-05-04",
+      "title": { "TR": "Habibler Taş Ocakları: Fotoğraf Arşivi", "EN": "Habibler Quarries: Photo Archive" },
+      "description": {
+        "TR": "Habibler çeperindeki topoğrafya değişimini gösteren yüksek çözünürlüklü fotoğraf arşivi.",
+        "EN": "High-resolution photo document revealing topographic landscape transformation in Habibler."
+      },
+      "photoUrl": "assets/covers/madyuruyus-05-habibler.png",
+      "cover": {
+        "image": "assets/covers/madyuruyus-05-habibler.png",
+        "text": "HABİBLER FOTOĞRAF",
+        "textColor": "#ffffff",
+        "horizontal": "right",
+        "vertical": "bottom"
+      }
+    },
+    {
+      "id": "slapp-03-erdogan-atmis",
+      "mediaType": "video",
+      "aspect": "landscape",
+      "categories": ["news"],
+      "date": "2021-02-01",
+      "title": { "TR": "SLAPP #3 | Erdoğan Atmış (Eksik Görsel Testi)", "EN": "SLAPP #3 | Erdoğan Atmış (Missing Cover Test)" },
+      "description": {
+        "TR": "Görsel dosyası eksik olduğunda nötr siyah/gri alan oluşturan test kaydı.",
+        "EN": "Test work demonstrating neutral black/grey placeholder field when image file is missing."
+      },
+      "youtube": "https://www.youtube.com/watch?v=q7ETz3gvldM&t=16s",
+      "cover": {
+        "image": "assets/covers/missing-test.png",
+        "text": "GÖRSEL EKSİK (TEST)",
+        "textColor": "#888888",
+        "horizontal": "center",
+        "vertical": "center"
+      }
+    }
+  ]
+}
