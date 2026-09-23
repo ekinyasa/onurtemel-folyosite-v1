@@ -26,6 +26,9 @@
   let enabledLangs = ['TR', 'EN'];
   let cmsThemeMode = 'otomatik';
 
+  let activeOverlay = null;
+  let originatingButton = null;
+
   // --- 1. INITIALIZATION ---
   function init() {
     setupEventListeners();
@@ -294,7 +297,7 @@
     updateViewSwitchBtnState();
   }
 
-  // Render Works (Primary View)
+  // Render Works (Primary View Grid)
   function renderWorksGrid(works) {
     worksGrid.innerHTML = '';
 
@@ -319,7 +322,6 @@
       const youtubeRaw = work.youtube || '';
 
       const { id: parsedId } = parseYouTubeUrl(youtubeRaw);
-
       const thumbUrl = work.thumbnail && String(work.thumbnail).trim() ? String(work.thumbnail).trim() : '';
       const isBlackCover = (thumbUrl === 'none' || thumbUrl === 'black' || work.noCover === true);
 
@@ -329,39 +331,40 @@
 
       let mediaHTML = '';
 
+      // Minimal white play triangle SVG (No black container box)
+      const playGlyphHTML = `
+        <span class="play-indicator" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><polygon points="6,4 18,12 6,20"></polygon></svg>
+        </span>
+      `;
+
       if (isBlackCover) {
-        // 100% Black cover state (SLAPP #3) - No img tag, no YouTube thumbnail request!
+        // 100% Black cover state (Work 14 - SLAPP #3) - Zero YouTube requests!
         mediaHTML = `
           <div class="work-media-container black-cover-container" id="media-${workId}">
             <button class="work-media-btn black-cover-btn" data-youtube="${escapeAttr(youtubeRaw)}" data-title="${escapeAttr(title)}" aria-label="${currentLang === 'TR' ? 'Videoyu oynat' : 'Play video'}: ${escapeAttr(title)}">
-              <span class="play-indicator" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><polygon points="6,4 18,12 6,20"></polygon></svg>
-              </span>
+              ${playGlyphHTML}
             </button>
           </div>
         `;
       } else if (thumbUrl) {
-        // Local cover image - No YouTube thumbnail request!
+        // Local cover image - Zero YouTube requests!
         mediaHTML = `
           <div class="work-media-container" id="media-${workId}">
             <button class="work-media-btn" data-youtube="${escapeAttr(youtubeRaw)}" data-title="${escapeAttr(title)}" aria-label="${currentLang === 'TR' ? 'Videoyu oynat' : 'Play video'}: ${escapeAttr(title)}">
               <img src="${escapeAttr(thumbUrl)}" alt="${currentLang === 'TR' ? 'Kapak görseli' : 'Thumbnail'}: ${escapeAttr(title)}" loading="lazy" decoding="async" width="640" height="360">
-              <span class="play-indicator" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><polygon points="6,4 18,12 6,20"></polygon></svg>
-              </span>
+              ${playGlyphHTML}
             </button>
           </div>
         `;
       } else if (parsedId) {
-        // Fallback YouTube thumbnail (only for future works without explicit cover decision)
+        // Fallback YouTube thumbnail (only for future works without cover decision)
         const fallbackThumb = `https://i.ytimg.com/vi/${parsedId}/hqdefault.jpg`;
         mediaHTML = `
           <div class="work-media-container" id="media-${workId}">
             <button class="work-media-btn" data-youtube="${escapeAttr(youtubeRaw)}" data-title="${escapeAttr(title)}" aria-label="${currentLang === 'TR' ? 'Videoyu oynat' : 'Play video'}: ${escapeAttr(title)}">
               <img src="${escapeAttr(fallbackThumb)}" alt="${currentLang === 'TR' ? 'Kapak görseli' : 'Thumbnail'}: ${escapeAttr(title)}" loading="lazy" decoding="async" width="640" height="360">
-              <span class="play-indicator" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><polygon points="6,4 18,12 6,20"></polygon></svg>
-              </span>
+              ${playGlyphHTML}
             </button>
           </div>
         `;
@@ -385,40 +388,117 @@
 
     worksGrid.appendChild(fragment);
 
-    // Attach Video Play Event Listeners
+    // Attach Cover Click Listener -> Opens Fullscreen Video Overlay
     worksGrid.querySelectorAll('.work-media-btn').forEach(btn => {
       btn.addEventListener('click', handleVideoPlay);
     });
   }
 
-  // Handle Video Cover Click -> Replace with YouTube iframe
+  // --- FULLSCREEN VIDEO OVERLAY CONTROLLER ---
   function handleVideoPlay(e) {
     const btn = e.currentTarget;
     const rawYoutube = btn.dataset.youtube;
     const title = btn.dataset.title || 'Video player';
-    const container = btn.parentElement;
 
-    if (!rawYoutube || !container) return;
+    if (!rawYoutube) return;
 
     const { id: youtubeId, start: startTime } = parseYouTubeUrl(rawYoutube);
     if (!youtubeId) return;
+
+    // Record origin button for focus restoration
+    originatingButton = btn;
 
     let embedSrc = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(youtubeId)}?autoplay=1&playsinline=1&rel=0`;
     if (startTime > 0) {
       embedSrc += `&start=${startTime}`;
     }
 
-    const iframe = document.createElement('iframe');
-    iframe.className = 'work-iframe';
-    iframe.src = embedSrc;
-    iframe.title = title;
-    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-    iframe.setAttribute('allowfullscreen', 'true');
-    iframe.setAttribute('frameborder', '0');
+    // Create Fullscreen Modal Overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'video-overlay';
+    overlay.id = 'video-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', title);
 
-    container.innerHTML = '';
-    container.appendChild(iframe);
-    iframe.focus();
+    overlay.innerHTML = `
+      <button class="video-overlay-close" id="video-overlay-close" aria-label="${currentLang === 'TR' ? 'Videoyu kapat (Esc)' : 'Close video (Esc)'}">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="video-overlay-frame-wrapper">
+        <iframe class="video-overlay-iframe" src="${escapeAttr(embedSrc)}" title="${escapeAttr(title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen frameborder="0"></iframe>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+    activeOverlay = overlay;
+
+    // Prevent background scrolling while video overlay is active
+    document.body.style.overflow = 'hidden';
+
+    // Teardown & Exit Handler
+    function closeOverlay() {
+      if (!activeOverlay) return;
+
+      // 1. Exit native browser fullscreen if active
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(() => {});
+      } else if (document.webkitFullscreenElement) {
+        document.webkitExitFullscreen();
+      }
+
+      // 2. Remove listeners
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+
+      // 3. Remove overlay from DOM (destroys iframe & stops audio/video immediately)
+      activeOverlay.remove();
+      activeOverlay = null;
+
+      // 4. Restore body scrolling
+      document.body.style.overflow = '';
+
+      // 5. Restore focus to originating cover button in grid
+      if (originatingButton) {
+        originatingButton.focus();
+        originatingButton = null;
+      }
+    }
+
+    function handleKeyDown(evt) {
+      if (evt.key === 'Escape' || evt.key === 'Esc') {
+        closeOverlay();
+      }
+    }
+
+    function handleFullscreenChange() {
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        closeOverlay();
+      }
+    }
+
+    // Attach Close Button Event Listener
+    const closeBtn = overlay.querySelector('#video-overlay-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeOverlay);
+      closeBtn.focus();
+    }
+
+    // Attach Esc & Fullscreen Change Listeners
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+
+    // Request native element fullscreen if supported
+    if (overlay.requestFullscreen) {
+      overlay.requestFullscreen().catch(() => {});
+    } else if (overlay.webkitRequestFullscreen) {
+      overlay.webkitRequestFullscreen();
+    }
   }
 
   // Render Information View (Bio & CV)
