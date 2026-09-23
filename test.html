@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ONUR TEMEL — Videograf & Hareketli Görüntü Arşivi</title>
+  <meta name="description" content="Videograf Onur Temel'in portfolyosu. Gözlemci belgesel, performans kaydı, sanatçı filmi dokümantasyonu ve sergi arşivleri.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="ONUR TEMEL — Videographer">
+  <meta property="og:description" content="Portfolio of videographer Onur Temel. Observational documentary, performance capture, artist film documentation, and exhibition archives.">
+  <meta property="og:type" content="website">
+
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    /* Visually hidden helper for screen reader headings */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-container" style="width:100%; display:flex; align-items:center; justify-content:space-between;">
+      <a href="#work" class="header-brand" id="brand-link" aria-label="Onur Temel Homepage">ONUR TEMEL</a>
+      
+      <div class="header-controls">
+        <!-- Theme Switcher: Visual non-text split circle icon -->
+        <button id="theme-toggle" class="icon-btn theme-toggle-btn" aria-label="Koyu/Açık temayı değiştir" title="Tema Değiştir">
+          <span class="theme-split-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16">
+              <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 3 A9 9 0 0 0 12 21 Z" fill="currentColor"/>
+            </svg>
+          </span>
+        </button>
+
+        <!-- Language Switcher: Shows target language (EN when TR active, TR when EN active) -->
+        <button id="lang-toggle" class="icon-btn lang-toggle-btn" aria-label="Switch language to English" title="Dil Değiştir">
+          EN
+        </button>
+        
+        <!-- View Switcher: Abstract text/paragraph symbol morphing to grid -->
+        <button id="view-switch-btn" class="icon-btn view-switch-btn" aria-label="Metin Görünümünü Göster" aria-expanded="false" title="Görünüm Değiştir">
+          <span class="view-switch-symbol" aria-hidden="true">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="site-container">
+    <main>
+      <!-- Primary View: Work Grid -->
+      <section id="work-view" class="view" aria-label="Seçilmiş Çalışmalar">
+        <h1 class="sr-only" id="work-heading">Seçilmiş Çalışmalar</h1>
+        <div id="works-grid" class="works-grid" role="region" aria-live="polite"></div>
+      </section>
+
+      <!-- Information / Bio / CV View -->
+      <section id="info-view" class="view" aria-label="Bilgi & Arşiv" hidden>
+        <h1 class="sr-only" id="info-heading">Bilgi & Arşiv</h1>
+        <div id="info-container" class="info-container"></div>
+      </section>
+
+      <!-- Graceful Fallback Error UI -->
+      <div id="error-state" class="error-state" hidden>
+        <p id="error-message">İçerik kataloğu yüklenemedi. Lütfen bağlantınızı kontrol edin.</p>
+        <button id="retry-btn" class="retry-btn">Yeniden Dene</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
