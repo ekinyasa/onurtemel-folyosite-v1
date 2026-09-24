@@ -707,6 +707,9 @@
     }
 
     textEl.style.fontSize = `${Math.floor(bestFont)}px`;
+    textEl.style.maxWidth = '';
+    textEl.style.maxHeight = '';
+    textEl.style.overflow = '';
   }
 
   // --- MEDIA INTERACTION & OVERLAY CONTROLLER ---
