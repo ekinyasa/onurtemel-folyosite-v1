@@ -710,6 +710,20 @@
     textEl.style.maxWidth = '';
     textEl.style.maxHeight = '';
     textEl.style.overflow = '';
+
+    if (layerEl.classList.contains('cover-align-center-center')) {
+      const layerRect = layerEl.getBoundingClientRect();
+      const textRect = textEl.getBoundingClientRect();
+      const safeCenterX = layerRect.left + (layerRect.width / 2);
+      const safeCenterY = layerRect.top + (layerRect.height / 2);
+      const titleCenterX = textRect.left + (textRect.width / 2);
+      const titleCenterY = textRect.top + (textRect.height / 2);
+      const offsetX = Math.abs(safeCenterX - titleCenterX);
+      const offsetY = Math.abs(safeCenterY - titleCenterY);
+      if (offsetX > 1 || offsetY > 1) {
+        console.warn(`[Cover Alignment Warning] Center offset > 1px for "${textEl.textContent.trim()}": X delta = ${offsetX.toFixed(2)}px, Y delta = ${offsetY.toFixed(2)}px`);
+      }
+    }
   }
 
   // --- MEDIA INTERACTION & OVERLAY CONTROLLER ---

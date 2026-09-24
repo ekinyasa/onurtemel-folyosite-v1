@@ -460,6 +460,24 @@ main { padding: 2rem 0 4rem 0; }
 .cover-align-center-bottom { justify-content: center; align-items: flex-end; text-align: center; }
 .cover-align-right-bottom { justify-content: flex-end; align-items: flex-end; text-align: right; }
 
+.cover-align-left-top .cover-text,
+.cover-align-left-center .cover-text,
+.cover-align-left-bottom .cover-text {
+  text-align: left;
+}
+
+.cover-align-center-top .cover-text,
+.cover-align-center-center .cover-text,
+.cover-align-center-bottom .cover-text {
+  text-align: center;
+}
+
+.cover-align-right-top .cover-text,
+.cover-align-right-center .cover-text,
+.cover-align-right-bottom .cover-text {
+  text-align: right;
+}
+
 .cover-text {
   font-family: Helvetica, Arial, sans-serif;
   font-weight: 700;
@@ -474,6 +492,12 @@ main { padding: 2rem 0 4rem 0; }
   overflow-wrap: normal !important;
   white-space: pre-wrap;
   hyphens: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .work-item, .work-item * {
+    cursor: pointer;
+  }
 }
 
 /* TEST B: EDITORIAL LOWER-CHROME AFFORDANCE (WATCH VIDEO / VİDEOYU İZLE) */
