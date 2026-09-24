@@ -494,10 +494,9 @@ main { padding: 2rem 0 4rem 0; }
   hyphens: none !important;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .work-item, .work-item * {
-    cursor: pointer;
-  }
+.work-item,
+.work-item * {
+  cursor: pointer !important;
 }
 
 /* TEST B: EDITORIAL LOWER-CHROME AFFORDANCE (WATCH VIDEO / VİDEOYU İZLE) */

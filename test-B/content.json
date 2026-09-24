@@ -119,8 +119,8 @@
         "image": "assets/covers/haydarpasa.png",
         "text": "HAYDARPAŞA GARI",
         "textColor": "#ffffff",
-        "horizontal": "right",
-        "vertical": "bottom"
+        "horizontal": "center",
+        "vertical": "center"
       }
     },
     {
@@ -159,8 +159,8 @@
         "image": "assets/covers/sanma-ki-o-yagmur-bulutu.png",
         "text": "MENDERES",
         "textColor": "#ffffff",
-        "horizontal": "left",
-        "vertical": "bottom"
+        "horizontal": "center",
+        "vertical": "center"
       }
     },
     {
@@ -199,8 +199,8 @@
         "image": "assets/covers/kisladag.png",
         "text": "KIŞLADAĞ",
         "textColor": "#f5f5f5",
-        "horizontal": "right",
-        "vertical": "top"
+        "horizontal": "center",
+        "vertical": "center"
       }
     },
     {
