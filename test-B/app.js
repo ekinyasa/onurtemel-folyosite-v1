@@ -426,7 +426,6 @@
       const workId = work.id || `work-${Math.random().toString(36).substr(2, 9)}`;
       const title = t(work.title, currentLang) || (currentLang === 'TR' ? 'İsimsiz Çalışma' : 'Untitled Work');
       const year = work.date ? String(work.date).split('-')[0] : '';
-      const role = t(work.role, currentLang) || '';
       const description = t(work.description, currentLang) || '';
 
       const mediaType = work.mediaType || 'video';
@@ -445,9 +444,16 @@
       const article = document.createElement('article');
       article.className = 'work-item';
       article.id = workId;
+      article.setAttribute('tabindex', '0');
+      article.setAttribute('role', 'button');
+      article.setAttribute('aria-label', `${currentLang === 'TR' ? 'Çalışmayı aç' : 'Open work'}: ${title}`);
+      article.dataset.mediaType = mediaType;
+      article.dataset.aspect = aspect;
+      article.dataset.youtube = youtubeRaw;
+      article.dataset.photo = photoUrl;
+      article.dataset.title = title;
 
       // TEST B EDITORIAL LOWER-CHROME AFFORDANCE:
-      // Exposes subtle text action "WATCH VIDEO" / "VİDEOYU İZLE" for video, or "PHOTO" / "FOTOĞRAF" for photo
       let actionBadgeHTML = '';
       if (mediaType === 'video') {
         const watchText = currentLang === 'TR' ? 'VİDEOYU İZLE' : 'WATCH VIDEO';
@@ -459,36 +465,25 @@
 
       let mediaHTML = `
         <div class="work-media-container ${!imgPath ? 'black-cover-container' : ''}" id="media-${workId}">
-          <button class="work-media-btn" 
-            data-media-type="${escapeAttr(mediaType)}"
-            data-aspect="${escapeAttr(aspect)}"
-            data-youtube="${escapeAttr(youtubeRaw)}"
-            data-photo="${escapeAttr(photoUrl)}"
-            data-title="${escapeAttr(title)}"
-            aria-label="${currentLang === 'TR' ? 'Çalışmayı aç' : 'Open work'}: ${escapeAttr(title)}">
+          ${imgPath ? `<img class="cover-img" src="${escapeAttr(imgPath)}" alt="" loading="lazy" decoding="async" onerror="this.style.display='none';">` : ''}
+          <div class="cover-veil"></div>
 
-            ${imgPath ? `<img class="cover-img" src="${escapeAttr(imgPath)}" alt="" loading="lazy" decoding="async" onerror="this.style.display='none';">` : ''}
-            <div class="cover-veil"></div>
+          ${coverText ? `
+            <div class="cover-typography-layer ${alignClass}">
+              <h3 class="cover-text" style="color:${escapeAttr(textColor)}">${escapeHTML(coverText)}</h3>
+            </div>
+          ` : ''}
 
-            ${coverText ? `
-              <div class="cover-typography-layer ${alignClass}">
-                <h3 class="cover-text" style="color:${escapeAttr(textColor)}">${escapeHTML(coverText)}</h3>
-              </div>
-            ` : ''}
-
-            ${actionBadgeHTML}
-          </button>
+          ${actionBadgeHTML}
         </div>
       `;
-
-      const detailsText = [year, role].filter(Boolean).join(' — ');
 
       article.innerHTML = `
         ${mediaHTML}
         <div class="work-meta">
-          <h2 class="work-title">${escapeHTML(title)}</h2>
-          ${detailsText ? `<p class="work-details">${escapeHTML(detailsText)}</p>` : ''}
-          ${description ? `<p class="work-description">${escapeHTML(description)}</p>` : ''}
+          <p class="work-description-line">
+            <span class="work-desc-text">${escapeHTML(description)}</span>${year ? `<span class="work-date-sep"> | </span><span class="work-date">${escapeHTML(year)}</span>` : ''}
+          </p>
         </div>
       `;
 
@@ -497,8 +492,15 @@
 
     worksGrid.appendChild(fragment);
 
-    worksGrid.querySelectorAll('.work-media-btn').forEach(btn => {
-      btn.addEventListener('click', handleMediaClick);
+    // Entire work item is the interactive click & hover region
+    worksGrid.querySelectorAll('.work-item').forEach(item => {
+      item.addEventListener('click', handleMediaClick);
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleMediaClick(e);
+        }
+      });
     });
 
     observeCoverContainers();
@@ -515,6 +517,12 @@
         for (const entry of entries) {
           fitCoverTypography(entry.target);
         }
+      });
+    }
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        fitAllCoverTypography();
       });
     }
   }
@@ -537,27 +545,50 @@
     const layerEl = container.querySelector('.cover-typography-layer');
     if (!textEl || !layerEl) return;
 
-    const layerRect = layerEl.getBoundingClientRect();
-    const maxW = layerRect.width;
-    const maxH = layerRect.height;
+    // 1. Measure container dimensions
+    const containerW = container.clientWidth;
+    const containerH = container.clientHeight;
+    if (containerW <= 0 || containerH <= 0) return;
+
+    // 2. Determine safe inner rectangle after container-aware padding
+    const pad = Math.min(Math.max(12, Math.round(containerW * 0.05)), 20);
+    const maxW = containerW - (pad * 2);
+    const maxH = containerH - (pad * 2);
+
     if (maxW <= 0 || maxH <= 0) return;
 
-    let minFont = 12;
-    let maxFont = Math.min(Math.max(24, maxW * 0.22), 84);
+    layerEl.style.padding = `${pad}px`;
+
+    // 3. Configure text styles identically to visible CSS rules
+    textEl.style.lineHeight = '1.05';
+    textEl.style.letterSpacing = '-0.01em';
+    textEl.style.wordBreak = 'normal';
+    textEl.style.overflowWrap = 'break-word';
+    textEl.style.whiteSpace = 'pre-wrap';
+    textEl.style.maxWidth = `${maxW}px`;
+    textEl.style.maxHeight = `${maxH}px`;
+    textEl.style.overflow = 'hidden';
+
+    // 4. Binary search fit algorithm
+    let minFont = 10;
+    let maxFont = Math.min(Math.max(20, maxW * 0.28), maxH * 0.78, 80);
     let bestFont = minFont;
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 10; i++) {
       const mid = (minFont + maxFont) / 2;
       textEl.style.fontSize = `${mid}px`;
-      
+
       const scrollW = textEl.scrollWidth;
       const scrollH = textEl.scrollHeight;
 
-      if (scrollW <= maxW + 1 && scrollH <= maxH + 1) {
+      const fitsWidth = scrollW <= maxW + 0.5;
+      const fitsHeight = scrollH <= maxH + 0.5;
+
+      if (fitsWidth && fitsHeight) {
         bestFont = mid;
-        minFont = mid + 0.5;
+        minFont = mid + 0.2;
       } else {
-        maxFont = mid - 0.5;
+        maxFont = mid - 0.2;
       }
     }
 

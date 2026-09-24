@@ -334,6 +334,14 @@ main { padding: 2rem 0 4rem 0; }
 .work-item {
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+}
+
+.work-item:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 4px;
 }
 
 /* NEW CODED COVER SYSTEM */
@@ -350,54 +358,48 @@ main { padding: 2rem 0 4rem 0; }
   background-color: #000000 !important;
 }
 
-.work-media-btn {
-  width: 100%;
-  height: 100%;
-  border: none;
-  background: var(--bg-media);
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-  position: relative;
-  display: block;
-  text-align: left;
-}
-
 /* Layer 1: Image */
 .cover-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: opacity 0.25s ease, filter 0.25s ease;
+  opacity: 0.7; /* Default 70% visible */
+  transition: opacity 0.2s ease;
+}
+
+.work-item:hover .cover-img,
+.work-item:focus-within .cover-img {
+  opacity: 0.2; /* Strongly recedes on hover/focus */
 }
 
 /* Layer 2: Muted Veil Overlay */
 .cover-veil {
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.32);
-  mix-blend-mode: multiply;
-  transition: background-color 0.25s ease;
+  background-color: rgba(0, 0, 0, 0.25);
+  transition: opacity 0.2s ease;
   pointer-events: none;
   z-index: 1;
-}
-
-.work-media-btn:hover .cover-veil,
-.work-media-btn:focus-visible .cover-veil {
-  background-color: rgba(0, 0, 0, 0.15); /* Lightens on hover/focus */
 }
 
 /* Layer 3: Coded HTML Cover Typography */
 .cover-typography-layer {
   position: absolute;
   inset: 0;
-  padding: 1.25rem;
+  padding: 1rem;
   display: flex;
   pointer-events: none;
   z-index: 2;
   overflow: hidden;
   box-sizing: border-box;
+  opacity: 0.8; /* Default 80% visible */
+  transition: opacity 0.2s ease;
+}
+
+.work-item:hover .cover-typography-layer,
+.work-item:focus-within .cover-typography-layer {
+  opacity: 1.0; /* 100% visible on hover/focus */
 }
 
 /* Alignments */
@@ -422,11 +424,12 @@ main { padding: 2rem 0 4rem 0; }
   margin: 0;
   padding: 0;
   max-width: 100%;
+  max-height: 100%;
   overflow: hidden;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
-  word-break: break-word;
+  word-break: normal;
+  overflow-wrap: break-word;
   white-space: pre-wrap;
-  transition: font-size 0.05s ease-out;
 }
 
 /* TEST B: EDITORIAL LOWER-CHROME AFFORDANCE (WATCH VIDEO / VİDEOYU İZLE) */
@@ -434,7 +437,7 @@ main { padding: 2rem 0 4rem 0; }
   position: absolute;
   bottom: 12px;
   right: 12px;
-  font-family: var(--font-stack);
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 0.675rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -444,19 +447,13 @@ main { padding: 2rem 0 4rem 0; }
   padding: 0.2rem 0.5rem;
   pointer-events: none;
   z-index: 3;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  opacity: 0.85; /* Responsive persistent visibility on touch */
+  opacity: 0.8; /* Default 80% visible */
+  transition: opacity 0.2s ease;
 }
 
-@media (hover: hover) {
-  .test-b-editorial-badge {
-    opacity: 0.7; /* Restrained default */
-  }
-  .work-media-btn:hover .test-b-editorial-badge,
-  .work-media-btn:focus-visible .test-b-editorial-badge {
-    opacity: 1;
-    transform: translateY(-1px);
-  }
+.work-item:hover .test-b-editorial-badge,
+.work-item:focus-within .test-b-editorial-badge {
+  opacity: 1.0; /* 100% visible on hover/focus */
 }
 
 /* FULLSCREEN & LIGHTBOX OVERLAYS */
@@ -537,28 +534,18 @@ main { padding: 2rem 0 4rem 0; }
 
 /* Work Item Metadata */
 .work-meta {
-  margin-top: 0.85rem;
+  margin-top: 0.65rem;
+  opacity: 0.8; /* Default 80% visible */
+  transition: opacity 0.2s ease;
 }
 
-.work-title {
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  margin: 0 0 0.25rem 0;
-  color: var(--fg-color);
-  line-height: 1.35;
+.work-item:hover .work-meta,
+.work-item:focus-within .work-meta {
+  opacity: 1.0; /* 100% visible on hover/focus */
 }
 
-.work-details {
-  font-size: 0.8rem;
-  color: var(--fg-muted);
-  margin: 0 0 0.4rem 0;
-  letter-spacing: 0.01em;
-}
-
-.work-meta .work-description,
-.work-description {
+.work-description-line {
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 0.825rem;
   color: var(--fg-color);
   margin: 0;
@@ -570,6 +557,17 @@ main { padding: 2rem 0 4rem 0; }
   line-clamp: 3;
   overflow: hidden;
   max-height: 4.2em;
+}
+
+.work-date-sep {
+  color: var(--fg-muted);
+  padding: 0 0.3rem;
+  font-weight: 400;
+}
+
+.work-date {
+  color: var(--fg-muted);
+  font-weight: 400;
 }
 
 /* INFO / BIO VIEW */
