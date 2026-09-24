@@ -89,13 +89,46 @@ html, body {
   position: sticky;
   top: 0;
   z-index: 100;
-  height: var(--header-height);
   background-color: var(--bg-color);
   border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.header-container {
+  height: var(--header-height);
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.header-center-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+}
+
+/* Second Row Toolbar Zone (used in two-row mode / mobile) */
+.second-row-zone {
+  background-color: var(--bg-color);
+  border-top: 1px solid var(--border-color);
+  overflow: hidden;
+  max-height: 50px;
+  transition: max-height 0.25s ease, opacity 0.2s ease, transform 0.2s ease;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.second-row-zone.toolbar-hidden {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.site-header.single-row-mode .second-row-zone {
+  display: none !important;
 }
 
 .header-brand {
@@ -198,10 +231,23 @@ main { padding: 2rem 0 4rem 0; }
 .filter-sort-bar {
   display: flex;
   align-items: center;
+  gap: 1.5rem;
+}
+
+.two-row-mode .filter-sort-bar,
+.second-row-zone .filter-sort-bar {
   justify-content: space-between;
-  margin-bottom: 2rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border-color);
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border-bottom: none;
+}
+
+.single-row-mode .filter-sort-bar {
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border-bottom: none;
 }
 
 .filter-dropdown-container, .sort-dropdown-container {
@@ -427,9 +473,10 @@ main { padding: 2rem 0 4rem 0; }
   max-height: 100%;
   overflow: hidden;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
-  word-break: normal;
-  overflow-wrap: break-word;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
   white-space: pre-wrap;
+  hyphens: none !important;
 }
 
 /* TEST B: EDITORIAL LOWER-CHROME AFFORDANCE (WATCH VIDEO / VİDEOYU İZLE) */
@@ -447,13 +494,34 @@ main { padding: 2rem 0 4rem 0; }
   padding: 0.2rem 0.5rem;
   pointer-events: none;
   z-index: 3;
-  opacity: 0.8; /* Default 80% visible */
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
-.work-item:hover .test-b-editorial-badge,
+/* Touch / coarse pointer devices: persistent 80% opacity */
+@media (hover: none), (pointer: coarse) {
+  .test-b-editorial-badge {
+    opacity: 0.8;
+    visibility: visible;
+  }
+}
+
+/* Fine pointer / hover devices: hidden by default, revealed on hover/focus */
+@media (hover: hover) and (pointer: fine) {
+  .test-b-editorial-badge {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .work-item:hover .test-b-editorial-badge,
+  .work-item:focus-within .test-b-editorial-badge {
+    opacity: 1.0;
+    visibility: visible;
+  }
+}
+
 .work-item:focus-within .test-b-editorial-badge {
-  opacity: 1.0; /* 100% visible on hover/focus */
+  opacity: 1.0 !important;
+  visibility: visible !important;
 }
 
 /* FULLSCREEN & LIGHTBOX OVERLAYS */
@@ -660,6 +728,55 @@ main { padding: 2rem 0 4rem 0; }
   cursor: pointer;
 }
 .retry-btn:hover { opacity: 0.85; }
+
+/* MINIMAL FOOTER */
+.site-footer {
+  margin-top: 4rem;
+  padding: 2.5rem 0 3.5rem 0;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  border: none;
+  background: transparent;
+}
+
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+}
+
+.footer-copy {
+  color: var(--fg-muted);
+  font-weight: 400;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+}
+
+.footer-link {
+  color: var(--fg-muted);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.25rem 0;
+  transition: color 0.15s ease;
+}
+
+.footer-link:hover {
+  color: var(--fg-color);
+  text-decoration: underline;
+}
+
+.footer-sep {
+  color: var(--border-color);
+  user-select: none;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

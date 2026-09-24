@@ -28,11 +28,14 @@
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="site-container" style="width:100%; display:flex; align-items:center; justify-content:space-between;">
+  <header class="site-header" id="site-header">
+    <div class="site-container header-container" id="header-container">
       <a href="#work" class="header-brand" id="brand-link" aria-label="Onur Temel Homepage">ONUR TEMEL</a>
       
-      <div class="header-controls">
+      <!-- CENTER ZONE: Filter & Sort toolbar is placed here on wide desktop -->
+      <div id="header-center-zone" class="header-center-zone"></div>
+
+      <div class="header-controls" id="header-controls">
         <button id="theme-toggle" class="icon-btn theme-toggle-btn" aria-label="Koyu/Açık temayı değiştir" title="Tema Değiştir">
           <span class="theme-split-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="16" height="16">
@@ -55,47 +58,52 @@
         </button>
       </div>
     </div>
+
+    <!-- SECOND ROW ZONE: Filter & Sort toolbar is placed here in two-row mode / mobile -->
+    <div id="second-row-zone" class="second-row-zone">
+      <div class="site-container" id="second-row-container">
+        <!-- Filter & Sort Controls Bar -->
+        <div id="filter-sort-bar" class="filter-sort-bar">
+          <!-- Filter Dropdown -->
+          <div class="filter-dropdown-container">
+            <button id="filter-toggle-btn" class="filter-bar-btn" aria-expanded="false" aria-controls="filter-menu">
+              <span id="filter-btn-label">TÜMÜ</span> ▾
+            </button>
+
+            <div id="filter-menu" class="filter-menu" hidden>
+              <div class="filter-group">
+                <h3 class="filter-group-title" id="filter-format-heading">FORMAT</h3>
+                <div id="filter-formats-list" class="filter-options-list"></div>
+              </div>
+              <div class="filter-group">
+                <h3 class="filter-group-title" id="filter-category-heading">KATEGORİ</h3>
+                <div id="filter-categories-list" class="filter-options-list"></div>
+              </div>
+              <div class="filter-menu-actions">
+                <button id="clear-filters-btn" class="filter-clear-btn">Filtreleri Temizle</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sort Dropdown -->
+          <div class="sort-dropdown-container">
+            <button id="sort-toggle-btn" class="filter-bar-btn" aria-expanded="false" aria-controls="sort-menu">
+              <span id="sort-btn-label">SIRALA: EN YENİ</span> ▾
+            </button>
+
+            <div id="sort-menu" class="sort-menu" hidden>
+              <button class="sort-option-btn active" data-sort="newest">En Yeni</button>
+              <button class="sort-option-btn" data-sort="oldest">En Eski</button>
+              <button class="sort-option-btn" data-sort="title">Unvan (A–Z)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
 
   <div class="site-container">
     <main>
-      <!-- Filter & Sort Controls Bar -->
-      <div id="filter-sort-bar" class="filter-sort-bar">
-        <!-- Filter Dropdown -->
-        <div class="filter-dropdown-container">
-          <button id="filter-toggle-btn" class="filter-bar-btn" aria-expanded="false" aria-controls="filter-menu">
-            <span id="filter-btn-label">TÜMÜ</span> ▾
-          </button>
-
-          <div id="filter-menu" class="filter-menu" hidden>
-            <div class="filter-group">
-              <h3 class="filter-group-title" id="filter-format-heading">FORMAT</h3>
-              <div id="filter-formats-list" class="filter-options-list"></div>
-            </div>
-            <div class="filter-group">
-              <h3 class="filter-group-title" id="filter-category-heading">KATEGORİ</h3>
-              <div id="filter-categories-list" class="filter-options-list"></div>
-            </div>
-            <div class="filter-menu-actions">
-              <button id="clear-filters-btn" class="filter-clear-btn">Filtreleri Temizle</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sort Dropdown -->
-        <div class="sort-dropdown-container">
-          <button id="sort-toggle-btn" class="filter-bar-btn" aria-expanded="false" aria-controls="sort-menu">
-            <span id="sort-btn-label">SIRALA: EN YENİ</span> ▾
-          </button>
-
-          <div id="sort-menu" class="sort-menu" hidden>
-            <button class="sort-option-btn active" data-sort="newest">En Yeni</button>
-            <button class="sort-option-btn" data-sort="oldest">En Eski</button>
-            <button class="sort-option-btn" data-sort="title">Unvan (A–Z)</button>
-          </div>
-        </div>
-      </div>
-
       <!-- Primary View: Work Grid -->
       <section id="work-view" class="view" aria-label="Seçilmiş Çalışmalar">
         <h1 class="sr-only" id="work-heading">Seçilmiş Çalışmalar</h1>
@@ -115,6 +123,8 @@
       </div>
     </main>
   </div>
+
+  <footer id="site-footer" class="site-footer"></footer>
 
   <script src="app.js"></script>
 </body>

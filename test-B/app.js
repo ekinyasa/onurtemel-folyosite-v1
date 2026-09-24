@@ -403,7 +403,9 @@
     renderFilterOptions();
     renderWorksGrid(getProcessedWorks());
     renderInfoView(siteData.bio || {}, siteData.links || [], siteData.site || {});
+    renderFooter(siteData.site || {});
     updateViewSwitchBtnState();
+    checkHeaderLayout();
   }
 
   // Render Works (Primary View Grid)
@@ -507,6 +509,117 @@
     requestAnimationFrame(fitAllCoverTypography);
   }
 
+  // --- MINIMAL FOOTER RENDERER (TEST B) ---
+  function renderFooter(site) {
+    const footerEl = document.getElementById('site-footer');
+    if (!footerEl) return;
+
+    const currentYear = new Date().getFullYear();
+    const social = (site && site.social) || {};
+    const emailAddr = social.email || site.email || '';
+
+    const links = [];
+    if (social.linkedin) {
+      links.push(`<a href="${escapeAttr(social.linkedin)}" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>`);
+    }
+    if (social.youtube) {
+      links.push(`<a href="${escapeAttr(social.youtube)}" target="_blank" rel="noopener noreferrer" class="footer-link">YouTube</a>`);
+    }
+    if (social.instagram) {
+      links.push(`<a href="${escapeAttr(social.instagram)}" target="_blank" rel="noopener noreferrer" class="footer-link">Instagram</a>`);
+    }
+    if (emailAddr) {
+      const emailLabel = currentLang === 'TR' ? 'E-posta' : 'Email';
+      links.push(`<a href="mailto:${escapeAttr(emailAddr)}" class="footer-link">${escapeHTML(emailLabel)}</a>`);
+    }
+
+    const linksHTML = links.join('<span class="footer-sep"> · </span>');
+
+    footerEl.innerHTML = `
+      <div class="site-container footer-container">
+        <span class="footer-copy">© ${currentYear} Onur Temel</span>
+        ${links.length > 0 ? `<nav class="footer-links">${linksHTML}</nav>` : ''}
+      </div>
+    `;
+  }
+
+  // --- ADAPTIVE HEADER & SCROLL CONTROLLER (TEST B) ---
+  let isSingleRowMode = false;
+  let lastScrollY = window.scrollY;
+  let isToolbarHidden = false;
+
+  function checkHeaderLayout() {
+    const siteHeader = document.getElementById('site-header');
+    const headerContainer = document.getElementById('header-container');
+    const brandLink = document.getElementById('brand-link');
+    const headerCenterZone = document.getElementById('header-center-zone');
+    const headerControls = document.getElementById('header-controls');
+    const secondRowContainer = document.getElementById('second-row-container');
+    const filterSortBar = document.getElementById('filter-sort-bar');
+    const secondRowZone = document.getElementById('second-row-zone');
+
+    if (!siteHeader || !headerContainer || !filterSortBar || !brandLink || !headerControls) return;
+
+    if (filterSortBar.parentElement !== headerCenterZone) {
+      headerCenterZone.appendChild(filterSortBar);
+    }
+
+    const containerW = headerContainer.clientWidth;
+    const brandW = brandLink.offsetWidth;
+    const controlsW = headerControls.offsetWidth;
+    const toolbarW = filterSortBar.offsetWidth;
+
+    const requiredWidth = brandW + controlsW + toolbarW + 80;
+
+    if (containerW >= requiredWidth && containerW >= 768) {
+      isSingleRowMode = true;
+      siteHeader.classList.add('single-row-mode');
+      siteHeader.classList.remove('two-row-mode');
+      if (secondRowZone) secondRowZone.classList.remove('toolbar-hidden');
+    } else {
+      isSingleRowMode = false;
+      siteHeader.classList.add('two-row-mode');
+      siteHeader.classList.remove('single-row-mode');
+      if (secondRowContainer && filterSortBar.parentElement !== secondRowContainer) {
+        secondRowContainer.appendChild(filterSortBar);
+      }
+    }
+  }
+
+  function handleScroll() {
+    const siteHeader = document.getElementById('site-header');
+    const secondRowZone = document.getElementById('second-row-zone');
+    if (!siteHeader || !secondRowZone) return;
+
+    if (isSingleRowMode) {
+      secondRowZone.classList.remove('toolbar-hidden');
+      isToolbarHidden = false;
+      return;
+    }
+
+    const filterMenu = document.getElementById('filter-menu');
+    const sortMenu = document.getElementById('sort-menu');
+    const isFilterOpen = filterMenu && !filterMenu.hidden;
+    const isSortOpen = sortMenu && !sortMenu.hidden;
+    if (isFilterOpen || isSortOpen) return;
+
+    const currentScrollY = window.scrollY;
+    const deltaY = currentScrollY - lastScrollY;
+
+    if (currentScrollY <= 20) {
+      secondRowZone.classList.remove('toolbar-hidden');
+      isToolbarHidden = false;
+    } else if (deltaY > 6 && !isToolbarHidden) {
+      secondRowZone.classList.add('toolbar-hidden');
+      isToolbarHidden = true;
+    } else if (deltaY < -6 && isToolbarHidden) {
+      secondRowZone.classList.remove('toolbar-hidden');
+      isToolbarHidden = false;
+    }
+
+    lastScrollY = currentScrollY;
+  }
+
   // --- COVER TYPOGRAPHY AUTO-FIT ENGINE (TEST B) ---
   let coverResizeObserver = null;
 
@@ -559,12 +672,13 @@
 
     layerEl.style.padding = `${pad}px`;
 
-    // 3. Configure text styles identically to visible CSS rules
+    // 3. Configure text styles: STRICT NO-WORD-BREAK RULES
     textEl.style.lineHeight = '1.05';
     textEl.style.letterSpacing = '-0.01em';
     textEl.style.wordBreak = 'normal';
-    textEl.style.overflowWrap = 'break-word';
+    textEl.style.overflowWrap = 'normal';
     textEl.style.whiteSpace = 'pre-wrap';
+    textEl.style.hyphens = 'none';
     textEl.style.maxWidth = `${maxW}px`;
     textEl.style.maxHeight = `${maxH}px`;
     textEl.style.overflow = 'hidden';
@@ -914,7 +1028,11 @@
       }
     });
 
-    window.addEventListener('resize', fitAllCoverTypography);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', () => {
+      checkHeaderLayout();
+      fitAllCoverTypography();
+    });
     window.addEventListener('hashchange', handleHashNavigation);
     if (retryBtn) retryBtn.addEventListener('click', loadContent);
   }

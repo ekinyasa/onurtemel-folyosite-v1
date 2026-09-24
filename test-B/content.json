@@ -30,7 +30,13 @@
       "EN": "Portfolio of videographer Onur Temel. Observational documentary, performance capture, urban research, and field documentation."
     },
     "email": "contact@onurtemel.com.tr",
-    "location": "Istanbul / Berlin"
+    "location": "Istanbul / Berlin",
+    "social": {
+      "linkedin": "https://linkedin.com",
+      "youtube": "https://youtube.com",
+      "instagram": "https://instagram.com",
+      "email": "contact@onurtemel.com.tr"
+    }
   },
   "bio": {
     "short": {
