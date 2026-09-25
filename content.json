@@ -221,19 +221,6 @@
       "thumbnail": "assets/covers/bakirkoy-kentin-ruh-hali.png"
     },
     {
-      "id": "topraga-donus-aydos",
-      "title": {
-        "TR": "İstanbul Çeperindeki Toprağa Dönüş İnisiyatifleri: #1 Aydos | Cengizhan Benice",
-        "EN": "Return to the Land Initiatives on Istanbul's Periphery: #1 Aydos | Cengizhan Benice"
-      },
-      "description": {
-        "TR": "Kent merkezlerinden “toprağa dönen”, çeşitli profesyonel geçmişlere sahip yedi üretici yedi farklı hikâyeyle “İstanbul Çeperindeki Toprağa Dönüş İnisiyatifleri” video serisinde! Serinin ilk videosunda, hızlı ve tüketim odaklı bir kent hayatını geride bırakıp, çocukluğunun sayfiye yeri Kartal Aydos’ta, kendi tanımlamasıyla “doğal tarım” yapmaya başlayan Cengizhan Benice’nin hikayesi sizlerle!",
-        "EN": "Seven producers with diverse professional backgrounds who 'returned to the land' from urban centers share seven distinct stories in the video series 'Return to the Land Initiatives on Istanbul's Periphery'. In this first installment, Cengizhan Benice leaves behind fast-paced consumerist city life to practice 'natural farming' in Kartal Aydos, his childhood retreat."
-      },
-      "youtube": "https://www.youtube.com/watch?v=jm7JW5vyFLQ&t=2s",
-      "thumbnail": "assets/covers/topraga-donus-aydos.png"
-    },
-    {
       "id": "yusufeli",
       "title": {
         "TR": "Yusufeli: Bindik Bi' Alâmete",
@@ -258,45 +245,6 @@
       },
       "youtube": "https://www.youtube.com/watch?v=4Tw2gB-ygME&t=69s",
       "thumbnail": "assets/covers/erzincan-artvin.png"
-    },
-    {
-      "id": "slapp-01-sedat-cezayirlioglu",
-      "title": {
-        "TR": "SLAPP #1 | Sedat Cezayirlioğlu",
-        "EN": "SLAPP #1 | Sedat Cezayirlioğlu"
-      },
-      "description": {
-        "TR": "İliçli Sedat Cezayirlioğlu, yaklaşık yedi yıldır Çöpler Altın Madeni'nin yol açtığı çevresel tahribata karşı aktif bir mücadele yürütüyor. Şirket tarafından açılan davalardan suç duyurularına kadar uzanan ve kendisine yönelik uygulanan yargısal tacizi konuşmak üzere, 22 Temmuz 2022 tarihinde Erzincan'da Sedat Cezayirlioğlu ile bir araya geldik.",
-        "EN": "Sedat Cezayirlioğlu from İliç has actively fought environmental destruction caused by the Çöpler Gold Mine for nearly seven years. We met with Sedat Cezayirlioğlu in Erzincan on July 22, 2022, to discuss judicial harassment ranging from corporate lawsuits to criminal complaints targeting his activism."
-      },
-      "youtube": "https://www.youtube.com/watch?v=4b99hVhK-q0&t=4s",
-      "thumbnail": "assets/covers/slapp-01-sedat-cezayirlioglu.png"
-    },
-    {
-      "id": "slapp-02-recai-cakir",
-      "title": {
-        "TR": "SLAPP #2 | Recai Çakır",
-        "EN": "SLAPP #2 | Recai Çakır"
-      },
-      "description": {
-        "TR": "Recai Çakır, 2010 yılından beri Amasra’da termik santral yapılmasına karşı mücadele veren bir hak savunucusu. Hattat Holding’in kurmaya çalıştığı termik santrale karşı mücadele yürüten Bartın Platformu’nun eş sözcüsü ve 2019’dan bu yana Amasra Belediye Başkanı. Çakır, şirketin hak savunucularını yıldırmak amacıyla stratejik olarak açtığı bir SLAPP davasıyla karşı karşıya.",
-        "EN": "Recai Çakır is a rights defender who has resisted coal-fired power plant construction in Amasra since 2010. Co-spokesperson for the Bartın Platform opposing Hattat Holding's power plant project and Mayor of Amasra since 2019, Çakır faces a Strategic Lawsuit Against Public Participation (SLAPP) filed by the corporation to intimidate defenders."
-      },
-      "youtube": "https://www.youtube.com/watch?v=zdSeijlr82E&t=7s",
-      "thumbnail": "assets/covers/slapp-02-recai-cakir.png"
-    },
-    {
-      "id": "slapp-03-erdogan-atmis",
-      "title": {
-        "TR": "SLAPP #3 | Erdoğan Atmış",
-        "EN": "SLAPP #3 | Erdoğan Atmış"
-      },
-      "description": {
-        "TR": "Erdoğan Atmış, 2010 yılından bu yana Bartın Platformu’yla birlikte Amasra’da termik santrale karşı mücadele veren hak savunucularından biri. Atmış’ın Bartın Üniversitesi’nde öğretim üyesi olarak çalıştığı dönemde termik santral projesinin sahibi Hattat Holding, Atmış hakkında suç duyurusunda bulundu ve üniversitedeki görevinden alınması için YÖK’e başvurdu.",
-        "EN": "Erdoğan Atmış is a rights defender who has campaigned with the Bartın Platform against the Amasra coal-fired power plant since 2010. While Atmış was a faculty member at Bartın University, Hattat Holding filed criminal complaints against him and petitioned the Council of Higher Education (YÖK) for his dismissal."
-      },
-      "youtube": "https://www.youtube.com/watch?v=q7ETz3gvldM&t=16s",
-      "thumbnail": "none"
     },
     {
       "id": "madyuruyus-02-beyoglu",
@@ -336,6 +284,58 @@
       },
       "youtube": "https://www.youtube.com/watch?v=lZcPSBDOUhU",
       "thumbnail": "assets/covers/madyuruyus-05-habibler.png"
+    },
+    {
+      "id": "topraga-donus-aydos",
+      "title": {
+        "TR": "İstanbul Çeperindeki Toprağa Dönüş İnisiyatifleri: #1 Aydos | Cengizhan Benice",
+        "EN": "Return to the Land Initiatives on Istanbul's Periphery: #1 Aydos | Cengizhan Benice"
+      },
+      "description": {
+        "TR": "Kent merkezlerinden “toprağa dönen”, çeşitli profesyonel geçmişlere sahip yedi üretici yedi farklı hikâyeyle “İstanbul Çeperindeki Toprağa Dönüş İnisiyatifleri” video serisinde! Serinin ilk videosunda, hızlı ve tüketim odaklı bir kent hayatını geride bırakıp, çocukluğunun sayfiye yeri Kartal Aydos’ta, kendi tanımlamasıyla “doğal tarım” yapmaya başlayan Cengizhan Benice’nin hikayesi sizlerle!",
+        "EN": "Seven producers with diverse professional backgrounds who 'returned to the land' from urban centers share seven distinct stories in the video series 'Return to the Land Initiatives on Istanbul's Periphery'. In this first installment, Cengizhan Benice leaves behind fast-paced consumerist city life to practice 'natural farming' in Kartal Aydos, his childhood retreat."
+      },
+      "youtube": "https://www.youtube.com/watch?v=jm7JW5vyFLQ&t=2s",
+      "thumbnail": "assets/covers/topraga-donus-aydos.png"
+    },
+    {
+      "id": "slapp-01-sedat-cezayirlioglu",
+      "title": {
+        "TR": "SLAPP #1 | Sedat Cezayirlioğlu",
+        "EN": "SLAPP #1 | Sedat Cezayirlioğlu"
+      },
+      "description": {
+        "TR": "İliçli Sedat Cezayirlioğlu, yaklaşık yedi yıldır Çöpler Altın Madeni'nin yol açtığı çevresel tahribata karşı aktif bir mücadele yürütüyor. Şirket tarafından açılan davalardan suç duyurularına kadar uzanan ve kendisine yönelik uygulanan yargısal tacizi konuşmak üzere, 22 Temmuz 2022 tarihinde Erzincan'da Sedat Cezayirlioğlu ile bir araya geldik.",
+        "EN": "Sedat Cezayirlioğlu from İliç has actively fought environmental destruction caused by the Çöpler Gold Mine for nearly seven years. We met with Sedat Cezayirlioğlu in Erzincan on July 22, 2022, to discuss judicial harassment ranging from corporate lawsuits to criminal complaints targeting his activism."
+      },
+      "youtube": "https://www.youtube.com/watch?v=4b99hVhK-q0&t=4s",
+      "thumbnail": "assets/covers/slapp-01-sedat-cezayirlioglu.png"
+    },
+    {
+      "id": "slapp-02-recai-cakir",
+      "title": {
+        "TR": "SLAPP #2 | Recai Çakır",
+        "EN": "SLAPP #2 | Recai Çakır"
+      },
+      "description": {
+        "TR": "Recai Çakır, 2010 yılından beri Amasra’da termik santral yapılmasına karşı mücadele veren bir hak savunucusu. Hattat Holding’in kurmaya çalıştığı termik santrale karşı mücadele yürüten Bartın Platformu’nun eş sözcüsü ve 2019’dan bu yana Amasra Belediye Başkanı. Çakır, şirketin hak savunucularını yıldırmak amacıyla stratejik olarak açtığı bir SLAPP davasıyla karşı karşıya.",
+        "EN": "Recai Çakır is a rights defender who has resisted coal-fired power plant construction in Amasra since 2010. Co-spokesperson for the Bartın Platform opposing Hattat Holding's power plant project and Mayor of Amasra since 2019, Çakır faces a Strategic Lawsuit Against Public Participation (SLAPP) filed by the corporation to intimidate defenders."
+      },
+      "youtube": "https://www.youtube.com/watch?v=zdSeijlr82E&t=7s",
+      "thumbnail": "assets/covers/slapp-02-recai-cakir.png"
+    },
+    {
+      "id": "slapp-03-erdogan-atmis",
+      "title": {
+        "TR": "SLAPP #3 | Erdoğan Atmış",
+        "EN": "SLAPP #3 | Erdoğan Atmış"
+      },
+      "description": {
+        "TR": "Erdoğan Atmış, 2010 yılından bu yana Bartın Platformu’yla birlikte Amasra’da termik santrale karşı mücadele veren hak savunucularından biri. Atmış’ın Bartın Üniversitesi’nde öğretim üyesi olarak çalıştığı dönemde termik santral projesinin sahibi Hattat Holding, Atmış hakkında suç duyurusunda bulundu ve üniversitedeki görevinden alınması için YÖK’e başvurdu.",
+        "EN": "Erdoğan Atmış is a rights defender who has campaigned with the Bartın Platform against the Amasra coal-fired power plant since 2010. While Atmış was a faculty member at Bartın University, Hattat Holding filed criminal complaints against him and petitioned the Council of Higher Education (YÖK) for his dismissal."
+      },
+      "youtube": "https://www.youtube.com/watch?v=q7ETz3gvldM&t=16s",
+      "thumbnail": "none"
     }
   ]
 }
