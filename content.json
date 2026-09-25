@@ -21,7 +21,7 @@
         "id": "photo",
         "label": {
           "TR": "Fotoğraf",
-          "EN": "Photograph"
+          "EN": "Photography"
         },
         "tabContent": "photo",
         "enabled": true
