@@ -105,9 +105,10 @@ html, body {
 }
 
 .header-brand {
-  font-size: 0.9rem;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: clamp(1.1rem, 4.5vw, 1.5rem);
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.34em;
   color: var(--fg-color);
   text-decoration: none;
   text-transform: uppercase;
@@ -118,12 +119,6 @@ html, body {
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
-}
-
-@media (min-width: 375px) {
-  .header-brand {
-    font-size: 0.95rem;
-  }
 }
 
 .header-controls {
@@ -583,3 +578,188 @@ main {
     animation: none !important;
   }
 }
+
+
+
+
+.media-controls-container.mac.inline:not(.audio) {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+/* Volume slider */
+
+.media-controls.mac.inline:not(.audio) .volume-slider-container {
+    position: absolute;
+    top: var(--inline-controls-inside-margin);
+    right: calc(var(--inline-controls-inside-margin) * 1);
+    width: 196px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 8px;
+    box-sizing: border-box;
+    border-radius: var(--inline-controls-border-radius);
+    transform: translateY(calc(var(--inline-controls-inside-margin) + 2));
+}
+
+.media-controls.mac.inline:not(.audio):not(.uses-ltr-user-interface-layout-direction) .volume-slider-container {
+    left: calc(var(--inline-controls-inside-margin) * 1);
+    right: auto;
+    flex-direction: row-reverse;
+}
+
+.media-controls.mac.inline:not(.audio) .volume-slider-container > .background-tint {
+    top: 0;
+    left: var(--inline-controls-inside-margin);
+    right: 0;
+    bottom: 0;
+    width: auto;
+}
+
+.media-controls.mac.inline:focus-within:not(.audio) .volume-slider-container, .media-controls.mac.inline:not(.audio).show-controls .volume-slider-container {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+}
+
+.media-controls.mac.inline:not(.audio) .volume-slider-container > .background-tint > div {
+    border-radius: var(--inline-controls-border-radius);
+    overflow: hidden;
+}
+
+.media-controls.mac.inline:not(.audio) .volume-slider-container > .slider {
+    width: 135px;
+}
+
+.media-controls.mac.inline:not(.audio):not(.uses-ltr-user-interface-layout-direction) .volume-slider-container > .slider {
+    transform: scaleX(-1);
+}
+
+.media-controls.mac.inline:not(.audio) .volume-slider-container button[class * ="mute"], .media-controls.mac.inline:not(.audio) .volume-slider-container .button.mute {
+    position: relative !important;
+    transform: scale(0.8);
+    margin-left: 2px
+}
+
+.media-controls.mac.inline:not(.audio):not(.uses-ltr-user-interface-layout-direction) .volume-slider-container button[class * ="mute"], .media-controls.mac.inline:not(.audio):not(.uses-ltr-user-interface-layout-direction) .volume-slider-container .button.mute {
+    margin-left: 0;
+}
+
+:host(video.media-document.audio) .media-controls.mac.inline, .media-controls.mac.inline:not(.audio) * {
+    --inline-controls-bar-height: 46px;
+}
+
+.media-controls.mac.inline:not(.audio) .controls-bar.bottom, .media-controls.mac.inline:not(.audio) .controls-bar.top-left {
+    border-radius: var(--inline-controls-border-radius);
+}
+/* Hide top-right controls bar to prevent overlapping volume slider */
+
+.media-controls.mac.inline:not(.audio) .controls-bar.top-right {
+    display: none !important;
+}
+
+.media-controls.mac.inline:not(.audio) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    position: relative;
+}
+
+.media-controls-container.mac.inline:not(.audio) > .media-controls.mac.inline {
+    position: relative;
+}
+
+.media-controls.mac.inline:not(.audio) .controls-bar.bottom {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 750px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    padding-inline: var(--inline-controls-inside-margin);
+    margin-bottom: var(--inline-controls-inside-margin);
+}
+
+.media-controls.mac.inline:not(.audio) > .controls-bar.bottom > .buttons-container.left, .media-controls.mac.inline:not(.audio) > .controls-bar.bottom > .time-control, .media-controls.mac.inline:not(.audio) > .controls-bar.bottom > .buttons-container.right {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.media-controls.mac.inline:not(.audio) > .controls-bar.bottom > .buttons-container.left {
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    min-width: fit-content;
+}
+
+.media-controls.mac.inline:not(.audio) > .controls-bar.bottom > .time-control {
+    left: auto !important;
+    max-width: 540px;
+}
+
+.media-controls.mac.inline:not(.audio) > .controls-bar.bottom > .buttons-container.right {
+    flex: 0 0 auto;
+    justify-content: flex-end;
+    min-width: fit-content;
+}
+
+.media-controls.mac.inline:not(.audio) .controls-bar.bottom .time-control .slider, .media-controls.mac.inline:not(.audio) .controls-bar.bottom .time-control .scrubber {
+    display: flex;
+    max-width: 452px;
+    min-width: 0px;
+    position: relative;
+}
+
+.media-controls.mac.inline:not(.audio) .controls-bar.bottom .background-tint, .media-controls.mac.inline:not(.audio) .controls-bar.top-left .background-tint {
+    border-radius: var(--inline-controls-border-radius);
+    overflow: hidden;
+}
+
+.media-controls.mac.inline:not(.audio) .slider.default > .appearance {
+    top: 50%;
+    transform: translateY(-50%);
+    height: 7.5px;
+}
+
+.media-controls.mac.inline:not(.audio) .slider.default > .appearance > .fill > .primary {
+    left: 0;
+    background-color: white;
+}
+
+.media-controls.mac.inline:not(.audio) .slider.default.allows-relative-scrubbing > .appearance > .fill > .primary {
+    background-color: white;
+}
+
+.slider.default > .appearance > .fill > .knob.pill, .media-controls.mac.inline:not(.audio) .volume-slider-container .slider.default > .appearance > .fill > .knob, .media-controls.mac.inline:not(.audio) .time-control .slider.default > .appearance > .fill > .knob {
+    top: -5px;
+    width: 21px;
+    height: 17px;
+    border-radius: 8.5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin: -2px;
+}
+
+.media-controls.mac.inline.narrowviewer:not(.audio) .controls-bar.bottom {
+    padding-inline: 8px;
+    max-width: 100%;
+}
+
+.media-controls.mac.inline.narrowviewer:not(.audio) .volume-slider-container button[class*="mute"], .media-controls.mac.inline.narrowviewer:not(.audio) .volume-slider-container .button.mute {
+    transform: scale(0.8) scaleX(-1);
+}
+
+.media-controls.mac.inline.narrowviewer:not(.audio) .controls-bar.top-left {
+    left: var(--inline-controls-inside-margin);
+}
+
+@supports (-apple-visual-effect: -apple-system-glass-material) {    .media-controls.mac * {        --primary-glyph-color: white;        --secondary-glyph-color: white;    }    .media-controls.mac:not(.audio) .background-tint > .blur {        display: none;    }    .media-controls.inline.mac:not(.audio, .narrowviewer) .background-tint > .blur {        display: revert;        background-color: rgba(0, 0, 0, 0.3);        -webkit-backdrop-filter: unset;    }    .media-controls.mac.inline.audio .background-tint > .blur {        background-color: rgba(0, 0, 0, 0.4);        -webkit-backdrop-filter: unset;    }    .media-controls.mac .background-tint > .tint {        background-color: unset;        color-scheme: dark;        mix-blend-mode: unset;    }    .media-controls.mac.inline .background-tint > .tint {        -apple-visual-effect: -apple-system-glass-material-media-controls-subdued;    }    .media-controls.mac.fullscreen .background-tint > .tint {        -apple-visual-effect: -apple-system-glass-material-media-controls;    }}
+@supports (-apple-visual-effect: -apple-system-glass-material) {    .media-controls.mac * {        --primary-glyph-color: white;        --secondary-glyph-color: white;    }    .media-controls.mac:not(.audio) .background-tint > .blur {        display: none;    }    .media-controls.inline.mac:not(.audio, .narrowviewer) .background-tint > .blur {        display: revert;        background-color: rgba(0, 0, 0, 0.3);        -webkit-backdrop-filter: unset;    }    .media-controls.mac.inline.audio .background-tint > .blur {        background-color: rgba(0, 0, 0, 0.4);        -webkit-backdrop-filter: unset;    }    .media-controls.mac .background-tint > .tint {        background-color: unset;        color-scheme: dark;        mix-blend-mode: unset;    }    .media-controls.mac.inline .background-tint > .tint {        -apple-visual-effect: -apple-system-glass-material-media-controls-subdued;    }    .media-controls.mac.fullscreen .background-tint > .tint {        -apple-visual-effect: -apple-system-glass-material-media-controls;    }}

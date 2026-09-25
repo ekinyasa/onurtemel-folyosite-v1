@@ -18,101 +18,112 @@
       "TR": "Videograf Onur Temel'in portfolyosu. Gözlemci belgesel, performans kaydı, kent araştırmaları ve saha dokümantasyonları.",
       "EN": "Portfolio of videographer Onur Temel. Observational documentary, performance capture, urban research, and field documentation."
     },
-    "email": "contact@onurtemel.com.tr",
-    "location": "Istanbul / Berlin"
+    "email": "temelonur83@gmail.com"
   },
   "bio": {
     "short": {
-      "TR": "Çağdaş sanat dokümantasyonu, uzun metrajlı performans kaydı ve gözlemci belgesel alanında uzmanlaşmış videograf ve kamera operatörü.",
-      "EN": "Videographer and camera operator specializing in contemporary art documentation, long-form performance recording, and observational documentary."
+      "TR": "Onur Temel, video haber üretimi üzerine yoğunlaşan bir belgesel sinemacı olarak çalışıyor. Video editörlüğü, fotoğrafçılık, canlı yayın ve podcast prodüktörlüğü alanlarında uzmanlaşmış olup kurgu üzerine yoğun bir deneyime sahip.",
+      "EN": "Onur Temel works as a documentary filmmaker with a focus on video journalism. He specializes in video editing, photography, live broadcasting, and podcast production, with extensive experience in editing."
     },
     "long": {
-      "TR": "Onur Temel, çağdaş sanat kurumları, sergi katalogları ve bağımsız film yapımları genelinde çalışmaktadır. Pratiği; sessiz mekânsal gözlem, doğal akustik dinamikler ve disiplinlerarası performansların hassas görsel dokümantasyonuna odaklanır.",
-      "EN": "Onur Temel works across contemporary art institutions, exhibition catalogues, and independent film productions. His practice focuses on quiet spatial observation, natural acoustic dynamics, and precise visual documentation of multi-disciplinary performances."
+      "TR": "Ulusal ve uluslararası film festivallerinde gösterim alan yapımlarda yer aldı, çeşitli festival organizasyonlarında koordinatörlük üstlendi. Ayrıca sivil toplum alanında birden fazla kurumun sözlü tarih görüşmelerine dayanan hafıza çalışmalarına katkıda bulundu.",
+      "EN": "His work has been screened at national and international film festivals, and he has coordinated various festival organizations. He has also contributed to memory projects in the civil society field based on oral history interviews conducted by several organizations."
     },
     "sections": [
       {
         "title": {
-          "TR": "Seçilmiş Deneyim",
-          "EN": "Selected Experience"
+          "TR": "İşbirliklerinden Seçilmiş Örnekler",
+          "EN": "Selection of Collaborations"
         },
         "items": [
-          {
-            "TR": "2023–Günümüz — Baş Kamera Operatörü, Hareketli Görüntü Arşivi Projesi",
-            "EN": "2023–Present — Lead Camera Operator, Moving Image Archive Project"
-          },
-          {
-            "TR": "2020–2023 — Videograf & Editör, Çağdaş Sanat Dokümantasyon Birimi",
-            "EN": "2020–2023 — Videographer & Editor, Contemporary Art Documentation Unit"
-          },
-          {
-            "TR": "2018–2020 — Görüntü Yönetmeni Yardımcısı, Gözlemci Sinema Atölyesi",
-            "EN": "2018–2020 — Assistant Cinematographer, Observational Cinema Workshop"
-          }
-        ]
-      },
-      {
-        "title": {
-          "TR": "Seçilmiş Gösterimler & Sergiler",
-          "EN": "Selected Screenings & Exhibitions"
-        },
-        "items": [
-          {
-            "TR": "2024 — Mekânsal Akustik & Hareket (Gösterim), Bienal Medya Salonu",
-            "EN": "2024 — Spatial Acoustics & Movement (Screening), Biennial Media Hall"
-          },
-          {
-            "TR": "2023 — Kent Topografyaları: Hareketli Görüntü Taraması, Kunsthalle Proje Odası",
-            "EN": "2023 — Urban Topographies: Moving Image Survey, Kunsthalle Project Room"
-          },
-          {
-            "TR": "2022 — Arşivsel Hareketler, Çağdaş Sanat Müzesi Gösterim Programı",
-            "EN": "2022 — Archival Motions, Museum of Contemporary Art Screening Program"
-          },
-          {
-            "TR": "2021 — Düşük Işıkta Oda Performansları, Sinema Forumu",
-            "EN": "2021 — Chamber Performances in Low Light, Cinema Forum"
-          }
-        ]
-      },
-      {
-        "title": {
-          "TR": "Seçilmiş Danışanlar & İşbirlikleri",
-          "EN": "Selected Clients & Collaborators"
-        },
-        "items": [
-          {
-            "TR": "Mekânsal Adalet Derneği (MAD)",
-            "EN": "Center for Spatial Justice (MAD)"
-          },
           {
             "TR": "BAYETAV",
             "EN": "BAYETAV"
           },
           {
-            "TR": "Bartın Platformu",
-            "EN": "Bartın Platform"
+            "TR": "Community Jameel",
+            "EN": "Community Jameel"
           },
           {
-            "TR": "Avdan Platformu",
-            "EN": "Avdan Platform"
+            "TR": "Mekanda Adalet Derneği",
+            "EN": "Center for Spatial Justice"
+          },
+          {
+            "TR": "Postane",
+            "EN": ""
+          },
+          {
+            "TR": "Hafıza Merkezi",
+            "EN": "Hafıza Merkezi"
+          },
+          {
+            "TR": "Dört Ayaklı Şehir",
+            "EN": "Dört Ayaklı Şehir"
+          },
+          {
+            "TR": "Milli Reasürans Sanat Galerisi",
+            "EN": "Milli Reasürans Sanat Galerisi"
+          },
+          {
+            "TR": "Somo Amsterdam",
+            "EN": "Somo Amsterdam"
           }
+        ]
+      },
+      {
+        "title": {
+          "TR": "Gösterimler & Sergiler",
+          "EN": "Screenings & Exhibitions"
+        },
+        "items": [
+          {
+
+    "TR": "2010 — Direnişin Belgesi, 22′33″, Belgesel • 5. Uluslararası İşçi Filmleri Festivali, TEKEL’den Tanıklıklar, Gösterim Seçkisi",
+
+    "EN": "2010 — Document of Disobedience, 22′33″, Documentary • 5th International Labor Film Festival, TEKEL Testimonies, Screening Selection"
+
+  },
+
+  {
+
+  "TR": "2010 — Direnişin Belgesi, 22’33”, Belgesel, Yönetmen • 5. Uluslararası İşçi Filmleri Festivali, TEKEL’den Tanıklıklar",
+
+  "EN": "2010 — Document of Disobedience, 22’33”, Documentary, Director • 5th International Labor Film Festival, TEKEL Testimonies"
+
+},
+
+{
+
+  "TR": "2014 — Anonim, 16’13”, Film, Yürütücü Yapımcı • 1. Potsdam Uluslararası Film Festivali, Kısa Film Yarışması",
+
+  "EN": "2014 — Anonymous, 16’13”, Film, Executive Producer • 1st Potsdam International Film Festival, Short Film Competition"
+
+},
+
+{
+
+  "TR": "2021 — Kanal İstanbul: Bir Distopya, Video Enstalasyon, Görüntü • Dün Bugün İstanbul, Sakıp Sabancı Müzesi",
+
+  "EN": "2021 — Kanal İstanbul: Bir Distopya, Video Installation, Cinematography • Dün Bugün İstanbul, Sakıp Sabancı Museum"
+
+},
+
+{
+
+  "TR": "2023 — Kendisinden doğup kendisine dönen, Video Enstalasyon • BAYETAV Sanat",
+
+  "EN": "2023 — Kendisinden doğup kendisine dönen, Video Installation • BAYETAV Sanat"
+
+}
+         
         ]
       }
     ]
   },
   "links": [
     {
-      "label": "Vimeo",
-      "url": "https://vimeo.com"
-    },
-    {
-      "label": "Instagram",
-      "url": "https://instagram.com"
-    },
-    {
-      "label": "E-posta",
-      "url": "mailto:contact@onurtemel.com.tr"
+      "label": "Linkedin",
+      "url": "https://www.linkedin.com/in/onur-temel-85770860"
     }
   ],
   "works": [
@@ -335,7 +346,7 @@
         "EN": "Erdoğan Atmış is a rights defender who has campaigned with the Bartın Platform against the Amasra coal-fired power plant since 2010. While Atmış was a faculty member at Bartın University, Hattat Holding filed criminal complaints against him and petitioned the Council of Higher Education (YÖK) for his dismissal."
       },
       "youtube": "https://www.youtube.com/watch?v=q7ETz3gvldM&t=16s",
-      "thumbnail": "none"
+      "thumbnail": "assets/covers/slapp-02-recai-cakir.png"
     }
   ]
 }

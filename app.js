@@ -332,10 +332,22 @@
       let mediaHTML = '';
 
       // Minimal white play triangle SVG (No black container box)
+      const playGlyphHTML2 = `
+        <span class="play-indicator" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><polygon points="6,4 18,12 6,20"></polygon></svg>
+        </span>
+      `;
       const playGlyphHTML = `
         <span class="play-indicator" aria-hidden="true">
           <svg viewBox="0 0 24 24"><polygon points="6,4 18,12 6,20"></polygon></svg>
         </span>
+        <button class="play-pause center paused" aria-label="Play" id="Play" style="left: 0px; width: 11px; height: 13px;">
+          <div class="background-tint">
+            <div class="blur"></div>
+            <div class="tint"></div>
+          </div>
+          <picture style="mask-image: url(&quot;blob:https://deretepe.org/cbb5526b-b90e-438e-80d3-4aa0bd0afa64&quot;); width: 11px; height: 13px;"></picture>
+        </button>
       `;
 
       if (isBlackCover) {
@@ -525,17 +537,9 @@
         </div>
 
         <div>
-          <h2 class="info-section-title">${currentLang === 'TR' ? 'İletişim & Konum' : 'Contact & Location'}</h2>
+          <h2 class="info-section-title">${currentLang === 'TR' ? 'İletişim' : 'Contact'}</h2>
           ${email ? `<p style="margin:0 0 0.25rem 0;"><a href="mailto:${escapeAttr(email)}" class="editorial-link">${escapeHTML(email)}</a></p>` : ''}
-          ${location ? `<p style="margin:0; font-size:0.85rem; color:var(--fg-muted);">${escapeHTML(location)}</p>` : ''}
-        </div>
-
-        ${
-          Array.isArray(links) && links.length > 0
-            ? `<div>
-                <h2 class="info-section-title">${currentLang === 'TR' ? 'Dış Bağlantılar' : 'External Links'}</h2>
-                <div class="links-list">
-                  ${links
+         ${links
                     .map(
                       link =>
                         `<a href="${escapeAttr(link.url)}" target="_blank" rel="noopener noreferrer" class="editorial-link">
@@ -543,8 +547,11 @@
                         </a>`
                     )
                     .join('')}
-                </div>
-              </div>`
+        </div>
+
+        ${
+          Array.isArray(links) && links.length > 0
+            ? ``
             : ''
         }
       </div>
