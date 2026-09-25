@@ -32,7 +32,41 @@
   // --- 1. INITIALIZATION ---
   function init() {
     setupEventListeners();
+    initSmartHeader();
     loadContent();
+  }
+
+  // --- SMART HEADER SCROLL CONTROLLER ---
+  let lastScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+
+  function initSmartHeader() {
+    const siteHeader = document.querySelector('.site-header');
+    if (!siteHeader) return;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const deltaY = currentScrollY - lastScrollY;
+
+      // Keep header visible if keyboard focus is inside header controls
+      if (siteHeader.contains(document.activeElement)) {
+        siteHeader.classList.remove('header-hidden');
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      if (currentScrollY <= 20) {
+        // At or near page top -> always show header
+        siteHeader.classList.remove('header-hidden');
+      } else if (deltaY > 5) {
+        // Meaningful downward scroll -> hide header
+        siteHeader.classList.add('header-hidden');
+      } else if (deltaY < -4) {
+        // Immediate upward scroll -> reveal header
+        siteHeader.classList.remove('header-hidden');
+      }
+
+      lastScrollY = currentScrollY;
+    }, { passive: true });
   }
 
   // --- YOUTUBE URL & START TIME PARSER ---
@@ -294,7 +328,32 @@
     // 4. Render Views
     renderWorksGrid(siteData.works || []);
     renderInfoView(siteData.bio || {}, siteData.links || [], siteData.site || {});
+    renderFooter(siteData);
     updateViewSwitchBtnState();
+  }
+
+  // --- CMS-DRIVEN MINIMAL FOOTER ---
+  function renderFooter(data) {
+    const footerEl = document.getElementById('site-footer');
+    if (!footerEl || !data) return;
+
+    const footerData = data.footer || {};
+    const owner = footerData.owner || 'Onur Temel';
+    const copyrightText = t(footerData.copyright, currentLang) || (currentLang === 'TR' ? 'Tüm hakları saklıdır.' : 'All rights reserved.');
+    const email = footerData.email || (data.site && data.site.email) || '';
+    const currentYear = new Date().getFullYear();
+
+    let emailHTML = '';
+    if (email) {
+      emailHTML = `<a href="mailto:${escapeAttr(email)}" class="footer-email-link">${escapeHTML(email)}</a>`;
+    }
+
+    footerEl.innerHTML = `
+      <div class="footer-content">
+        <span>© ${currentYear} ${escapeHTML(owner)}. ${escapeHTML(copyrightText)}</span>
+        ${emailHTML}
+      </div>
+    `;
   }
 
   // Render Works (Primary View Grid)
@@ -331,23 +390,13 @@
 
       let mediaHTML = '';
 
-      // Minimal white play triangle SVG (No black container box)
-      const playGlyphHTML2 = `
-        <span class="play-indicator" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><polygon points="6,4 18,12 6,20"></polygon></svg>
-        </span>
-      `;
+      // Centered Circular Translucent Glass Play Button
       const playGlyphHTML = `
-        <span class="play-indicator" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><polygon points="6,4 18,12 6,20"></polygon></svg>
+        <span class="glass-play-btn" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24">
+            <polygon points="9,6 19,12 9,18"></polygon>
+          </svg>
         </span>
-        <button class="play-pause center paused" aria-label="Play" id="Play" style="left: 0px; width: 11px; height: 13px;">
-          <div class="background-tint">
-            <div class="blur"></div>
-            <div class="tint"></div>
-          </div>
-          <picture style="mask-image: url(&quot;blob:https://deretepe.org/cbb5526b-b90e-438e-80d3-4aa0bd0afa64&quot;); width: 11px; height: 13px;"></picture>
-        </button>
       `;
 
       if (isBlackCover) {

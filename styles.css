@@ -90,7 +90,7 @@ html, body {
   }
 }
 
-/* Persistent Header */
+/* Persistent / Smart Header */
 .site-header {
   position: sticky;
   top: 0;
@@ -101,7 +101,13 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease;
+  will-change: transform;
+}
+
+.site-header.header-hidden {
+  transform: translateY(-100%);
+  pointer-events: none;
 }
 
 .header-brand {
@@ -278,6 +284,7 @@ main {
   background-color: var(--bg-media);
   position: relative;
   overflow: hidden;
+  container-type: inline-size;
 }
 
 /* Black Cover State for Work 14 (SLAPP #3) */
@@ -314,34 +321,62 @@ main {
   opacity: 0.9;
 }
 
-/* Minimal White Triangular Play Glyph (No black box container) */
-.play-indicator {
+/* Centered Circular Apple-Style Translucent Glass Play Button */
+.glass-play-btn {
   position: absolute;
-  bottom: 12px;
-  right: 12px;
-  width: 11px;
-  height: 11px;
-  color: #ffffff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10cqw;
+  height: 10cqw;
+  min-width: 28px;
+  min-height: 28px;
+  max-width: 64px;
+  max-height: 64px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.65));
-  opacity: 0.85;
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  background-color: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  z-index: 2;
 }
 
-.play-indicator svg {
-  width: 100%;
-  height: 100%;
-  fill: #ffffff;
+html[data-theme="dark"] .glass-play-btn,
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .glass-play-btn {
+    background-color: rgba(30, 30, 30, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  }
+}
+
+html[data-theme="light"] .glass-play-btn {
+  background-color: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #111111;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.glass-play-btn svg {
+  width: 45%;
+  height: 45%;
+  fill: currentColor;
+  margin-left: 2px;
   display: block;
 }
 
-.work-media-btn:hover .play-indicator,
-.work-media-btn:focus-visible .play-indicator {
-  opacity: 1;
-  transform: scale(1.15);
+.work-media-btn:hover .glass-play-btn,
+.work-media-btn:focus-visible .glass-play-btn {
+  transform: translate(-50%, -50%) scale(1.08);
 }
 
 /* FULLSCREEN VIDEO OVERLAY */
@@ -577,189 +612,33 @@ main {
   ::view-transition-new(*) {
     animation: none !important;
   }
+
+/* Minimal CMS-Driven Footer */
+.site-footer {
+  margin-top: 4rem;
+  padding-bottom: 3.5rem;
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+  text-align: center;
 }
 
-
-
-
-.media-controls-container.mac.inline:not(.audio) {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
-/* Volume slider */
-
-.media-controls.mac.inline:not(.audio) .volume-slider-container {
-    position: absolute;
-    top: var(--inline-controls-inside-margin);
-    right: calc(var(--inline-controls-inside-margin) * 1);
-    width: 196px;
-    height: 46px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-inline: 8px;
-    box-sizing: border-box;
-    border-radius: var(--inline-controls-border-radius);
-    transform: translateY(calc(var(--inline-controls-inside-margin) + 2));
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 0.5rem;
+  line-height: 1.5;
 }
 
-.media-controls.mac.inline:not(.audio):not(.uses-ltr-user-interface-layout-direction) .volume-slider-container {
-    left: calc(var(--inline-controls-inside-margin) * 1);
-    right: auto;
-    flex-direction: row-reverse;
+.footer-email-link {
+  color: var(--fg-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s ease;
 }
 
-.media-controls.mac.inline:not(.audio) .volume-slider-container > .background-tint {
-    top: 0;
-    left: var(--inline-controls-inside-margin);
-    right: 0;
-    bottom: 0;
-    width: auto;
+.footer-email-link:hover,
+.footer-email-link:focus-visible {
+  color: var(--fg-color);
 }
-
-.media-controls.mac.inline:focus-within:not(.audio) .volume-slider-container, .media-controls.mac.inline:not(.audio).show-controls .volume-slider-container {
-    opacity: 1;
-    pointer-events: auto;
-    transform: none;
-}
-
-.media-controls.mac.inline:not(.audio) .volume-slider-container > .background-tint > div {
-    border-radius: var(--inline-controls-border-radius);
-    overflow: hidden;
-}
-
-.media-controls.mac.inline:not(.audio) .volume-slider-container > .slider {
-    width: 135px;
-}
-
-.media-controls.mac.inline:not(.audio):not(.uses-ltr-user-interface-layout-direction) .volume-slider-container > .slider {
-    transform: scaleX(-1);
-}
-
-.media-controls.mac.inline:not(.audio) .volume-slider-container button[class * ="mute"], .media-controls.mac.inline:not(.audio) .volume-slider-container .button.mute {
-    position: relative !important;
-    transform: scale(0.8);
-    margin-left: 2px
-}
-
-.media-controls.mac.inline:not(.audio):not(.uses-ltr-user-interface-layout-direction) .volume-slider-container button[class * ="mute"], .media-controls.mac.inline:not(.audio):not(.uses-ltr-user-interface-layout-direction) .volume-slider-container .button.mute {
-    margin-left: 0;
-}
-
-:host(video.media-document.audio) .media-controls.mac.inline, .media-controls.mac.inline:not(.audio) * {
-    --inline-controls-bar-height: 46px;
-}
-
-.media-controls.mac.inline:not(.audio) .controls-bar.bottom, .media-controls.mac.inline:not(.audio) .controls-bar.top-left {
-    border-radius: var(--inline-controls-border-radius);
-}
-/* Hide top-right controls bar to prevent overlapping volume slider */
-
-.media-controls.mac.inline:not(.audio) .controls-bar.top-right {
-    display: none !important;
-}
-
-.media-controls.mac.inline:not(.audio) {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    height: 100%;
-    position: relative;
-}
-
-.media-controls-container.mac.inline:not(.audio) > .media-controls.mac.inline {
-    position: relative;
-}
-
-.media-controls.mac.inline:not(.audio) .controls-bar.bottom {
-    position: relative !important;
-    bottom: auto !important;
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 750px;
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-    padding-inline: var(--inline-controls-inside-margin);
-    margin-bottom: var(--inline-controls-inside-margin);
-}
-
-.media-controls.mac.inline:not(.audio) > .controls-bar.bottom > .buttons-container.left, .media-controls.mac.inline:not(.audio) > .controls-bar.bottom > .time-control, .media-controls.mac.inline:not(.audio) > .controls-bar.bottom > .buttons-container.right {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.media-controls.mac.inline:not(.audio) > .controls-bar.bottom > .buttons-container.left {
-    flex: 0 0 auto;
-    justify-content: flex-start;
-    min-width: fit-content;
-}
-
-.media-controls.mac.inline:not(.audio) > .controls-bar.bottom > .time-control {
-    left: auto !important;
-    max-width: 540px;
-}
-
-.media-controls.mac.inline:not(.audio) > .controls-bar.bottom > .buttons-container.right {
-    flex: 0 0 auto;
-    justify-content: flex-end;
-    min-width: fit-content;
-}
-
-.media-controls.mac.inline:not(.audio) .controls-bar.bottom .time-control .slider, .media-controls.mac.inline:not(.audio) .controls-bar.bottom .time-control .scrubber {
-    display: flex;
-    max-width: 452px;
-    min-width: 0px;
-    position: relative;
-}
-
-.media-controls.mac.inline:not(.audio) .controls-bar.bottom .background-tint, .media-controls.mac.inline:not(.audio) .controls-bar.top-left .background-tint {
-    border-radius: var(--inline-controls-border-radius);
-    overflow: hidden;
-}
-
-.media-controls.mac.inline:not(.audio) .slider.default > .appearance {
-    top: 50%;
-    transform: translateY(-50%);
-    height: 7.5px;
-}
-
-.media-controls.mac.inline:not(.audio) .slider.default > .appearance > .fill > .primary {
-    left: 0;
-    background-color: white;
-}
-
-.media-controls.mac.inline:not(.audio) .slider.default.allows-relative-scrubbing > .appearance > .fill > .primary {
-    background-color: white;
-}
-
-.slider.default > .appearance > .fill > .knob.pill, .media-controls.mac.inline:not(.audio) .volume-slider-container .slider.default > .appearance > .fill > .knob, .media-controls.mac.inline:not(.audio) .time-control .slider.default > .appearance > .fill > .knob {
-    top: -5px;
-    width: 21px;
-    height: 17px;
-    border-radius: 8.5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    margin: -2px;
-}
-
-.media-controls.mac.inline.narrowviewer:not(.audio) .controls-bar.bottom {
-    padding-inline: 8px;
-    max-width: 100%;
-}
-
-.media-controls.mac.inline.narrowviewer:not(.audio) .volume-slider-container button[class*="mute"], .media-controls.mac.inline.narrowviewer:not(.audio) .volume-slider-container .button.mute {
-    transform: scale(0.8) scaleX(-1);
-}
-
-.media-controls.mac.inline.narrowviewer:not(.audio) .controls-bar.top-left {
-    left: var(--inline-controls-inside-margin);
-}
-
-@supports (-apple-visual-effect: -apple-system-glass-material) {    .media-controls.mac * {        --primary-glyph-color: white;        --secondary-glyph-color: white;    }    .media-controls.mac:not(.audio) .background-tint > .blur {        display: none;    }    .media-controls.inline.mac:not(.audio, .narrowviewer) .background-tint > .blur {        display: revert;        background-color: rgba(0, 0, 0, 0.3);        -webkit-backdrop-filter: unset;    }    .media-controls.mac.inline.audio .background-tint > .blur {        background-color: rgba(0, 0, 0, 0.4);        -webkit-backdrop-filter: unset;    }    .media-controls.mac .background-tint > .tint {        background-color: unset;        color-scheme: dark;        mix-blend-mode: unset;    }    .media-controls.mac.inline .background-tint > .tint {        -apple-visual-effect: -apple-system-glass-material-media-controls-subdued;    }    .media-controls.mac.fullscreen .background-tint > .tint {        -apple-visual-effect: -apple-system-glass-material-media-controls;    }}
-@supports (-apple-visual-effect: -apple-system-glass-material) {    .media-controls.mac * {        --primary-glyph-color: white;        --secondary-glyph-color: white;    }    .media-controls.mac:not(.audio) .background-tint > .blur {        display: none;    }    .media-controls.inline.mac:not(.audio, .narrowviewer) .background-tint > .blur {        display: revert;        background-color: rgba(0, 0, 0, 0.3);        -webkit-backdrop-filter: unset;    }    .media-controls.mac.inline.audio .background-tint > .blur {        background-color: rgba(0, 0, 0, 0.4);        -webkit-backdrop-filter: unset;    }    .media-controls.mac .background-tint > .tint {        background-color: unset;        color-scheme: dark;        mix-blend-mode: unset;    }    .media-controls.mac.inline .background-tint > .tint {        -apple-visual-effect: -apple-system-glass-material-media-controls-subdued;    }    .media-controls.mac.fullscreen .background-tint > .tint {        -apple-visual-effect: -apple-system-glass-material-media-controls;    }}
