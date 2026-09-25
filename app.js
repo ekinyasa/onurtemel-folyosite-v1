@@ -18,10 +18,12 @@
   const themeToggleBtn = document.getElementById('theme-toggle');
   const langToggleBtn = document.getElementById('lang-toggle');
   const brandLink = document.getElementById('brand-link');
+  const portfolioTabsNav = document.getElementById('portfolio-tabs-nav');
 
   // Application State
   let siteData = null;
   let currentView = 'work';
+  let activeTab = 'video';
   let currentLang = 'TR';
   let enabledLangs = ['TR', 'EN'];
   let cmsThemeMode = 'otomatik';
@@ -326,10 +328,293 @@
     }
 
     // 4. Render Views
-    renderWorksGrid(siteData.works || []);
+    renderPortfolioTabs();
+    renderActiveTabContent();
     renderInfoView(siteData.bio || {}, siteData.links || [], siteData.site || {});
     renderFooter(siteData);
     updateViewSwitchBtnState();
+  }
+
+  // --- CMS-DRIVEN PORTFOLIO TABS ENGINE ---
+  function getEnabledPortfolioTabs() {
+    if (!siteData) return [];
+    const settings = siteData.siteAyarlari || {};
+    const tabs = settings.portfolioTabs || siteData.portfolioTabs || [
+      { id: 'video', label: { TR: 'Video', EN: 'Video' }, enabled: true },
+      { id: 'photo', label: { TR: 'Fotoğraf', EN: 'Photograph' }, enabled: true },
+      { id: 'podcast', label: { TR: 'Podcast', EN: 'Podcast' }, enabled: true }
+    ];
+    return tabs.filter(t => t.enabled !== false);
+  }
+
+  function renderPortfolioTabs() {
+    if (!portfolioTabsNav) return;
+    portfolioTabsNav.innerHTML = '';
+
+    // Do not render portfolio tabs if Info view is currently active
+    if (currentView === 'info') {
+      portfolioTabsNav.style.display = 'none';
+      return;
+    }
+
+    const enabledTabs = getEnabledPortfolioTabs();
+    if (enabledTabs.length === 0) {
+      portfolioTabsNav.style.display = 'none';
+      return;
+    }
+
+    portfolioTabsNav.style.display = 'flex';
+    const fragment = document.createDocumentFragment();
+
+    enabledTabs.forEach((tab, index) => {
+      const btn = document.createElement('button');
+      btn.className = `portfolio-tab-btn ${tab.id === activeTab ? 'active' : ''}`;
+      btn.dataset.tab = tab.id;
+      btn.textContent = t(tab.label, currentLang) || tab.id;
+      btn.setAttribute('aria-selected', tab.id === activeTab ? 'true' : 'false');
+      btn.setAttribute('role', 'tab');
+
+      btn.addEventListener('click', () => {
+        setActiveTab(tab.id, true);
+      });
+
+      fragment.appendChild(btn);
+    });
+
+    // Render separator '|' after the LAST enabled tab (spacing after matches utility controls)
+    const sep = document.createElement('span');
+    sep.className = 'header-nav-sep';
+    sep.setAttribute('aria-hidden', 'true');
+    sep.textContent = '|';
+    fragment.appendChild(sep);
+
+    portfolioTabsNav.appendChild(fragment);
+  }
+
+  function setActiveTab(tabId, updateHash = true) {
+    const enabledTabs = getEnabledPortfolioTabs();
+    if (!enabledTabs.some(t => t.id === tabId)) {
+      if (enabledTabs.length > 0) {
+        tabId = enabledTabs[0].id;
+      } else {
+        tabId = 'video';
+      }
+    }
+
+    activeTab = tabId;
+
+    if (currentView === 'work' && updateHash) {
+      const targetHash = `#${tabId}`;
+      if (window.location.hash !== targetHash) {
+        history.pushState(null, '', targetHash);
+      }
+    }
+
+    renderPortfolioTabs();
+    renderActiveTabContent();
+  }
+
+  function getItemsForTab(tabId) {
+    if (!siteData) return [];
+    const allItems = [];
+    if (Array.isArray(siteData.works)) allItems.push(...siteData.works);
+    if (Array.isArray(siteData.photos)) allItems.push(...siteData.photos);
+    if (Array.isArray(siteData.podcasts)) allItems.push(...siteData.podcasts);
+
+    return allItems.filter(item => {
+      const itemTab = item.tab || (item.mediaType === 'photo' ? 'photo' : (item.mediaType && item.mediaType.startsWith('spotify') ? 'podcast' : 'video'));
+      return itemTab === tabId;
+    });
+  }
+
+  function renderActiveTabContent() {
+    if (!worksGrid || !siteData) return;
+
+    if (activeTab === 'photo') {
+      renderPhotoGrid();
+    } else if (activeTab === 'podcast') {
+      renderPodcastGrid();
+    } else if (activeTab === 'video') {
+      renderVideoGrid(siteData.works || []);
+    } else {
+      renderGenericTabGrid(activeTab);
+    }
+  }
+
+  // --- PHOTO GRID & NATIVE ASPECT RATIO RENDERER ---
+  function renderPhotoGrid() {
+    worksGrid.className = 'photos-grid';
+    worksGrid.innerHTML = '';
+
+    const photoHeading = document.getElementById('work-heading');
+    if (photoHeading) {
+      photoHeading.textContent = currentLang === 'TR' ? 'Fotoğraf Portfolyosu' : 'Photograph Portfolio';
+    }
+
+    const photos = getItemsForTab('photo');
+    if (photos.length === 0) {
+      worksGrid.innerHTML = `<p class="work-description">${currentLang === 'TR' ? 'Fotoğraf bulunamadı.' : 'No photographs available.'}</p>`;
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+
+    photos.forEach(photo => {
+      const photoId = photo.id || `photo-${Math.random().toString(36).substr(2, 9)}`;
+      const imgSrc = photo.image || '';
+      const altText = t(photo.alt, currentLang) || t(photo.title, currentLang) || (currentLang === 'TR' ? 'Fotoğraf' : 'Photograph');
+
+      const article = document.createElement('article');
+      article.className = 'photo-item';
+      article.id = photoId;
+
+      article.innerHTML = `
+        <button class="photo-btn" data-img="${escapeAttr(imgSrc)}" data-title="${escapeAttr(altText)}" aria-label="${currentLang === 'TR' ? 'Fotoğrafı büyüt' : 'Enlarge photo'}: ${escapeAttr(altText)}">
+          <img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(altText)}" loading="lazy" decoding="async" class="photo-img">
+        </button>
+      `;
+
+      fragment.appendChild(article);
+    });
+
+    worksGrid.appendChild(fragment);
+
+    // Attach Photo Click Listener -> Fullscreen Photo Overlay
+    worksGrid.querySelectorAll('.photo-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const btnEl = e.currentTarget;
+        const imgUrl = btnEl.dataset.img;
+        const titleText = btnEl.dataset.title;
+        openPhotoOverlay(imgUrl, titleText, btnEl);
+      });
+    });
+  }
+
+  function openPhotoOverlay(imgSrc, altText, btnEl) {
+    if (!imgSrc) return;
+    originatingButton = btnEl;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'photo-overlay';
+    overlay.id = 'photo-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', altText || 'Photograph view');
+
+    overlay.innerHTML = `
+      <button class="photo-overlay-close" id="photo-overlay-close" aria-label="${currentLang === 'TR' ? 'Görseli kapat (Esc)' : 'Close photo (Esc)'}">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="photo-overlay-content">
+        <img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(altText)}" class="photo-overlay-img">
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+    activeOverlay = overlay;
+    document.body.style.overflow = 'hidden';
+
+    function closePhoto() {
+      if (overlay && overlay.parentNode) {
+        overlay.parentNode.removeChild(overlay);
+      }
+      activeOverlay = null;
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', handleKeyDown);
+      if (originatingButton) {
+        originatingButton.focus();
+        originatingButton = null;
+      }
+    }
+
+    function handleKeyDown(e) {
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        closePhoto();
+      }
+    }
+
+    const closeBtn = overlay.querySelector('#photo-overlay-close');
+    if (closeBtn) closeBtn.addEventListener('click', closePhoto);
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay || e.target.classList.contains('photo-overlay-content')) {
+        closePhoto();
+      }
+    });
+
+    document.addEventListener('keydown', handleKeyDown);
+    if (closeBtn) closeBtn.focus();
+  }
+
+  // --- PODCAST TAB & SPOTIFY EMBED RENDERER ---
+  function renderPodcastGrid() {
+    worksGrid.className = 'podcasts-grid';
+    worksGrid.innerHTML = '';
+
+    const podcastHeading = document.getElementById('work-heading');
+    if (podcastHeading) {
+      podcastHeading.textContent = currentLang === 'TR' ? 'Podcast Seri & Bölümleri' : 'Podcast Series & Episodes';
+    }
+
+    const podcasts = getItemsForTab('podcast');
+    if (podcasts.length === 0) {
+      worksGrid.innerHTML = `<p class="work-description">${currentLang === 'TR' ? 'Podcast bulunamadı.' : 'No podcasts available.'}</p>`;
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+
+    podcasts.forEach(podcast => {
+      const podcastId = podcast.id || `podcast-${Math.random().toString(36).substr(2, 9)}`;
+      const title = t(podcast.title, currentLang) || 'Podcast';
+      const embedUrl = parseSpotifyUrl(podcast.url);
+
+      const article = document.createElement('article');
+      article.className = 'podcast-item';
+      article.id = podcastId;
+
+      article.innerHTML = `
+        <h3 class="podcast-title">${escapeHTML(title)}</h3>
+        ${embedUrl ? `
+          <iframe class="spotify-iframe" src="${escapeAttr(embedUrl)}" title="${escapeAttr(title)}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" frameborder="0"></iframe>
+        ` : `<div class="work-description">${currentLang === 'TR' ? 'Çalma kaynağı bulunamadı.' : 'No stream source.'}</div>`}
+      `;
+
+      fragment.appendChild(article);
+    });
+
+    worksGrid.appendChild(fragment);
+  }
+
+  function parseSpotifyUrl(url) {
+    if (!url) return '';
+    try {
+      const str = String(url).trim();
+      const parsed = new URL(str);
+      const parts = parsed.pathname.split('/').filter(Boolean);
+      if (parts.length >= 2) {
+        const type = parts[0]; // 'show' or 'episode'
+        const id = parts[1];
+        return `https://open.spotify.com/embed/${type}/${id}`;
+      }
+    } catch (e) {}
+    return '';
+  }
+
+  function renderGenericTabGrid(tabId) {
+    worksGrid.className = 'works-grid';
+    worksGrid.innerHTML = '';
+
+    const items = getItemsForTab(tabId);
+    if (items.length === 0) {
+      worksGrid.innerHTML = `<p class="work-description">${currentLang === 'TR' ? 'İçerik bulunamadı.' : 'No items available.'}</p>`;
+      return;
+    }
+
+    renderVideoGrid(items);
   }
 
   // --- CMS-DRIVEN MINIMAL FOOTER ---
@@ -356,8 +641,9 @@
     `;
   }
 
-  // Render Works (Primary View Grid)
-  function renderWorksGrid(works) {
+  // Render Video Grid (Primary View Grid)
+  function renderVideoGrid(works) {
+    worksGrid.className = 'works-grid';
     worksGrid.innerHTML = '';
 
     const workHeading = document.getElementById('work-heading');
@@ -692,11 +978,18 @@
   }
 
   function handleHashNavigation() {
-    const hash = window.location.hash.toLowerCase();
-    if (hash === '#info' || hash === '#/info') {
+    const rawHash = window.location.hash.toLowerCase().replace('#', '').replace('/', '').trim();
+    if (rawHash === 'info') {
       switchView('info', false);
     } else {
       switchView('work', false);
+      if (rawHash && rawHash !== 'work') {
+        const enabledTabs = getEnabledPortfolioTabs();
+        const matchingTab = enabledTabs.find(t => t.id === rawHash);
+        if (matchingTab) {
+          setActiveTab(matchingTab.id, false);
+        }
+      }
     }
   }
 
@@ -705,7 +998,7 @@
     currentView = viewName;
 
     if (updateHash) {
-      const targetHash = `#${viewName}`;
+      const targetHash = viewName === 'info' ? '#info' : `#${activeTab}`;
       if (window.location.hash !== targetHash) {
         history.pushState(null, '', targetHash);
       }
@@ -723,6 +1016,7 @@
     if (viewName === 'info') {
       workView.hidden = true;
       infoView.hidden = false;
+      renderPortfolioTabs();
       updateViewSwitchBtnState();
 
       const infoHeading = document.getElementById('info-heading');
@@ -730,6 +1024,8 @@
     } else {
       infoView.hidden = true;
       workView.hidden = false;
+      renderPortfolioTabs();
+      renderActiveTabContent();
       updateViewSwitchBtnState();
 
       const workHeading = document.getElementById('work-heading');

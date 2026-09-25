@@ -6,7 +6,33 @@
     "_yardim_varsayilanDil": "varsayilanDil: İlk açılış dilini belirler. \"\" (otomatik tarayıcı dili), \"TR\" veya \"EN\".",
     "varsayilanDil": "",
     "_yardim_varsayilanTema": "varsayilanTema: Sitenin renk temasını belirler. \"otomatik\" (kullanıcı seçimi + ikon göster), \"karanlik\" (koyu tema zorunlu, ikon gizli), \"aydinlik\" (açık tema zorunlu, ikon gizli).",
-    "varsayilanTema": "otomatik"
+    "varsayilanTema": "otomatik",
+    "portfolioTabs": [
+      {
+        "id": "video",
+        "label": {
+          "TR": "Video",
+          "EN": "Video"
+        },
+        "enabled": true
+      },
+      {
+        "id": "photo",
+        "label": {
+          "TR": "Fotoğraf",
+          "EN": "Photograph"
+        },
+        "enabled": true
+      },
+      {
+        "id": "podcast",
+        "label": {
+          "TR": "Podcast",
+          "EN": "Podcast"
+        },
+        "enabled": true
+      }
+    ]
   },
   "site": {
     "name": "ONUR TEMEL",
@@ -355,6 +381,49 @@
       },
       "youtube": "https://www.youtube.com/watch?v=q7ETz3gvldM&t=16s",
       "thumbnail": "assets/covers/slapp-02-recai-cakir.png"
+    }
+  ],
+  "photos": [
+    { "id": "photo-1", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0061.JPG" },
+    { "id": "photo-2", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0236.JPG" },
+    { "id": "photo-3", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC00040.jpg" },
+    { "id": "photo-4", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC04033.JPG" },
+    { "id": "photo-5", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC07617.JPG" },
+    { "id": "photo-6", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0065.JPG" },
+    { "id": "photo-7", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0339.JPG" },
+    { "id": "photo-8", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC04008.JPG" },
+    { "id": "photo-9", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC04036.JPG" },
+    { "id": "photo-10", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC08089.JPG" },
+    { "id": "photo-11", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0141.JPG" },
+    { "id": "photo-12", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0497.JPG" },
+    { "id": "photo-13", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC04026.jpg" },
+    { "id": "photo-14", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC06350.JPG" },
+    { "id": "photo-15", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0204.JPG" },
+    { "id": "photo-16", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0601.JPG" },
+    { "id": "photo-17", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC04028.JPG" },
+    { "id": "photo-18", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC07580.JPG" }
+  ],
+  "podcasts": [
+    {
+      "id": "podcast-1",
+      "tab": "podcast",
+      "mediaType": "spotify-show",
+      "title": { "TR": "Neden Feminist Dış Politika", "EN": "Neden Feminist Dış Politika" },
+      "url": "https://open.spotify.com/show/715vQxqATkMcO50CogOn5F?si=f04488477d13468c"
+    },
+    {
+      "id": "podcast-2",
+      "tab": "podcast",
+      "mediaType": "spotify-episode",
+      "title": { "TR": "Sessiz Kalma", "EN": "Sessiz Kalma" },
+      "url": "https://open.spotify.com/episode/4DRd876xGLzLk7CRvM53Ig?si=9ZwhK5DYTL-wpP99FKDcQg"
+    },
+    {
+      "id": "podcast-3",
+      "tab": "podcast",
+      "mediaType": "spotify-episode",
+      "title": { "TR": "Mekanda Adalet Derneği", "EN": "Mekanda Adalet Derneği" },
+      "url": "https://open.spotify.com/episode/1C9Z2DJgQhupVHM8P5oSvO?si=rNnJU6OET3q_54Z5gPCJkg"
     }
   ]
 }
