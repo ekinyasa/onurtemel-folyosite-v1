@@ -391,12 +391,27 @@
       let mediaHTML = '';
 
       // Centered Circular Translucent Glass Play Button
-      const playGlyphHTML = `
+      const playGlyphHTML1 = `
         <span class="glass-play-btn" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="24" height="24">
             <polygon points="9,6 19,12 9,18"></polygon>
           </svg>
         </span>
+      `;
+      // Centered Circular Translucent Glass Play Button
+      const playGlyphHTML = `
+        <div class="liquidGlass-wrapper button glass-play-btn">
+            <div class="liquidGlass-effect2"></div>
+            <div class="liquidGlass-tint"></div>
+            <div class="liquidGlass-shine"></div>
+            <div class="liquidGlass-text">
+              <span> 
+              <svg viewBox="0 0 24 24" width="24" height="24">
+                <polygon points="9,6 19,12 9,18"></polygon>
+              </svg>
+              </span>
+            </div>
+          </div>
       `;
 
       if (isBlackCover) {

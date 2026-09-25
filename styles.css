@@ -13,6 +13,54 @@
   --font-stack: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
   --site-max-width: 1600px;
   --header-height: 56px;
+
+
+
+
+
+
+
+
+
+
+
+  --surfaceFilmOpacity: 0.16;
+  --surfaceBase:
+    radial-gradient(
+      120% 90% at 18% 10%,
+      rgba(255,255,255,0.98) 0%,
+      rgba(255,255,255,0) 52%
+    ),
+    radial-gradient(
+      95% 80% at 80% 82%,
+      rgba(242,242,240,0.22) 0%,
+      rgba(242,242,240,0) 58%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,1) 0%,
+      rgba(250,250,249,1) 48%,
+      rgba(246,246,244,1) 100%
+    );
+  --edgeA: rgba(255,255,255,0.00);
+  --edgeB: rgba(246,246,244,0.26);
+  --edgeC: rgba(240,240,238,0.24);
+  --headerBrand:#484C54;
+  --aap-background-transition-duration:250ms;
+  --navCTAbg: rgba(0,0,0,0.04);
+  --navCTAborder: 1px solid rgba(0,0,0,0.12);
+  --aap-blur:7px;
+  --aap-background-color:rgb(232 232 237/70%);
+  --aap-inner-glow-color:rgb(232 232 237/11%);
+  --pantoneCoolGraycp11:#343741;
+  --liguidTint:  rgba(255, 255, 255, 0.25);
+  --liguidMoreTint:  rgba(255, 255, 255, 0.75);
+  --liguidShine:  rgba(255, 255, 255, 0.5);
+  --liguid-hover-half-tint:  rgba(255, 255, 255, 0.50);
+  --liguid-hover-tint:  rgba(255, 255, 255, 0.50);
+  --drawer-background:  linear-gradient(180deg, rgba(255, 255, 255,0.6) 0%, rgba(255, 255, 255,0.35) 40%, rgba(255, 255, 255,0) 100%);
+  --white-smoke:  rgba(245, 245, 245, 0.38);
+  --smokle-gray:#353535;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -322,62 +370,17 @@ main {
 }
 
 /* Centered Circular Apple-Style Translucent Glass Play Button */
-.glass-play-btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 10cqw;
-  height: 10cqw;
-  min-width: 28px;
-  min-height: 28px;
-  max-width: 64px;
-  max-height: 64px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  background-color: rgba(255, 255, 255, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.5);
-  color: #ffffff;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-  box-sizing: border-box;
-  z-index: 2;
-}
 
-html[data-theme="dark"] .glass-play-btn,
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .glass-play-btn {
-    background-color: rgba(30, 30, 30, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: #ffffff;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
-  }
-}
-
-html[data-theme="light"] .glass-play-btn {
-  background-color: rgba(255, 255, 255, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  color: #111111;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.8);
-}
 
 .glass-play-btn svg {
-  width: 45%;
-  height: 45%;
-  fill: currentColor;
-  margin-left: 2px;
-  display: block;
+width: 32px;
+height: 100%;
+fill: rgba(231, 231, 231, 0.887);
+margin-left: -1px;
+display: block;
 }
 
-.work-media-btn:hover .glass-play-btn,
-.work-media-btn:focus-visible .glass-play-btn {
-  transform: translate(-50%, -50%) scale(1.08);
-}
+
 
 /* FULLSCREEN VIDEO OVERLAY */
 .video-overlay {
@@ -612,6 +615,7 @@ html[data-theme="light"] .glass-play-btn {
   ::view-transition-new(*) {
     animation: none !important;
   }
+}
 
 /* Minimal CMS-Driven Footer */
 .site-footer {
@@ -641,4 +645,100 @@ html[data-theme="light"] .glass-play-btn {
 .footer-email-link:hover,
 .footer-email-link:focus-visible {
   color: var(--fg-color);
+}
+
+
+
+
+
+
+.liquidGlass-wrapper {
+  box-sizing: border-box;
+
+  display: flex;
+  overflow: hidden;
+  
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  padding: 8px 18px;
+  border-radius: 44px;
+
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10cqw;
+  height: 10cqw;
+  min-width: 28px;
+  min-height: 28px;
+  max-width: 64px;
+  max-height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+ 
+  box-sizing: border-box;
+  z-index: 2;
+
+    opacity: 0.9;
+    
+    zoom: 1.6;
+
+    box-shadow: 0 2.6px 2.3px rgba(0, 0, 0, 0.1), 0 0 18.7px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+.liquidGlass-effect {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+
+  backdrop-filter: blur(10px);
+  filter: url(#glass-distortion);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.liquidGlass-effect2 {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+
+  backdrop-filter: blur(3px);
+  filter: url(#glass-distortion2);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.liquidGlass-tint {
+  z-index: 1;
+  position: absolute;
+  inset: 0;
+  
+  transition: background 220ms ease-out;
+  background:rgba(43, 30, 10, 0.284);
+}
+
+
+.section-body .nav-cta:hover .liquidGlass-tint {background:var(--liguid-hover-half-tint)}
+.site-nav .nav-cta:hover .liquidGlass-tint {background:var(--liguid-hover-tint)}
+
+.liquidGlass-shine {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  overflow: hidden;
+  
+  box-shadow: inset 2.4px 0.1px 0.1px -1.5px rgba(255, 255, 255, 0.3),
+inset -0.5px -0.2px 0.1px 0.7px rgba(43, 30, 10, 0.018)
+}
+
+.liquidGlass-text {
+  z-index: 3;
+
+  letter-spacing: .05em;
 }
