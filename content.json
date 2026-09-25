@@ -14,6 +14,7 @@
           "TR": "Video",
           "EN": "Video"
         },
+        "tabContent": "video",
         "enabled": true
       },
       {
@@ -22,6 +23,7 @@
           "TR": "Fotoğraf",
           "EN": "Photograph"
         },
+        "tabContent": "photo",
         "enabled": true
       },
       {
@@ -30,6 +32,7 @@
           "TR": "Podcast",
           "EN": "Podcast"
         },
+        "tabContent": "podcast",
         "enabled": true
       }
     ]
@@ -384,24 +387,24 @@
     }
   ],
   "photos": [
-    { "id": "photo-1", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0061.JPG" },
-    { "id": "photo-2", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0236.JPG" },
-    { "id": "photo-3", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC00040.jpg" },
-    { "id": "photo-4", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC04033.JPG" },
-    { "id": "photo-5", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC07617.JPG" },
-    { "id": "photo-6", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0065.JPG" },
-    { "id": "photo-7", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0339.JPG" },
-    { "id": "photo-8", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC04008.JPG" },
-    { "id": "photo-9", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC04036.JPG" },
-    { "id": "photo-10", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC08089.JPG" },
-    { "id": "photo-11", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0141.JPG" },
-    { "id": "photo-12", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0497.JPG" },
-    { "id": "photo-13", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC04026.jpg" },
-    { "id": "photo-14", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC06350.JPG" },
-    { "id": "photo-15", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0204.JPG" },
-    { "id": "photo-16", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0601.JPG" },
-    { "id": "photo-17", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC04028.JPG" },
-    { "id": "photo-18", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC07580.JPG" }
+    { "id": "photo-1", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0061.jpeg" },
+    { "id": "photo-2", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0236.jpeg" },
+    { "id": "photo-3", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC00040.jpeg" },
+    { "id": "photo-4", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC04033.jpeg" },
+    { "id": "photo-5", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC07617.jpeg" },
+    { "id": "photo-6", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0065.jpeg" },
+    { "id": "photo-7", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0339.jpeg" },
+    { "id": "photo-8", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC04008.jpeg" },
+    { "id": "photo-9", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC04036.jpeg" },
+    { "id": "photo-10", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC08089.jpeg" },
+    { "id": "photo-11", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0141.jpeg" },
+    { "id": "photo-12", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0497.jpeg" },
+    { "id": "photo-13", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC04026.jpeg" },
+    { "id": "photo-14", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC06350.jpeg" },
+    { "id": "photo-15", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0204.jpeg" },
+    { "id": "photo-16", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DJI_0601.jpeg" },
+    { "id": "photo-17", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC04028.jpeg" },
+    { "id": "photo-18", "tab": "photo", "mediaType": "photo", "image": "assets/photos/DSC07580.jpeg" }
   ],
   "podcasts": [
     {

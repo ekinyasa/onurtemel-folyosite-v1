@@ -416,33 +416,50 @@
 
   function getItemsForTab(tabId) {
     if (!siteData) return [];
+    const enabledTabs = getEnabledPortfolioTabs();
+    const tabObj = enabledTabs.find(t => t.id === tabId);
+    const contentType = tabObj ? (tabObj.tabContent || tabObj.id) : tabId;
+
     const allItems = [];
     if (Array.isArray(siteData.works)) allItems.push(...siteData.works);
     if (Array.isArray(siteData.photos)) allItems.push(...siteData.photos);
     if (Array.isArray(siteData.podcasts)) allItems.push(...siteData.podcasts);
 
     return allItems.filter(item => {
-      const itemTab = item.tab || (item.mediaType === 'photo' ? 'photo' : (item.mediaType && item.mediaType.startsWith('spotify') ? 'podcast' : 'video'));
-      return itemTab === tabId;
+      if (item.tab) {
+        return item.tab === tabId;
+      }
+      // Fallback matching when item.tab is omitted
+      if (contentType === 'photo' && (item.mediaType === 'photo' || siteData.photos?.includes(item))) return true;
+      if (contentType === 'podcast' && (item.mediaType?.startsWith('spotify') || siteData.podcasts?.includes(item))) return true;
+      if (contentType === 'video' && (!item.mediaType || siteData.works?.includes(item))) return true;
+      return false;
     });
   }
 
   function renderActiveTabContent() {
     if (!worksGrid || !siteData) return;
 
-    if (activeTab === 'photo') {
-      renderPhotoGrid();
-    } else if (activeTab === 'podcast') {
-      renderPodcastGrid();
-    } else if (activeTab === 'video') {
-      renderVideoGrid(siteData.works || []);
+    const enabledTabs = getEnabledPortfolioTabs();
+    const activeTabObj = enabledTabs.find(t => t.id === activeTab);
+    const contentType = activeTabObj ? (activeTabObj.tabContent || activeTabObj.id) : activeTab;
+
+    if (contentType === 'photo') {
+      renderPhotoGrid(activeTab);
+    } else if (contentType === 'podcast') {
+      renderPodcastGrid(activeTab);
+    } else if (contentType === 'video') {
+      const items = getItemsForTab(activeTab);
+      renderVideoGrid(items.length > 0 ? items : (siteData.works || []));
     } else {
-      renderGenericTabGrid(activeTab);
+      console.warn(`Unknown tabContent type "${contentType}" for tab "${activeTab}"`);
+      worksGrid.className = 'works-grid';
+      worksGrid.innerHTML = `<p class="work-description">${currentLang === 'TR' ? 'Desteklenmeyen içerik tipi.' : 'Unsupported content type.'}</p>`;
     }
   }
 
-  // --- PHOTO GRID & NATIVE ASPECT RATIO RENDERER ---
-  function renderPhotoGrid() {
+  // --- PHOTO GRID & 3:2 COVER RATIO RENDERER ---
+  function renderPhotoGrid(tabId) {
     worksGrid.className = 'photos-grid';
     worksGrid.innerHTML = '';
 
@@ -451,7 +468,7 @@
       photoHeading.textContent = currentLang === 'TR' ? 'Fotoğraf Portfolyosu' : 'Photograph Portfolio';
     }
 
-    const photos = getItemsForTab('photo');
+    const photos = getItemsForTab(tabId || 'photo');
     if (photos.length === 0) {
       worksGrid.innerHTML = `<p class="work-description">${currentLang === 'TR' ? 'Fotoğraf bulunamadı.' : 'No photographs available.'}</p>`;
       return;
@@ -459,8 +476,8 @@
 
     const fragment = document.createDocumentFragment();
 
-    photos.forEach(photo => {
-      const photoId = photo.id || `photo-${Math.random().toString(36).substr(2, 9)}`;
+    photos.forEach((photo, index) => {
+      const photoId = photo.id || `photo-${index}`;
       const imgSrc = photo.image || '';
       const altText = t(photo.alt, currentLang) || t(photo.title, currentLang) || (currentLang === 'TR' ? 'Fotoğraf' : 'Photograph');
 
@@ -469,9 +486,11 @@
       article.id = photoId;
 
       article.innerHTML = `
-        <button class="photo-btn" data-img="${escapeAttr(imgSrc)}" data-title="${escapeAttr(altText)}" aria-label="${currentLang === 'TR' ? 'Fotoğrafı büyüt' : 'Enlarge photo'}: ${escapeAttr(altText)}">
-          <img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(altText)}" loading="lazy" decoding="async" class="photo-img">
-        </button>
+        <div class="photo-cover-container">
+          <button class="photo-btn" data-photo-id="${escapeAttr(photoId)}" data-photo-index="${index}" aria-label="${currentLang === 'TR' ? 'Fotoğrafı büyüt' : 'Enlarge photo'}: ${escapeAttr(altText)}">
+            <img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(altText)}" loading="lazy" decoding="async" class="photo-img">
+          </button>
+        </div>
       `;
 
       fragment.appendChild(article);
@@ -479,19 +498,20 @@
 
     worksGrid.appendChild(fragment);
 
-    // Attach Photo Click Listener -> Fullscreen Photo Overlay
+    // Attach Photo Click Listener -> Fullscreen Photo Gallery Overlay
     worksGrid.querySelectorAll('.photo-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const btnEl = e.currentTarget;
-        const imgUrl = btnEl.dataset.img;
-        const titleText = btnEl.dataset.title;
-        openPhotoOverlay(imgUrl, titleText, btnEl);
+        const photoIndex = parseInt(btnEl.dataset.photoIndex, 10);
+        openPhotoGallery(photos, photoIndex, btnEl);
       });
     });
   }
 
-  function openPhotoOverlay(imgSrc, altText, btnEl) {
-    if (!imgSrc) return;
+  // --- NAVIGABLE FULLSCREEN PHOTO GALLERY VIEWER ---
+  function openPhotoGallery(photos, initialIndex, btnEl) {
+    if (!Array.isArray(photos) || photos.length === 0) return;
+    let currentIndex = (initialIndex >= 0 && initialIndex < photos.length) ? initialIndex : 0;
     originatingButton = btnEl;
 
     const overlay = document.createElement('div');
@@ -499,7 +519,6 @@
     overlay.id = 'photo-overlay';
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-modal', 'true');
-    overlay.setAttribute('aria-label', altText || 'Photograph view');
 
     overlay.innerHTML = `
       <button class="photo-overlay-close" id="photo-overlay-close" aria-label="${currentLang === 'TR' ? 'Görseli kapat (Esc)' : 'Close photo (Esc)'}">
@@ -508,14 +527,40 @@
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
-      <div class="photo-overlay-content">
-        <img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(altText)}" class="photo-overlay-img">
+      <div class="photo-overlay-content" id="photo-overlay-content">
+        <img src="" alt="" class="photo-overlay-img" id="photo-overlay-img" draggable="false">
       </div>
     `;
 
     document.body.appendChild(overlay);
     activeOverlay = overlay;
     document.body.style.overflow = 'hidden';
+
+    const imgEl = overlay.querySelector('#photo-overlay-img');
+    const contentEl = overlay.querySelector('#photo-overlay-content');
+
+    function updatePhotoDisplay(index) {
+      currentIndex = (index + photos.length) % photos.length;
+      const photo = photos[currentIndex];
+      const imgSrc = photo.image || '';
+      const altText = t(photo.alt, currentLang) || t(photo.title, currentLang) || (currentLang === 'TR' ? 'Fotoğraf' : 'Photograph');
+
+      overlay.setAttribute('aria-label', `${altText} (${currentIndex + 1}/${photos.length})`);
+      imgEl.src = imgSrc;
+      imgEl.alt = altText;
+      imgEl.style.transform = '';
+
+      // Update focus restoration element to match current photo
+      const currentPhotoId = photo.id;
+      if (currentPhotoId) {
+        const matchingBtn = document.querySelector(`.photo-btn[data-photo-id="${currentPhotoId}"]`);
+        if (matchingBtn) {
+          originatingButton = matchingBtn;
+        }
+      }
+    }
+
+    updatePhotoDisplay(currentIndex);
 
     function closePhoto() {
       if (overlay && overlay.parentNode) {
@@ -524,6 +569,11 @@
       activeOverlay = null;
       document.body.style.overflow = '';
       document.removeEventListener('keydown', handleKeyDown);
+      overlay.removeEventListener('pointerdown', handlePointerDown);
+      overlay.removeEventListener('pointermove', handlePointerMove);
+      overlay.removeEventListener('pointerup', handlePointerUp);
+      overlay.removeEventListener('pointercancel', handlePointerCancel);
+
       if (originatingButton) {
         originatingButton.focus();
         originatingButton = null;
@@ -532,25 +582,107 @@
 
     function handleKeyDown(e) {
       if (e.key === 'Escape' || e.key === 'Esc') {
+        e.preventDefault();
         closePhoto();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        updatePhotoDisplay(currentIndex + 1);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        updatePhotoDisplay(currentIndex - 1);
       }
+    }
+
+    // Pointer Events for Touch Swipe & Mouse Drag
+    let pointerDown = false;
+    let startX = 0;
+    let startY = 0;
+    let currentDeltaX = 0;
+    let currentDeltaY = 0;
+    let isDragging = false;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function handlePointerDown(e) {
+      if (e.target.closest('#photo-overlay-close')) return;
+      pointerDown = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      currentDeltaX = 0;
+      currentDeltaY = 0;
+      isDragging = false;
+      imgEl.style.transition = 'none';
+    }
+
+    function handlePointerMove(e) {
+      if (!pointerDown) return;
+      currentDeltaX = e.clientX - startX;
+      currentDeltaY = e.clientY - startY;
+
+      const absX = Math.abs(currentDeltaX);
+      const absY = Math.abs(currentDeltaY);
+
+      if (absX > 8 || absY > 8) {
+        isDragging = true;
+      }
+
+      if (isDragging && absX > absY) {
+        if (!prefersReducedMotion) {
+          imgEl.style.transform = `translateX(${currentDeltaX * 0.35}px)`;
+        }
+      }
+    }
+
+    function handlePointerUp(e) {
+      if (!pointerDown) return;
+      pointerDown = false;
+
+      imgEl.style.transition = 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)';
+      imgEl.style.transform = '';
+
+      const absX = Math.abs(currentDeltaX);
+      const absY = Math.abs(currentDeltaY);
+      const minDistance = 40;
+
+      if (isDragging && absX >= minDistance && absX > absY * 1.3) {
+        if (currentDeltaX < 0) {
+          updatePhotoDisplay(currentIndex + 1);
+        } else {
+          updatePhotoDisplay(currentIndex - 1);
+        }
+      } else if (!isDragging) {
+        if (e.target === overlay || e.target === contentEl) {
+          closePhoto();
+        }
+      }
+
+      setTimeout(() => {
+        isDragging = false;
+      }, 50);
+    }
+
+    function handlePointerCancel() {
+      if (!pointerDown) return;
+      pointerDown = false;
+      isDragging = false;
+      imgEl.style.transition = 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)';
+      imgEl.style.transform = '';
     }
 
     const closeBtn = overlay.querySelector('#photo-overlay-close');
     if (closeBtn) closeBtn.addEventListener('click', closePhoto);
 
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay || e.target.classList.contains('photo-overlay-content')) {
-        closePhoto();
-      }
-    });
+    overlay.addEventListener('pointerdown', handlePointerDown);
+    overlay.addEventListener('pointermove', handlePointerMove);
+    overlay.addEventListener('pointerup', handlePointerUp);
+    overlay.addEventListener('pointercancel', handlePointerCancel);
 
     document.addEventListener('keydown', handleKeyDown);
     if (closeBtn) closeBtn.focus();
   }
 
   // --- PODCAST TAB & SPOTIFY EMBED RENDERER ---
-  function renderPodcastGrid() {
+  function renderPodcastGrid(tabId) {
     worksGrid.className = 'podcasts-grid';
     worksGrid.innerHTML = '';
 
