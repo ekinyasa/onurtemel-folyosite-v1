@@ -19,6 +19,9 @@
   const langToggleBtn = document.getElementById('lang-toggle');
   const brandLink = document.getElementById('brand-link');
   const portfolioTabsNav = document.getElementById('portfolio-tabs-nav');
+  const mobileMenuToggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+  const mobileMenuNav = document.getElementById('mobile-menu-nav');
 
   // Application State
   let siteData = null;
@@ -27,6 +30,7 @@
   let currentLang = 'TR';
   let enabledLangs = ['TR', 'EN'];
   let cmsThemeMode = 'otomatik';
+  let isMobileMenuOpen = false;
 
   let activeOverlay = null;
   let originatingButton = null;
@@ -46,6 +50,12 @@
     if (!siteHeader) return;
 
     window.addEventListener('scroll', () => {
+      // Do not hide header while full-screen mobile menu is active
+      if (isMobileMenuOpen) {
+        siteHeader.classList.remove('header-hidden');
+        return;
+      }
+
       const currentScrollY = window.scrollY;
       const deltaY = currentScrollY - lastScrollY;
 
@@ -85,9 +95,9 @@
       start = parseInt(tMatch[1], 10);
     }
 
-    // Extract video ID from YouTube URL formats
+    // Extract video ID from YouTube URL formats (watch, embed, shorts, youtu.be)
     if (str.includes('youtube.com/') || str.includes('youtu.be/')) {
-      const idMatch = str.match(/(?:v=|\/embed\/|\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+      const idMatch = str.match(/(?:v=|\/embed\/|\/watch\?v=|\/shorts\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
       if (idMatch) {
         id = idMatch[1];
       }
@@ -329,6 +339,7 @@
 
     // 4. Render Views
     renderPortfolioTabs();
+    renderMobileMenuNav();
     renderActiveTabContent();
     renderInfoView(siteData.bio || {}, siteData.links || [], siteData.site || {});
     renderFooter(siteData);
@@ -341,6 +352,7 @@
     const settings = siteData.siteAyarlari || {};
     const tabs = settings.portfolioTabs || siteData.portfolioTabs || [
       { id: 'video', label: { TR: 'Video', EN: 'Video' }, enabled: true },
+      { id: 'shorts', label: { TR: 'Kısalar', EN: 'Shorts' }, enabled: true },
       { id: 'photo', label: { TR: 'Fotoğraf', EN: 'Photograph' }, enabled: true },
       { id: 'podcast', label: { TR: 'Podcast', EN: 'Podcast' }, enabled: true }
     ];
@@ -411,6 +423,7 @@
     }
 
     renderPortfolioTabs();
+    renderMobileMenuNav();
     renderActiveTabContent();
   }
 
@@ -422,6 +435,7 @@
 
     const allItems = [];
     if (Array.isArray(siteData.works)) allItems.push(...siteData.works);
+    if (Array.isArray(siteData.shorts)) allItems.push(...siteData.shorts);
     if (Array.isArray(siteData.photos)) allItems.push(...siteData.photos);
     if (Array.isArray(siteData.podcasts)) allItems.push(...siteData.podcasts);
 
@@ -430,6 +444,7 @@
         return item.tab === tabId;
       }
       // Fallback matching when item.tab is omitted
+      if (contentType === 'shorts' && (item.mediaType === 'shorts' || siteData.shorts?.includes(item))) return true;
       if (contentType === 'photo' && (item.mediaType === 'photo' || siteData.photos?.includes(item))) return true;
       if (contentType === 'podcast' && (item.mediaType?.startsWith('spotify') || siteData.podcasts?.includes(item))) return true;
       if (contentType === 'video' && (!item.mediaType || siteData.works?.includes(item))) return true;
@@ -444,7 +459,9 @@
     const activeTabObj = enabledTabs.find(t => t.id === activeTab);
     const contentType = activeTabObj ? (activeTabObj.tabContent || activeTabObj.id) : activeTab;
 
-    if (contentType === 'photo') {
+    if (contentType === 'shorts') {
+      renderShortsGrid(activeTab);
+    } else if (contentType === 'photo') {
       renderPhotoGrid(activeTab);
     } else if (contentType === 'podcast') {
       renderPodcastGrid(activeTab);
@@ -456,6 +473,142 @@
       worksGrid.className = 'works-grid';
       worksGrid.innerHTML = `<p class="work-description">${currentLang === 'TR' ? 'Desteklenmeyen içerik tipi.' : 'Unsupported content type.'}</p>`;
     }
+  }
+
+  // --- SHORTS GRID & 9:16 PORTRAIT RENDERER ---
+  function renderShortsGrid(tabId) {
+    worksGrid.className = 'shorts-grid';
+    worksGrid.innerHTML = '';
+
+    const shortsHeading = document.getElementById('work-heading');
+    if (shortsHeading) {
+      shortsHeading.textContent = currentLang === 'TR' ? 'Kısalar' : 'Shorts';
+    }
+
+    const shorts = getItemsForTab(tabId || 'shorts');
+    if (shorts.length === 0) {
+      worksGrid.innerHTML = `<p class="work-description">${currentLang === 'TR' ? 'Kısa video bulunamadı.' : 'No shorts available.'}</p>`;
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+
+    const playGlyphHTML = `
+      <div class="liquidGlass-wrapper button glass-play-btn">
+        <div class="liquidGlass-effect2"></div>
+        <div class="liquidGlass-tint"></div>
+        <div class="liquidGlass-shine"></div>
+        <div class="liquidGlass-text">
+          <span> 
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <polygon points="9,6 19,12 9,18"></polygon>
+            </svg>
+          </span>
+        </div>
+      </div>
+    `;
+
+    shorts.forEach((short, index) => {
+      const shortId = short.id || `short-${index}`;
+      const title = t(short.title, currentLang) || (currentLang === 'TR' ? 'Kısa Video' : 'Short Video');
+      const youtubeUrl = short.youtube || '';
+      const { id: youtubeId } = parseYouTubeUrl(youtubeUrl);
+      const thumbUrl = short.thumbnail || (youtubeId ? `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg` : '');
+
+      const article = document.createElement('article');
+      article.className = 'short-item';
+      article.id = shortId;
+
+      article.innerHTML = `
+        <div class="short-media-container">
+          <button class="short-media-btn" data-youtube="${escapeAttr(youtubeUrl)}" data-title="${escapeAttr(title)}" aria-label="${currentLang === 'TR' ? 'Shorts izle' : 'Watch Short'}: ${escapeAttr(title)}">
+            ${thumbUrl ? `<img src="${escapeAttr(thumbUrl)}" alt="${escapeAttr(title)}" loading="lazy" decoding="async" class="short-img">` : ''}
+            ${playGlyphHTML}
+          </button>
+        </div>
+        <div class="short-meta">
+          <h2 class="short-title">${escapeHTML(title)}</h2>
+        </div>
+      `;
+
+      fragment.appendChild(article);
+    });
+
+    worksGrid.appendChild(fragment);
+
+    // Attach Shorts click listener
+    worksGrid.querySelectorAll('.short-media-btn').forEach(btn => {
+      btn.addEventListener('click', handleShortsPlay);
+    });
+  }
+
+  function handleShortsPlay(e) {
+    const btn = e.currentTarget;
+    const rawYoutube = btn.dataset.youtube;
+    const title = btn.dataset.title || 'YouTube Short';
+
+    if (!rawYoutube) return;
+    const { id: youtubeId } = parseYouTubeUrl(rawYoutube);
+    if (!youtubeId) return;
+
+    originatingButton = btn;
+
+    const embedSrc = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(youtubeId)}?autoplay=1&playsinline=1&rel=0`;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'video-overlay shorts-overlay';
+    overlay.id = 'video-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', title);
+
+    overlay.innerHTML = `
+      <button class="video-overlay-close" id="video-overlay-close" aria-label="${currentLang === 'TR' ? 'Videoyu kapat (Esc)' : 'Close video (Esc)'}">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="shorts-overlay-frame-wrapper">
+        <iframe class="video-overlay-iframe" src="${escapeAttr(embedSrc)}" title="${escapeAttr(title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen frameborder="0"></iframe>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+    activeOverlay = overlay;
+    document.body.style.overflow = 'hidden';
+
+    function closeShortOverlay() {
+      if (!activeOverlay) return;
+      document.removeEventListener('keydown', handleKeyDown);
+      activeOverlay.remove();
+      activeOverlay = null;
+      document.body.style.overflow = '';
+      if (originatingButton) {
+        originatingButton.focus();
+        originatingButton = null;
+      }
+    }
+
+    function handleKeyDown(evt) {
+      if (evt.key === 'Escape' || evt.key === 'Esc') {
+        closeShortOverlay();
+      }
+    }
+
+    const closeBtn = overlay.querySelector('#video-overlay-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeShortOverlay);
+      closeBtn.focus();
+    }
+
+    overlay.addEventListener('click', (evt) => {
+      if (evt.target === overlay || evt.target.classList.contains('shorts-overlay-frame-wrapper')) {
+        closeShortOverlay();
+      }
+    });
+
+    document.addEventListener('keydown', handleKeyDown);
   }
 
   // --- PHOTO GRID & 3:2 COVER RATIO RENDERER ---
@@ -1070,6 +1223,120 @@
   }
 
   // --- 7. NAVIGATION & VIEW SWITCHING ---
+  function updateDOMView(viewName) {
+    if (viewName === 'info') {
+      workView.hidden = true;
+      infoView.hidden = false;
+      renderPortfolioTabs();
+      renderMobileMenuNav();
+      updateViewSwitchBtnState();
+
+      const infoHeading = document.getElementById('info-heading');
+      if (infoHeading) infoHeading.focus();
+    } else {
+      infoView.hidden = true;
+      workView.hidden = false;
+      renderPortfolioTabs();
+      renderMobileMenuNav();
+      renderActiveTabContent();
+      updateViewSwitchBtnState();
+
+      const workHeading = document.getElementById('work-heading');
+      if (workHeading) workHeading.focus();
+    }
+  }
+
+  // --- FULLSCREEN MOBILE NAVIGATION ENGINE ---
+  function renderMobileMenuNav() {
+    if (!mobileMenuNav) return;
+    mobileMenuNav.innerHTML = '';
+
+    const enabledTabs = getEnabledPortfolioTabs();
+    const fragment = document.createDocumentFragment();
+
+    // 1. CMS Portfolio Tabs
+    enabledTabs.forEach((tab) => {
+      const btn = document.createElement('button');
+      const isActive = (currentView === 'work' && tab.id === activeTab);
+      btn.className = `mobile-menu-item ${isActive ? 'active' : ''}`;
+      btn.dataset.tab = tab.id;
+      btn.textContent = t(tab.label, currentLang) || tab.id;
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+
+      btn.addEventListener('click', () => {
+        setActiveTab(tab.id, true);
+        if (currentView === 'info') {
+          switchView('work', true);
+        }
+        closeMobileMenu();
+      });
+
+      fragment.appendChild(btn);
+    });
+
+    // 2. Vertical Whitespace Separator
+    const sep = document.createElement('div');
+    sep.className = 'mobile-menu-sep';
+    sep.setAttribute('aria-hidden', 'true');
+    fragment.appendChild(sep);
+
+    // 3. BIO / Information Menu Entry
+    const bioBtn = document.createElement('button');
+    const isBioActive = (currentView === 'info');
+    bioBtn.className = `mobile-menu-item ${isBioActive ? 'active' : ''}`;
+    bioBtn.dataset.action = 'info';
+    bioBtn.textContent = 'BIO';
+    bioBtn.setAttribute('aria-selected', isBioActive ? 'true' : 'false');
+
+    bioBtn.addEventListener('click', () => {
+      switchView('info', true);
+      closeMobileMenu();
+    });
+
+    fragment.appendChild(bioBtn);
+    mobileMenuNav.appendChild(fragment);
+  }
+
+  function openMobileMenu() {
+    if (!mobileMenuOverlay) return;
+    isMobileMenuOpen = true;
+    mobileMenuOverlay.classList.add('is-active');
+    mobileMenuOverlay.setAttribute('aria-hidden', 'false');
+
+    if (mobileMenuToggleBtn) {
+      mobileMenuToggleBtn.setAttribute('aria-expanded', 'true');
+      mobileMenuToggleBtn.setAttribute('aria-label', currentLang === 'TR' ? 'Menüyü kapat' : 'Close menu');
+    }
+
+    document.body.style.overflow = 'hidden';
+
+    const firstItem = mobileMenuNav ? mobileMenuNav.querySelector('.mobile-menu-item') : null;
+    if (firstItem) firstItem.focus();
+  }
+
+  function closeMobileMenu() {
+    if (!mobileMenuOverlay) return;
+    isMobileMenuOpen = false;
+    mobileMenuOverlay.classList.remove('is-active');
+    mobileMenuOverlay.setAttribute('aria-hidden', 'true');
+
+    if (mobileMenuToggleBtn) {
+      mobileMenuToggleBtn.setAttribute('aria-expanded', 'false');
+      mobileMenuToggleBtn.setAttribute('aria-label', currentLang === 'TR' ? 'Menüyü aç' : 'Open menu');
+    }
+
+    document.body.style.overflow = '';
+  }
+
+  function toggleMobileMenu() {
+    if (isMobileMenuOpen) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
+    }
+  }
+
+  // --- 7. NAVIGATION & VIEW SWITCHING ---
   function setupEventListeners() {
     // Theme toggle button
     if (themeToggleBtn) {
@@ -1092,6 +1359,11 @@
       });
     }
 
+    // Mobile menu toggle button
+    if (mobileMenuToggleBtn) {
+      mobileMenuToggleBtn.addEventListener('click', toggleMobileMenu);
+    }
+
     // Brand link (ONUR TEMEL) -> returns to #work
     if (brandLink) {
       brandLink.addEventListener('click', (e) => {
@@ -1102,6 +1374,23 @@
 
     // Hash change listener (browser back/forward support)
     window.addEventListener('hashchange', handleHashNavigation);
+
+    // Auto-close mobile menu on desktop viewport resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768 && isMobileMenuOpen) {
+        closeMobileMenu();
+      }
+    });
+
+    // Global Keydown listener (Escape closes mobile menu)
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        if (isMobileMenuOpen) {
+          closeMobileMenu();
+          if (mobileMenuToggleBtn) mobileMenuToggleBtn.focus();
+        }
+      }
+    });
 
     // Retry loading button
     if (retryBtn) {

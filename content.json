@@ -18,10 +18,19 @@
         "enabled": true
       },
       {
+        "id": "shorts",
+        "label": {
+          "TR": "Kısalar",
+          "EN": "Shorts"
+        },
+        "tabContent": "shorts",
+        "enabled": true
+      },
+      {
         "id": "photo",
         "label": {
           "TR": "Fotoğraf",
-          "EN": "Photography"
+          "EN": "Photograph"
         },
         "tabContent": "photo",
         "enabled": true
@@ -384,6 +393,148 @@
       },
       "youtube": "https://www.youtube.com/watch?v=q7ETz3gvldM&t=16s",
       "thumbnail": "assets/covers/slapp-02-recai-cakir.png"
+    }
+  ],
+  "shorts": [
+    {
+      "id": "short-1",
+      "tab": "shorts",
+      "mediaType": "shorts",
+      "title": {
+        "TR": "Yedikule Bostanları ve Hevsel Bahçelerini Birlikte Düşünmek",
+        "EN": "Yedikule Bostanları ve Hevsel Bahçelerini Birlikte Düşünmek"
+      },
+      "youtube": "https://www.youtube.com/shorts/kHUIzfZ0Afg"
+    },
+    {
+      "id": "short-2",
+      "tab": "shorts",
+      "mediaType": "shorts",
+      "title": {
+        "TR": "Başlıksız",
+        "EN": "Untitled"
+      },
+      "youtube": "https://www.youtube.com/shorts/fPR2Zmv-i_E"
+    },
+    {
+      "id": "short-3",
+      "tab": "shorts",
+      "mediaType": "shorts",
+      "title": {
+        "TR": "Enerji Yoksulluğu Deneyimleri | EMEKLİLER",
+        "EN": "Enerji Yoksulluğu Deneyimleri | EMEKLİLER"
+      },
+      "youtube": "https://www.youtube.com/shorts/ZzPoS2a-Muw"
+    },
+    {
+      "id": "short-4",
+      "tab": "shorts",
+      "mediaType": "shorts",
+      "title": {
+        "TR": "Başlıksız",
+        "EN": "Untitled"
+      },
+      "youtube": "https://www.youtube.com/shorts/IhHAz_q2jnU"
+    },
+    {
+      "id": "short-5",
+      "tab": "shorts",
+      "mediaType": "shorts",
+      "title": {
+        "TR": "Enerji Yoksulluğu Deneyimleri | ŞAHİNTEPE",
+        "EN": "Enerji Yoksulluğu Deneyimleri | ŞAHİNTEPE"
+      },
+      "youtube": "https://www.youtube.com/shorts/fYOsdwnmHp4"
+    },
+    {
+      "id": "short-6",
+      "tab": "shorts",
+      "mediaType": "shorts",
+      "title": {
+        "TR": "Başlıksız",
+        "EN": "Untitled"
+      },
+      "youtube": "https://www.youtube.com/shorts/uXpeDuXJ5ao"
+    },
+    {
+      "id": "short-7",
+      "tab": "shorts",
+      "mediaType": "shorts",
+      "title": {
+        "TR": "Başlıksız",
+        "EN": "Untitled"
+      },
+      "youtube": "https://www.youtube.com/shorts/8xPOo0HjKEk"
+    },
+    {
+      "id": "short-8",
+      "tab": "shorts",
+      "mediaType": "shorts",
+      "title": {
+        "TR": "Kentte İyilik Hâli ve SICAK DALGALARI / Yağız Eren Abanus #iyilikhali",
+        "EN": "Kentte İyilik Hâli ve SICAK DALGALARI / Yağız Eren Abanus #iyilikhali"
+      },
+      "youtube": "https://www.youtube.com/shorts/z7bEzJlofZE"
+    },
+    {
+      "id": "short-9",
+      "tab": "shorts",
+      "mediaType": "shorts",
+      "title": {
+        "TR": "Kentte İyilik Hâli ve KENTSEL DÖNÜŞÜM / Öncül Kırlangıç #iyilikhali",
+        "EN": "Kentte İyilik Hâli ve KENTSEL DÖNÜŞÜM / Öncül Kırlangıç #iyilikhali"
+      },
+      "youtube": "https://www.youtube.com/shorts/UKhi9BUPhNA"
+    },
+    {
+      "id": "short-10",
+      "tab": "shorts",
+      "mediaType": "shorts",
+      "title": {
+        "TR": "ENERJİ YOKSULLUĞU 101 | Çözüm Örnekleri 03 #enerjiyoksulluğu",
+        "EN": "ENERJİ YOKSULLUĞU 101 | Çözüm Örnekleri 03 #enerjiyoksulluğu"
+      },
+      "youtube": "https://www.youtube.com/shorts/EvgGBTUUsVo"
+    },
+    {
+      "id": "short-11",
+      "tab": "shorts",
+      "mediaType": "shorts",
+      "title": {
+        "TR": "Hatice Kocalar - Avdan Platformu - MAD",
+        "EN": "Hatice Kocalar - Avdan Platformu - MAD"
+      },
+      "youtube": "https://www.youtube.com/shorts/XIcoI9S-7VI"
+    },
+    {
+      "id": "short-12",
+      "tab": "shorts",
+      "mediaType": "shorts",
+      "title": {
+        "TR": "SLAPP 3 / Erdoğan Atmış #slapp",
+        "EN": "SLAPP 3 / Erdoğan Atmış #slapp"
+      },
+      "youtube": "https://www.youtube.com/shorts/YSO3Ep4yYZA"
+    },
+    {
+      "id": "short-13",
+      "tab": "shorts",
+      "mediaType": "shorts",
+      "title": {
+        "TR": "Mahallenin Sakini: BOBO #sokaktayımyanındayım",
+        "EN": "Mahallenin Sakini: BOBO #sokaktayımyanındayım"
+      },
+      "youtube": "https://www.youtube.com/shorts/-rF3HFif1yg"
+    },
+    {
+      "id": "short-14",
+      "tab": "shorts",
+      "mediaType": "shorts",
+      "title": {
+        "TR": "Başlıksız",
+        "EN": "Untitled"
+      },
+      "youtube": "https://www.youtube.com/shorts/r4wc75L2pkw"
     }
   ],
   "photos": [

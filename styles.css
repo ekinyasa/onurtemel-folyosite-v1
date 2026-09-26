@@ -236,6 +236,146 @@ html, body {
   margin-right: 0.2rem;
 }
 
+/* Mobile Hamburger Menu Toggle Button & Animation */
+.mobile-menu-toggle-btn {
+  display: flex;
+  min-width: 40px;
+  min-height: 44px;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .mobile-menu-toggle-btn {
+    display: none !important;
+  }
+}
+
+.hamburger-icon {
+  width: 18px;
+  height: 14px;
+  position: relative;
+  display: block;
+}
+
+.hamburger-icon .line {
+  display: block;
+  height: 2px;
+  background-color: var(--fg-color);
+  width: 18px;
+  position: absolute;
+  left: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), top 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center center;
+}
+
+.hamburger-icon .line-top {
+  top: 3px;
+}
+
+.hamburger-icon .line-bottom {
+  top: 9px;
+}
+
+/* Open state: Transforms into X without moving bounding box or adjacent controls */
+.mobile-menu-toggle-btn[aria-expanded="true"] .line-top {
+  top: 6px;
+  transform: rotate(45deg);
+}
+
+.mobile-menu-toggle-btn[aria-expanded="true"] .line-bottom {
+  top: 6px;
+  transform: rotate(-45deg);
+}
+
+/* Mobile Header Breakpoints: Hide desktop tab nav and view switch on mobile (<768px) */
+@media (max-width: 767px) {
+  .portfolio-tabs-nav {
+    display: none !important;
+  }
+  .view-switch-btn {
+    display: none !important;
+  }
+  .header-brand {
+    font-size: 1.15rem;
+    letter-spacing: 0.25em;
+  }
+  .header-controls {
+    gap: 0.25rem;
+  }
+}
+
+/* Fullscreen Mobile Navigation Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  width: 100vw;
+  height: calc(100dvh - var(--header-height));
+  background-color: var(--bg-color);
+  z-index: 99;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 768px) {
+  .mobile-menu-overlay {
+    display: none !important;
+  }
+}
+
+.mobile-menu-overlay.is-active {
+  display: flex;
+}
+
+.mobile-menu-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 360px;
+}
+
+.mobile-menu-item {
+  background: none;
+  border: none;
+  padding: 0.85rem 1rem;
+  margin: 0;
+  font-family: var(--font-stack);
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: color 0.15s ease, opacity 0.15s ease;
+  display: block;
+  width: 100%;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-menu-item:hover,
+.mobile-menu-item:focus-visible {
+  color: var(--fg-color);
+}
+
+.mobile-menu-item.active {
+  color: var(--fg-color);
+  font-weight: 700;
+}
+
+.mobile-menu-sep {
+  height: 2rem;
+  width: 100%;
+}
+
 /* Buttons Reset */
 .icon-btn {
   background: none;
@@ -666,7 +806,111 @@ display: block;
   }
 }
 
-/* PHOTO TAB & GRID (Native Aspect Ratios) */
+/* SHORTS TAB & GRID (9:16 Portrait Geometry, Restrained Editorial Grid) */
+.shorts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .shorts-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .shorts-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem 1.75rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .shorts-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3.5rem 2rem;
+  }
+}
+
+.short-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.short-media-container {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  background-color: var(--bg-media);
+  position: relative;
+  overflow: hidden;
+  container-type: inline-size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.short-media-btn {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: var(--bg-media);
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+}
+
+.short-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.short-media-btn:hover .short-img {
+  opacity: 0.9;
+}
+
+.short-meta {
+  margin-top: 0.75rem;
+}
+
+.short-title {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin: 0;
+  color: var(--fg-color);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* FULLSCREEN SHORTS OVERLAY (PORTRAIT 9:16 PLAYER) */
+.shorts-overlay-frame-wrapper {
+  max-height: 90vh;
+  max-height: 90dvh;
+  aspect-ratio: 9 / 16;
+  height: 100%;
+  max-width: 90vw;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
 /* PHOTO TAB & GRID (Standardized 3:2 Cover Ratio, Zero Crop) */
 .photos-grid {
   display: grid;
